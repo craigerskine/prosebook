@@ -3,7 +3,7 @@ name: 11ty Deploy
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 permissions:
