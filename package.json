@@ -4,8 +4,7 @@
   "private": false,
   "scripts": {
     "start": "eleventy --serve --quiet",
-    "build": "eleventy",
-    "ghpages": "eleventy --pathprefix=prosebook"
+    "build": "eleventy"
   },
   "keywords": [
     "11ty",
