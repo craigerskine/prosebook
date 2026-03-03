@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" role="img" class="fill-current w-{{ width if width else '10' }} h-auto opacity-50">
+  <title>{{ site.meta.title }}</title>
+  <linearGradient id="logoGrad" gradientUnits="userSpaceOnUse" x1="37.5" x2="37.5" y1="0" y2="150">
+    <stop offset="0" stop-color="var(--color-primary)"></stop>
+    <stop offset=".8" stop-color="var(--color-primary)" stop-opacity="0"></stop>
+  </linearGradient>
+  <clipPath id="logoPath"><path d="m0 0h150v150h-150z"></path></clipPath>
+  <g fill="url(#logoGrad)" clip-path="url(#logoPath)">
+    <rect width="75" height="150" rx="37.5"></rect>
+    <rect width="75" height="150" rx="37.5" transform="matrix(1 0 0 -1 75 150)"></rect>
+  </g>
+</svg>

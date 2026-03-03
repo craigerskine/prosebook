@@ -1,0 +1,27 @@
+---
+meta:
+  title: Prosebook
+  description: Prosebook
+  url: https://craigerskine.github.io/11ty-twind/
+  author: Craig Erskine
+  author_url: https://craigerskine.com
+
+prose: 'prose prose-a:(text-pri-700 dark:(text-pri-500)) prose-headings:(text-wrap-balance) prose-pre:(bg-gray-800 dark:bg-gray-800) mx-auto max-w-4xl'
+
+social:
+  - title: X
+    url: https://x.com/USER
+    ico: simple-icons:x
+    color: blue
+  - title: GitHub
+    url: https://github.com/craigerskine/11ty-twind/
+    ico: simple-icons:github
+    color: neutral
+
+footer:
+  - title: Sitemap
+
+analytics: |-
+  // google analytics
+  // window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+  // ga('create', 'UA-XXXXXXX-X', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')

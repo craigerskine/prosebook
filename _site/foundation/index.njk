@@ -1,0 +1,19 @@
+---
+layout: 'layouts/default.njk'
+title: Foundation
+override:tags: ''
+eleventyNavigation:
+  title: UX
+  order: 2
+eleventyComputed:
+  eleventyNavigation:
+    key: "{{ title }}"
+---
+
+{%- from 'macro.list.njk' import list, listItem -%}
+
+{%- set compList -%}
+  {{ listItem({slot: 'Back', sub: '⇠', url: '../'}) }}
+{%- endset -%}
+
+{{- list({slot: compList}) -}}

@@ -1,0 +1,9 @@
+{%- macro heading(param) %}
+<{{ param.tag if param.tag else 'h1' }} class="pb-12 w-full text-2xl leading-tight font-black flex items-center space-x-4 lg:text-[calc(3vw)]">
+  <span class="{{ 'shrink-0' if param.divider else 'grow' }}">
+    {{ param.slot | safe }}
+    <small class="max-w-xs text-sm text-current/60 font-normal text-balance block md:text-base">{{ param.desc | safe }}</small>
+  </span>
+  {%- if param.divider %}<i class="h-0 border-b border-base-300 grow" aria-hidden="true"></i>{%- endif %}
+</{{ param.tag if param.tag else 'h1' }}>
+{%- endmacro %}

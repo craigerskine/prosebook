@@ -1,0 +1,16 @@
+{%- macro list(param) %}
+<ul class="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-5">
+  {{ param.slot | safe }}
+</ul>
+{%- endmacro %}
+
+{%- macro listItem(param) %}
+<li>
+  {%- if param.url %}<a href="{{ param.url }}" class="p-4 min-h-[7.5rem] bg-primary/10 bg-gradient-to-b from-white/20 via-transparent to-(--color-primary)/20 text-primary font-bold grow outline-2 outline-transparent outline-offset-2 flex flex-col flex-col-reverse rounded-xl transition hover:bg-(--color-primary) hover:text-(--color-primary-content) hover:outline-(--color-primary)">{%- endif %}
+    {{ param.slot | safe }}
+    {%- if param.sub %}  
+      <small class="block opacity-70">{{ param.sub }}</small>
+    {%- endif %}
+  {%- if param.url %}</a>{%- endif %}
+</li>
+{%- endmacro %}

@@ -1,0 +1,21 @@
+---
+layout: 'layouts/default.njk'
+title: Components
+override:tags: ''
+eleventyNavigation:
+  title: UI
+  order: 1
+eleventyComputed:
+  eleventyNavigation:
+    key: "{{ title }}"
+---
+
+{%- from 'macro.list.njk' import list, listItem -%}
+
+{%- set compList -%}
+  {%- for item in collections.component -%}
+    {{ listItem({slot: item.data.title, sub: 'UI', url: item.url}) }}
+  {%- endfor -%}
+{%- endset -%}
+
+{{- list({slot: compList}) -}}
