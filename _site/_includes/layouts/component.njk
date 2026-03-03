@@ -48,7 +48,7 @@ layout: layouts/default.njk
     {#- PREVIEW -#}
     <div x-show="tabActive === 0" class="" role="tabpanel" x-transition:enter.opacity.duration.500ms x-transition:leave.opacity.duration.0ms style="display: none;">
       <div
-        class="p-6 border border-base-300 bg-base-100 bg-artboard flex items-center justify-center rounded-t-xl"
+        class="p-6 border-x border-t border-base-300 bg-base-100 bg-artboard flex items-center justify-center rounded-t-xl"
         :class="'min-h-['+ previewHeight +'rem]'"
       >
         <div
@@ -66,7 +66,7 @@ layout: layouts/default.njk
                 setTimeout(() => $el.textContent = 'Copy', 2000);
               })
             "
-            class="absolute top-2 right-2 btn btn-dash btn-xs opacity-70"
+            class="absolute top-2 right-2 btn btn-neutral btn-dash btn-xs opacity-50"
           >
             Copy
           </button>
@@ -86,7 +86,7 @@ layout: layouts/default.njk
               setTimeout(() => $el.textContent = 'Copy', 2000);
             })
           "
-          class="absolute top-2 right-2 btn btn-dash btn-xs opacity-70"
+          class="absolute top-2 right-2 btn btn-neutral btn-dash btn-xs opacity-50"
         >
           Copy
         </button>

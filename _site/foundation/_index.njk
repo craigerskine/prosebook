@@ -1,10 +1,10 @@
 ---
-layout: 'layouts/default.njk'
-title: Components
+title: Foundation
+permalink: /foundation/
 override:tags: ''
 eleventyNavigation:
-  title: UI
-  order: 1
+  title: UX
+  order: 2
 eleventyComputed:
   eleventyNavigation:
     key: "{{ title }}"
@@ -13,9 +13,7 @@ eleventyComputed:
 {%- from 'macro.list.njk' import list, listItem -%}
 
 {%- set compList -%}
-  {%- for item in collections.component -%}
-    {{ listItem({slot: item.data.title, sub: 'UI', url: item.url | url}) }}
-  {%- endfor -%}
+  {{ listItem({slot: 'Back', sub: '⇠', url: '../'}) }}
 {%- endset -%}
 
 {{- list({slot: compList}) -}}
