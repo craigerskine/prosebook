@@ -1,6 +1,6 @@
-# [11ty-twind](craigerskine.github.io/11ty-twind/)
+# [prosebook](https://craigerskine.github.io/prosebook/) [![11ty Deploy](https://github.com/craigerskine/prosebook/actions/workflows/deploy.yml/badge.svg)](https://github.com/craigerskine/prosebook/actions/workflows/deploy.yml)
 
-A starterkit for 11ty, DaisyUI, Tailwind, and Alpine.js using esbuild. Enjoy!
+Storybook replacement using 11ty and md files for components. Simple and supports ANY language. Deploys to a static site so it's fast and foolproof.
 
 - [x] [11ty](https://11ty.dev)
 - [x] [DaisyUI](https://daisyui.com)
