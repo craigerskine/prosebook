@@ -14,7 +14,7 @@ eleventyComputed:
 
 {%- set compList -%}
   {%- for item in collections.component -%}
-    {{ listItem({slot: item.data.title, sub: 'UI', url: item.url}) }}
+    {{ listItem({slot: item.data.title, sub: 'UI', url: item.url | url}) }}
   {%- endfor -%}
 {%- endset -%}
 

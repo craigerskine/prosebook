@@ -6,7 +6,7 @@ layout: 'layouts/default.njk'
 
 {%- set navList -%}
   {%- for item in collections.all | eleventyNavigation -%}
-    {{ listItem({slot: item.key, sub: item.title, url: item.url}) }}
+    {{ listItem({slot: item.key, sub: item.title, url: item.url | url}) }}
   {%- endfor -%}
 {%- endset -%}
 
