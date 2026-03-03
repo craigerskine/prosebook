@@ -1,16 +1,16 @@
 :root {
-  --base: color-mix(in oklab, #282c34, #000 15%);
-  --mono-1: color-mix(in oklab, #abb2bf, #000 15%);
-  --mono-2: color-mix(in oklab, #818896, #000 15%);
-  --mono-3: color-mix(in oklab, #5c6370, #000 15%);
-  --hue-1: color-mix(in oklab, #56b6c2, #000 15%);
-  --hue-2: color-mix(in oklab, #61aeee, #000 15%);
-  --hue-3: color-mix(in oklab, #c678dd, #000 15%);
-  --hue-4: color-mix(in oklab, #98c379, #000 15%);
-  --hue-5: color-mix(in oklab, #e06c75, #000 15%);
-  --hue-5-2: color-mix(in oklab, #be5046, #000 15%);
-  --hue-6: color-mix(in oklab, #d19a66, #000 15%);
-  --hue-6-2: color-mix(in oklab, #e6c07b, #000 15%);
+  --base: color-mix(in oklab, var(--prs-c-gray-800), #000 0%);
+  --mono-1: color-mix(in oklab, var(--prs-c-gray-600), #000 0%);
+  --mono-2: color-mix(in oklab, var(--prs-c-gray-700), #000 0%);
+  --mono-3: color-mix(in oklab, var(--prs-c-gray-800), #000 0%);
+  --hue-1: color-mix(in oklab, var(--prs-c-warning-600), #000 0%);
+  --hue-2: color-mix(in oklab, var(--prs-c-warning-700), #000 0%);
+  --hue-3: color-mix(in oklab, var(--prs-c-warning-800), #000 0%);
+  --hue-4: color-mix(in oklab, var(--prs-c-warning-800), #000 0%);
+  --hue-5: color-mix(in oklab, var(--prs-c-info-600), #000 0%);
+  --hue-5-2: color-mix(in oklab, var(--prs-c-info-400), #000 0%);
+  --hue-6: color-mix(in oklab, var(--prs-c-info-800), #000 0%);
+  --hue-6-2: color-mix(in oklab, var(--prs-c-danger-700), #000 0%);
 }
 
 pre code.hljs {

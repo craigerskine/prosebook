@@ -112,7 +112,7 @@ preview: |
     :disabled="state === 'disabled'"
   >
     <iconify-icon x-show="shape !== 'default' || (withIcon === 'leading')" icon="mdi:close" class="icon" noobserver></iconify-icon>
-    <span x-show="shape === 'default'" x-text="text" class="line-clamp-1"></span>
+    <span x-show="shape === 'default'" x-text="text ? text : 'Button'" class="line-clamp-1"></span>
     <iconify-icon x-show="(withIcon === 'trailing' && shape === 'default')" icon="mdi:close" class="icon" noobserver></iconify-icon>
   </button>
 
@@ -122,13 +122,13 @@ code:
       {icon}{text}{iconEnd}
     </button>
   logic:
-    - "/{text}/g, this.shape === 'default' ? this.text : '<svg class=\"icon\"></svg>'"
-    - "/{icon}/g, (this.shape === 'default' && this.withIcon === 'leading') ? '<svg class=\"icon\"></svg> ' : ''"
-    - "/{iconEnd}/g, (this.shape === 'default' && this.withIcon === 'trailing') ? ' <svg class=\"icon\"></svg>' : ''"
-    - "/{variant}/g, this.variant === 'primary' ? ' prs-btn-primary' : ' prs-btn-' +this.variant"
-    - "/{color}/g, this.color === 'default' ? '' : ' prs-btn-' +this.color"
-    - "/{size}/g, this.size === 'default' ? '' : ' prs-btn-' +this.size"
-    - "/{shape}/g, this.shape === 'default' ? '' : ' prs-btn-' +this.shape"
-    - "/{state}/g, (this.state === 'default' || this.state === 'disabled') ? '' : ' prs-btn_' +this.state"
-    - "/{disabled}/g, this.state === 'disabled' ? ' disabled' : ''"
+    text: "this.shape === 'default' ? this.text : '<svg class=\"icon\"></svg>'"
+    icon: "(this.shape === 'default' && this.withIcon === 'leading') ? '<svg class=\"icon\"></svg> ' : ''"
+    iconEnd: "(this.shape === 'default' && this.withIcon === 'trailing') ? ' <svg class=\"icon\"></svg>' : ''"
+    variant: "this.variant === 'primary' ? ' prs-btn-primary' : ' prs-btn-' +this.variant"
+    color: "this.color === 'default' ? '' : ' prs-btn-' +this.color"
+    size: "this.size === 'default' ? '' : ' prs-btn-' +this.size"
+    shape: "this.shape === 'default' ? '' : ' prs-btn-' +this.shape"
+    state: "(this.state === 'default' || this.state === 'disabled') ? '' : ' prs-btn_' +this.state"
+    disabled: "this.state === 'disabled' ? ' disabled' : ''"
 ---

@@ -5,12 +5,11 @@
 {%- endmacro %}
 
 {%- macro listItem(param) %}
-<li class="font-bold grow flex flex-col flex-col-reverse">
+<li class="font-bold grow flex flex-col flex-col-reverse relative">
   {%- if param.url %}<a href="{{ param.url }}" class="p-4 min-h-[7.5rem] bg-primary/10 bg-gradient-to-b from-white/20 to-(--color-primary)/20 text-primary grow outline-2 outline-transparent outline-offset-2 flex flex-col flex-col-reverse rounded-xl transition hover:bg-(--color-primary) hover:text-(--color-primary-content) hover:outline-(--color-primary)">{%- endif %}
     <span class="line-clamp-2">{{ param.slot | safe }}</span>
-    {%- if param.sub %}  
-      <small class="text-xs block opacity-70">{{ param.sub }}</small>
-    {%- endif %}
+    {%- if param.sub %}<small class="text-xs leading-none block opacity-70">{{ param.sub }}</small>{%- endif %}
+    {% if param.ico %}<iconify-icon icon="{{ param.ico }}" class="text-5xl self-end block pointer-events-none opacity-50" noobserver></iconify-icon>{% endif %}
   {%- if param.url %}</a>{%- endif %}
 </li>
 {%- endmacro %}

@@ -1,5 +1,5 @@
 {%- from 'macro.heading.njk' import heading -%}
-{%- set page_title -%}{{ title +' :: '+ site.meta.title if title else site.meta.title }}{%- endset -%}
+{%- set page_title -%}{{ title +' ⇢ '+ site.meta.title if title else site.meta.title }}{%- endset -%}
 
 <!doctype html>
 <html lang="en" class="bg-transparent antialiased" x-data x-cloak>
@@ -27,8 +27,8 @@
     {%- set css -%}
       {%- include 'css/tokens.css' -%}
       {%- include 'css/styles.css' -%}
-      {%- include 'css/highlight.css' -%}
       {%- include 'css/daisyui.css' -%}
+      {%- include 'css/highlight.css' -%}
     {%- endset -%}
     <style>
       [x-cloak] { display: none; }
@@ -63,8 +63,8 @@
       @layer utilities {
         :where(.btn) { @apply font-normal; }
         .mockup-code {
-          @apply border border-(--color-base-300) bg-(--color-base-200) text-(--color-base-content);
-          & pre { @apply before:hidden; }
+          @apply pb-0 border border-(--color-base-300) bg-(--color-base-200) text-(--color-base-content);
+          & pre { @apply pb-5 before:hidden; }
         }
       }
 
