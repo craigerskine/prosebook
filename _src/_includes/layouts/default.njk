@@ -2,7 +2,7 @@
 {%- set page_title -%}{{ title +' ⇢ '+ site.meta.title if title else site.meta.title }}{%- endset -%}
 
 <!doctype html>
-<html lang="en" class="bg-transparent antialiased" x-data x-cloak>
+<html lang="en" class="bg-transparent antialiased" data-theme="light" x-data x-cloak>
 
   <head>
     <meta charset="utf-8" />
@@ -44,18 +44,6 @@
       }
 
       @theme {
-        /* colors */
-        --color-pri-50: var(--color-sky-50);
-        --color-pri-100: var(--color-sky-100);
-        --color-pri-200: var(--color-sky-200);
-        --color-pri-300: var(--color-sky-300);
-        --color-pri-400: var(--color-sky-400);
-        --color-pri-500: var(--color-sky-500);
-        --color-pri-600: var(--color-sky-600);
-        --color-pri-700: var(--color-sky-700);
-        --color-pri-800: var(--color-sky-800);
-        --color-pri-900: var(--color-sky-900);
-        --color-pri-950: var(--color-sky-950);
         /* fonts */
         --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       }
@@ -64,7 +52,7 @@
         :where(.btn) { @apply font-normal; }
         .mockup-code {
           @apply pb-0 border border-(--color-base-300) bg-(--color-base-200) text-(--color-base-content);
-          & pre { @apply pb-5 before:hidden; }
+          & pre { @apply pb-5 before:mb-2.5 before:italic; }
         }
       }
 
@@ -87,12 +75,19 @@
           <ul class="flex items-center gap-4 md:gap-10">
             {%- for item in collections.all | eleventyNavigation %}
             <li>
-              <a href="{{ item.url | url }}" class="flex text-primary font-semibold relative transition hover:text-(--color-neutral)">
+              <a href="{{ item.url | url }}" class="flex text-primary font-semibold relative transition hover:text-(--color-base-content)">
                 {{ item.key }}
                 {% if item.url == page.url or item.url in page.url %}<b class="w-full h-[2px] bg-current absolute inset-x-0 -bottom-1 opacity-25"></b>{% endif %}
               </a>
             </li>
             {%- endfor %}
+            {#- <li>
+              <label class="toggle text-base-content">
+                <input type="checkbox" value="dark" class="theme-controller" />
+                <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></g></svg>
+                <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></g></svg>
+              </label>
+            </li> -#}
           </ul>
         </nav>
       </header>

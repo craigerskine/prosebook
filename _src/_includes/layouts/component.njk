@@ -13,7 +13,7 @@ layout: layouts/default.njk
 :id="$id('tab', {{ param.i }})"
 :tabindex="{{ param.i }} === tabActive ? 0 : -1"
 :aria-selected="{{ param.i }} === tabActive"
-:class="{{ param.i }} === tabActive ? 'tab-active border-(--color-neutral)/10 shadow' : 'border-transparent'"
+:class="{{ param.i }} === tabActive ? 'tab-active border-(--color-base-content)/10 shadow' : 'border-transparent'"
 class="tab border rounded-xl"
 role="tab"
 {%- endmacro -%}
@@ -51,6 +51,7 @@ role="tab"
     {#- PREVIEW -#}
     <div x-show="tabActive === 0" class="" role="tabpanel" x-transition:enter.opacity.duration.500ms x-transition:leave.opacity.duration.0ms style="display: none;">
       <div
+        data-theme="light"
         class="p-6 border-x border-t border-base-300 bg-base-100 bg-artboard flex items-center justify-center rounded-t-xl"
         :class="'min-h-['+ previewHeight +'rem]'"
       >
@@ -61,7 +62,7 @@ role="tab"
       </div>
       <div>
         <div class="mockup-code mb-6 bg-grid rounded-t-none rounded-b-xl before:hidden">
-          <pre class="language-html px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
+          <pre data-prefix="&lt;!-- html --&gt;" class="language-html px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
           <button
             @click="
               navigator.clipboard.writeText(codeRendered).then(() => {
@@ -81,7 +82,7 @@ role="tab"
     {#- CODE -#}
     <div x-show="tabActive === 1" class="" role="tabpanel" x-transition:enter.opacity.duration.500ms x-transition:leave.opacity.duration.0ms style="display: none;">
       <div class="mockup-code bg-grid">
-        <pre class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{{ styles }}</code></pre>
+        <pre data-prefix="/* css */" class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{{ styles }}</code></pre>
         <button
           @click="
             navigator.clipboard.writeText($refs.stylesBlock.textContent).then(() => {
@@ -112,7 +113,7 @@ role="tab"
             <div class="prs-label prs-label-alt">
               <label for="id-{{ c.name | slugify }}" class="prs-label-text">{{ c.label or c.name | capitalize }}</label>
               {%- if c.desc %}  
-                <span class="max-w-xs text-neutral/60 text-xs leading-normal font-normal text-pretty">{{ c.desc }}</span>
+                <span class="max-w-xs text-base-content/60 text-xs leading-normal font-normal text-pretty">{{ c.desc }}</span>
               {%- endif %}
             </div>
             <div class="prs-form-control">
