@@ -12,13 +12,13 @@
     <div class="pb-8 text-center space-y-5 md:pb-12 md:text-start md:flex md:items-start md:justify-between md:gap-5 md:space-y-0">
       <nav class="shrink-0">
         <a href="{{ '/' | url }}" class="group inline-flex transform transition hover:opacity-50">
-          {%- set width = '8' -%}
+          {%- set width = '5' -%}
           {%- include '_logo.njk' %}
         </a>
         <ul class="py-5 text-lg flex items-center justify-center gap-5 md:justify-start">
           {%- for item in site.social %}
           <li>
-            <a href="{{ item.url | url }}" class="btn btn-circle btn-dash btn-lg btn-{{ item.color }}" aria-label="{{ item.title }}">
+            <a href="{{ item.url | url }}" class="btn btn-circle btn-outline border-dashed border-current/25 hover:border-transparent" aria-label="{{ item.title }}">
               <iconify-icon icon="{{ item.ico }}" class="iconify" noobserver></iconify-icon>
             </a>
           </li>

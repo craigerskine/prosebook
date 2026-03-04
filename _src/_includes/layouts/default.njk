@@ -75,7 +75,7 @@
           <ul class="flex items-center gap-4 md:gap-10">
             {%- for item in collections.all | eleventyNavigation %}
             <li>
-              <a href="{{ item.url | url }}" class="flex text-primary font-semibold relative transition hover:text-(--color-base-content)">
+              <a href="{{ item.url | url }}" class="flex text-current font-semibold relative transition hover:text-(--color-primary) [&[aria-current=page]]:text-(--color-primary)"{% if item.url == page.url or item.url in page.url %} aria-current="page"{% endif %}>
                 {{ item.key }}
                 {% if item.url == page.url or item.url in page.url %}<b class="w-full h-[2px] bg-current absolute inset-x-0 -bottom-1 opacity-25"></b>{% endif %}
               </a>
