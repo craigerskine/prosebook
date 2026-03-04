@@ -13,8 +13,8 @@ layout: layouts/default.njk
 :id="$id('tab', {{ param.i }})"
 :tabindex="{{ param.i }} === tabActive ? 0 : -1"
 :aria-selected="{{ param.i }} === tabActive"
-:class="{{ param.i }} === tabActive ? 'tab-active [--tab-bg:var(--color-base-300)]' : ''"
-class="tab"
+:class="{{ param.i }} === tabActive ? 'tab-active border-(--color-neutral)/10 shadow' : 'border-transparent'"
+class="tab border rounded-xl"
 role="tab"
 {%- endmacro -%}
 
@@ -37,7 +37,7 @@ role="tab"
       @keydown.end.prevent.stop="$focus.last()"
       @keydown.page-down.prevent.stop="$focus.last()"
       role="tablist"
-      class="tabs tabs-lift ml-3 -mb-px"
+      class="tabs tabs-box mb-4 ml-auto border border-base-300 w-fit bg-grid shadow-inner rounded-2xl"
     >
       {%- for item in ['Preview', 'Styles'] %}
         <button
@@ -60,7 +60,7 @@ role="tab"
         </div>
       </div>
       <div>
-        <div class="mockup-code mb-6 rounded-t-none rounded-b-xl before:hidden">
+        <div class="mockup-code mb-6 bg-grid rounded-t-none rounded-b-xl before:hidden">
           <pre class="language-html px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
           <button
             @click="
@@ -80,7 +80,7 @@ role="tab"
 
     {#- CODE -#}
     <div x-show="tabActive === 1" class="" role="tabpanel" x-transition:enter.opacity.duration.500ms x-transition:leave.opacity.duration.0ms style="display: none;">
-      <div class="mockup-code">
+      <div class="mockup-code bg-grid">
         <pre class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{{ styles }}</code></pre>
         <button
           @click="

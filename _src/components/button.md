@@ -122,7 +122,7 @@ code:
       {icon}{text}{iconEnd}
     </button>
   logic:
-    text: "this.shape === 'default' ? this.text : '<svg class=\"icon\" aria-label=\"Close\"></svg>'"
+    text: "this.shape === 'default' ? this.text : '<svg class=\"icon\" aria-label=\"'+ this.text +'\"></svg>'"
     icon: "(this.shape === 'default' && this.withIcon === 'leading') ? '<svg class=\"icon\"></svg> ' : ''"
     iconEnd: "(this.shape === 'default' && this.withIcon === 'trailing') ? ' <svg class=\"icon\"></svg>' : ''"
     variant: "this.variant === 'primary' ? ' prs-btn-primary' : ' prs-btn-' +this.variant"
