@@ -113,7 +113,7 @@ role="tab"
             <div class="prs-label prs-label-alt">
               <label for="id-{{ c.name | slugify }}" class="prs-label-text">{{ c.label or c.name | capitalize }}</label>
               {%- if c.desc %}  
-                <span class="max-w-xs text-base-content/60 text-xs leading-normal font-normal text-pretty">{{ c.desc }}</span>
+                <span class="max-w-xs text-base-content/60 text-xs font-normal text-pretty">{{ c.desc }}</span>
               {%- endif %}
             </div>
             <div class="prs-form-control">
@@ -126,12 +126,14 @@ role="tab"
               {%- elseif c.type === 'radio' %}
                 {%- for opt in c.options %}
                   <label class="prs-radio-label">
-                    <input type="radio" id="id-{{ n.name | slugify }}-{{ loop.index }}" name="name-{{ c.name | slugify }}" value="{{ opt }}" x-model="{{ c.name }}" class="radio radio-sm" />
+                    <input type="radio" id="id-{{ c.name | slugify }}-{{ loop.index }}" name="name-{{ c.name | slugify }}" value="{{ opt }}" x-model="{{ c.name }}" class="radio radio-sm" />
                     <span class="text-sm">{{ opt | title }}</span>
                   </label>
                 {%- endfor %}
               {%- elseif c.type === 'toggle' %}
                 <input type="checkbox" id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="toggle toggle-sm" />
+              {%- elseif c.type === 'range' %}
+                <input type="range" min="{{ c.min }}" max="{{ c.max }}" step="{{ c.step }}" value="{{ c.name }}" class="range" />
               {%- elseif c.type === 'text' or c.type == 'number' %}
                 <input type="{{ c.type }}" id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="input input-sm" placeholder="{{ c.placeholder | default('Value') }}" />
               {%- endif %}

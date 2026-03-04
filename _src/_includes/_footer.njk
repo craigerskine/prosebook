@@ -18,7 +18,7 @@
         <ul class="py-5 text-lg flex justify-center gap-5 md:justify-start">
           {%- for item in site.social %}
           <li>
-            <a href="{{ item.url | url }}" class="opacity-50 transition hover:text-{{ item.color }}-500 hover:opacity-100" aria-label="{{ item.title }}">
+            <a href="{{ item.url | url }}" class="btn btn-circle btn-dash btn-lg btn-{{ item.color }}" aria-label="{{ item.title }}">
               <iconify-icon icon="{{ item.ico }}" class="iconify" noobserver></iconify-icon>
             </a>
           </li>

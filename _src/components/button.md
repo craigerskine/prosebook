@@ -35,7 +35,7 @@ controls:
   - name: withIcon
     type: select
     label: With icon
-    desc: Use <svg>, <iconify-icon> or .icon. It is recommended to use iconify-icon with mdi:(Material Design Icons)
+    desc: Use <svg>, <iconify-icon> or .icon. It is recommended to use iconify-icon with mdi:(Material Design Icons).
     default: no icon
     options:
       - no icon
@@ -75,7 +75,7 @@ controls:
   - name: shape
     type: radio
     label: Shape
-    desc: For icons ONLY. Make sure your icon has the appropriate aria-label or sr-only label for screen readers.
+    desc: For icons ONLY. Make sure your icon has the appropriate `aria-label` or screen reader-safe text.
     default: default
     options:
       - default
