@@ -4,6 +4,6 @@
     {{ param.slot | safe }}
     <small class="max-w-xs text-sm text-current/60 font-normal text-balance block md:text-base">{{ param.desc | safe }}</small>
   </span>
-  {%- if param.divider %}<i class="h-0 border-b border-base-300 grow" aria-hidden="true"></i>{%- endif %}
+  {%- if param.divider %}<i class="h-0 border-b border-base-content/10 grow" aria-hidden="true"></i>{%- endif %}
 </{{ param.tag if param.tag else 'h1' }}>
 {%- endmacro %}

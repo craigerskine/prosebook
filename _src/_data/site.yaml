@@ -10,7 +10,7 @@ social:
   - title: GitHub
     url: https://github.com/craigerskine/prosebook/
     ico: simple-icons:github
-    color: neutral
+    color: primary
 
 footer:
   - title: Sitemap
