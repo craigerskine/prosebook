@@ -176,10 +176,56 @@ role="tab"
         return html.trim();
       },
 
+      syncFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        Object.keys(this.defaults || {}).forEach(key => {
+          const value = params.get(key);
+          if (value !== null) {
+            if (typeof this[key] === 'boolean') {
+              this[key] = value === 'true';
+            } else if (typeof this[key] === 'number') {
+              this[key] = Number(value);
+            } else {
+              this[key] = value;
+            }
+          }
+        });
+      },
+
+      syncToUrl() {
+        // console.log('[syncToUrl] Current state:', this);
+        const params = new URLSearchParams();
+        let hasChanges = false;
+
+        Object.keys(this.defaults || {}).forEach(key => {
+          const value = this[key];
+          const defaultValue = this.defaults[key];
+          // console.log(`  ${key}: ${value} (default: ${defaultValue})`);
+
+          if (value !== defaultValue) {
+            params.set(key, value);
+            hasChanges = true;
+          }
+        });
+
+        const newSearch = params.toString();
+        // console.log('[syncToUrl] New search string:', newSearch);
+
+        const newUrl = newSearch ? `${window.location.pathname}?${newSearch}` : window.location.pathname;
+
+        if (newUrl !== window.location.href) {
+          // console.log('[syncToUrl] Updating URL to:', newUrl);
+          window.history.replaceState({}, '', newUrl);
+        } else {
+          // console.log('[syncToUrl] No change needed');
+        }
+      },
+
       restoreDefaults() {
         Object.keys(this.defaults).forEach(key => {
           this[key] = this.defaults[key];
         });
+        this.syncToUrl();
       },
 
       initDefaults() {
@@ -190,6 +236,17 @@ role="tab"
 
       init() {
         this.initDefaults();
+
+        this.syncFromUrl();
+
+        this.$watch(
+          () => JSON.stringify(this),
+          (newVal, oldVal) => {
+            // console.log('[Watcher] State changed');
+            this.syncToUrl();
+          },
+          { deep: true }
+        );
 
         this.$nextTick(() => {
           if (this.$refs.codeBlock) {
