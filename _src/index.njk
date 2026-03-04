@@ -1,11 +1,12 @@
 ---
+desc: Storybook without the language restrictions and dependencies.
 ---
 
 {%- from 'macro.list.njk' import list, listItem -%}
 
 {%- set navList -%}
   {%- for item in collections.all | eleventyNavigation -%}
-    {{ listItem({slot: item.key, sub: item.title, url: item.url | url}) }}
+    {{ listItem({slot: item.key, sub: item.title, color: item.data.color, url: item.url | url}) }}
   {%- endfor -%}
 {%- endset -%}
 
