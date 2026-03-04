@@ -6,7 +6,7 @@
 
 {%- macro listItem(param) %}
 <li class="font-bold grow flex flex-col flex-col-reverse relative">
-  {%- if param.url %}<a href="{{ param.url }}" class="p-4 min-h-[7.5rem] bg-{{ param.color | default('neutral') }} text-{{ param.color | default('neutral') }}-content bg-gradient-to-b from-white/25 to-black/10 grow outline-2 outline-transparent outline-offset-2 flex flex-col flex-col-reverse rounded-2xl transition hover:from-white/50 hover:outline-(--color-{{ param.color | default('neutral') }})">{%- endif %}
+  {%- if param.url %}<a href="{{ param.url }}" class="p-4 min-h-[7.5rem] bg-{{ param.color | default('neutral') }} text-{{ param.color | default('neutral') }}-content bg-gradient-to-b from-white/25 to-black/10 grow outline-2 outline-transparent outline-offset-2 flex flex-col flex-col-reverse rounded-2xl transition hover:from-white/50 hover:outline-(--color-{{ param.color | default('neutral') }}) focus-visible:outline-(--color-{{ param.color | default('neutral') }})">{%- endif %}
     <span class="line-clamp-2">{{ param.slot | safe }}</span>
     {%- if param.sub %}<small class="text-xs leading-none block opacity-70">{{ param.sub }}</small>{%- endif %}
     {% if param.ico %}<iconify-icon icon="{{ param.ico }}" class="text-5xl self-end block pointer-events-none opacity-50" noobserver></iconify-icon>{% endif %}

@@ -15,7 +15,7 @@
           {%- set width = '8' -%}
           {%- include '_logo.njk' %}
         </a>
-        <ul class="py-5 text-lg flex justify-center gap-5 md:justify-start">
+        <ul class="py-5 text-lg flex items-center justify-center gap-5 md:justify-start">
           {%- for item in site.social %}
           <li>
             <a href="{{ item.url | url }}" class="btn btn-circle btn-dash btn-lg btn-{{ item.color }}" aria-label="{{ item.title }}">
@@ -23,6 +23,13 @@
             </a>
           </li>
           {%- endfor %}
+          {#- <li>
+            <label class="swap swap-rotate text-2xl">
+              <input type="checkbox" class="theme-controller" value="dark" />
+              <iconify-icon icon="mdi:weather-sunny" class="swap-off" noobserver></iconify-icon>
+              <iconify-icon icon="mdi:moon-waning-crescent" class="swap-on" noobserver></iconify-icon>
+            </label>
+          </li> -#}
         </ul>
       </nav>
       <nav class="w-full text-sm flex flex-col gap-10 md:max-w-xl md:flex-row md:justify-end md:gap-32">
