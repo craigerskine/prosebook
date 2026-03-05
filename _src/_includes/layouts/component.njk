@@ -125,7 +125,7 @@ role="tab"
         {%- for c in controls %}
           <div class="prs-form-control-col py-4">
             <div class="prs-label prs-label-alt">
-              <label for="id-{{ c.name | slugify }}" class="prs-label-text">{{ c.label or c.name | capitalize }}</label>
+              <label for="id-{{ c.name | slugify }}{{ '-1' if c.type === 'radio' }}" class="prs-label-text">{{ c.label or c.name | capitalize }}</label>
               {%- if c.desc %}  
                 <span class="max-w-xs text-base-content/60 text-xs font-normal text-pretty">{{ c.desc }}</span>
               {%- endif %}

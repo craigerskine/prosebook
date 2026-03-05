@@ -8,6 +8,7 @@ import 'iconify-icon';
 import Alpine from 'alpinejs';
 import anchor from '@alpinejs/anchor';
 import focus from '@alpinejs/focus';
+import persist from '@alpinejs/persist';
 import tippy from 'tippy.js';
 
 document.addEventListener('alpine:init', () => {
@@ -68,6 +69,6 @@ document.addEventListener('alpine:init', () => {
   });
 });
 
-Alpine.plugin([anchor, focus]);
+Alpine.plugin([anchor, focus, persist]);
 window.Alpine = Alpine;
 Alpine.start();

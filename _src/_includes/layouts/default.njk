@@ -1,8 +1,39 @@
+---
+themes:
+  - light
+  - dark
+  - emerald
+  - corporate
+  - synthwave
+  - retro
+  - valentine
+  - halloween
+  - garden
+  - forest
+  - pastel
+  - fantasy
+  - black
+  - luxury
+  - dracula
+  - autumn
+  - business
+  - acid
+  - lemonade
+  - coffee
+  - winter
+  - dim
+  - nord
+  - sunset
+  - caramellatte
+  - abyss
+  - silk
+---
+
 {%- from 'macro.heading.njk' import heading -%}
 {%- set page_title -%}{{ title +' ⇢ '+ site.meta.title if title else site.meta.title }}{%- endset -%}
 
 <!doctype html>
-<html lang="en" class="bg-transparent antialiased" data-theme="light" x-data x-cloak>
+<html lang="en" class="bg-transparent antialiased" :data-theme="theme" x-data="{ theme: $persist('prose'), }" x-cloak>
 
   <head>
     <meta charset="utf-8" />
@@ -28,6 +59,7 @@
       {%- include 'css/prose-tokens.css' -%}
       {%- include 'css/prose-styles.css' -%}
       {%- include 'css/daisyui.css' -%}
+      {%- include 'css/daisyui-themes.css' -%}
       {%- include 'css/highlight.css' -%}
     {%- endset -%}
     <style>
@@ -37,8 +69,9 @@
     {% renderblock 'css' %}
     <style data-twind></style>
 
-    <style type="text/tailwindcss">
-      :root {
+    <style>
+      :root,:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {
+        color-scheme: light;
         --color-base-content: #1D1B26;
         --color-primary: #0600B4;
         --color-primary-content: #FFFFFF;
@@ -68,7 +101,9 @@
         --depth: 0;
         --noise: 0;
       }
+    </style>
 
+    <style type="text/tailwindcss">
       @theme {
         /* fonts */
         --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -88,7 +123,7 @@
 
   </head>
 
-  <body class="bg-base-100 text-base-content !block" style="display: none;" data-instant-intensity="mousedown">
+  <body class="bg-base-100 text-base-content !block" style="display: none;" data-instant-intensity="mousedown" :data-theme="theme">
 
     <div class="min-h-screen flex flex-col relative">
 
@@ -107,6 +142,38 @@
               </a>
             </li>
             {%- endfor %}
+            <li>
+              <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
+                <div tabindex="0" class="btn btn-ghost btn-sm gap-1 pl-1.5 pr-1">
+                  <span :data-theme="theme" class="border border-(--color-base-content)/10 p-0.5 w-5 h-5 bg-base-100 shrink-0 grid grid-cols-2 gap-0.5 rounded-md shadow-sm">
+                    <span class="bg-base-content rounded-xs"></span>
+                    <span class="bg-primary rounded-xs"></span>
+                    <span class="bg-secondary rounded-xs"></span>
+                    <span class="bg-accent rounded-xs"></span>
+                  </span>
+                  <iconify-icon icon="mdi:chevron-down" class="text-base iconify" noobserver></iconify-icon>
+                </div>
+                <div tabindex="-1" class="dropdown-content my-2 border border-white/5 h-[30.5rem] max-h-[calc(100vh-8.6rem)] outline outline-black/5 bg-base-100 overflow-y-auto rounded-box shadow-2xl">
+                  <ul class="menu w-52">
+                    <li class="menu-title text-xs">Theme</li>
+                    {%- for item in themes %}
+                      <li>
+                        <a href="#{{ item }}" @click.prevent="theme = '{{ item }}'; document.activeElement.blur();">
+                          <span data-theme="{{ item }}" class="border border-(--color-base-content)/10 p-0.5 w-5 h-5 bg-base-100 shrink-0 grid grid-cols-2 gap-0.5 rounded-md shadow-sm">
+                            <span class="bg-base-content rounded-xs"></span>
+                            <span class="bg-primary rounded-xs"></span>
+                            <span class="bg-secondary rounded-xs"></span>
+                            <span class="bg-accent rounded-xs"></span>
+                          </span>
+                          {{ item | title }}
+                          <iconify-icon x-show="theme === '{{ item }}'" icon="mdi:check" class="iconify text-base" noobserver style="display: none;"></iconify-icon>
+                        </a>
+                      </li>
+                    {%- endfor %}
+                  </ul>
+                </div>
+              </div>
+            </li>
           </ul>
         </nav>
       </header>
