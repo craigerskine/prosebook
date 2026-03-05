@@ -28,24 +28,38 @@ role="tab"
 >
 
   <div x-id="['tab']">
-    <div
-      x-ref="tablist"
-      @keydown.right.prevent.stop="$focus.wrap().next()"
-      @keydown.home.prevent.stop="$focus.first()"
-      @keydown.page-up.prevent.stop="$focus.first()"
-      @keydown.left.prevent.stop="$focus.wrap().prev()"
-      @keydown.end.prevent.stop="$focus.last()"
-      @keydown.page-down.prevent.stop="$focus.last()"
-      role="tablist"
-      class="tabs tabs-box tabs-sm mb-4 ml-auto border border-base-300 w-fit bg-grid shadow-inner rounded-2xl"
-    >
-      {%- for item in ['Preview', 'Styles'] %}
-        <button
-          {{ tabAttr({i: loop.index0 }) }}
-        >
-          {{ item }}
-        </button>
-      {%- endfor %}
+    <div class="mb-4 flex items-center justify-between">
+      <div
+        x-ref="tablist"
+        @keydown.right.prevent.stop="$focus.wrap().next()"
+        @keydown.home.prevent.stop="$focus.first()"
+        @keydown.page-up.prevent.stop="$focus.first()"
+        @keydown.left.prevent.stop="$focus.wrap().prev()"
+        @keydown.end.prevent.stop="$focus.last()"
+        @keydown.page-down.prevent.stop="$focus.last()"
+        role="tablist"
+        class="tabs tabs-box tabs-sm border border-base-300 w-fit bg-grid shadow-inner rounded-2xl"
+      >
+        {%- for item in ['Preview', 'Styles'] %}
+          <button
+            {{ tabAttr({i: loop.index0 }) }}
+          >
+            {{ item }}
+          </button>
+        {%- endfor %}
+      </div>
+      <div class="relative z-20">
+        <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
+          <div tabindex="0" class="btn btn-outline btn-circle btn-sm border-current/10 text-base" role="button" aria-label="AI"><iconify-icon icon="mdi:stars-outline" class="iconify" noobserver></iconify-icon></div>
+          <ul tabindex="-1" class="dropdown-content menu menu-sm my-2 border border-white/5 outline outline-black/5 w-52 bg-base-200 rounded-box shadow-2xl">
+            <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="mdi:content-copy" class="text-base iconify" noobserver></iconify-icon> Copy docs</a></li>
+            <li></li>
+            <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:openai-chatgpt" class="text-base iconify" noobserver></iconify-icon> Open in ChatGPT</a></li>
+            <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:claude" class="text-base iconify" noobserver></iconify-icon> Open in Claude</a></li>
+            <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:google-gemini" class="text-base iconify" noobserver></iconify-icon> Open in Gemini</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     {#- PREVIEW -#}
@@ -70,7 +84,7 @@ role="tab"
                 setTimeout(() => $el.textContent = 'Copy', 2000);
               })
             "
-            class="absolute top-1 right-1 btn btn-outline border-current/50 border-dashed btn-xs opacity-50"
+            class="absolute top-1 right-1 btn btn-outline border-current/50 border-dashed btn-xs"
           >
             Copy
           </button>
@@ -90,7 +104,7 @@ role="tab"
               setTimeout(() => $el.textContent = 'Copy', 2000);
             })
           "
-          class="absolute top-1 right-1 btn btn-outline border-current/50 border-dashed btn-xs opacity-50"
+          class="absolute top-1 right-1 btn btn-outline border-current/50 border-dashed btn-xs"
         >
           Copy
         </button>

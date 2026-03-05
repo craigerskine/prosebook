@@ -25,8 +25,8 @@
     <script src="{{ '/' | url }}_assets/js/tailwind.js"></script>
 
     {%- set css -%}
-      {%- include 'css/tokens.css' -%}
-      {%- include 'css/styles.css' -%}
+      {%- include 'css/prose-tokens.css' -%}
+      {%- include 'css/prose-styles.css' -%}
       {%- include 'css/daisyui.css' -%}
       {%- include 'css/highlight.css' -%}
     {%- endset -%}
@@ -39,6 +39,32 @@
 
     <style type="text/tailwindcss">
       :root {
+        --color-base-content: #1D1B26;
+        --color-primary: #0600B4;
+        --color-primary-content: #FFFFFF;
+        --color-secondary: #FF2986;
+        --color-secondary-content: #1D1B26;
+        --color-accent: #A30283;
+        --color-accent-content: #FFFFFF;
+        --color-neutral: #69686F;
+        --color-neutral-content: #FFFFFF;
+        --color-info: #00BCFF;
+        --color-info-content: #1D1B26;
+        --color-success: #00F0A8;
+        --color-success-content: #1D1B26;
+        --color-warning: #E1FF00;
+        --color-warning-content: #1D1B26;
+        --color-error: #FF2986;
+        --color-error-content: #FFFFFF;
+        --color-base-100: #FFFFFF;
+        --color-base-200: color-mix(in oklab, var(--color-neutral), #FFF 95%);
+        --color-base-300: color-mix(in oklab, var(--color-neutral), #FFF 85%);
+        --radius-selector: 0.25rem;
+        --radius-field: 0.25rem;
+        --radius-box: 0.5rem;
+        --size-selector: 0.25rem;
+        --size-field: 0.25rem;
+        --border: 1px;
         --depth: 0;
         --noise: 0;
       }
