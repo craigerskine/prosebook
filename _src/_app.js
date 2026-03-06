@@ -12,6 +12,31 @@ import persist from '@alpinejs/persist';
 import tippy from 'tippy.js';
 
 document.addEventListener('alpine:init', () => {
+  Alpine.data('app', function() {
+    return {
+      theme: this.$persist('light'),
+      setTheme(newTheme, event) {
+        const btn = event.currentTarget;
+        const rect = btn.getBoundingClientRect();
+        const x = (rect.left + rect.width / 2) + 'px';
+        const y = (rect.top + rect.height / 2) + 'px';
+  
+        document.documentElement.style.setProperty('--click-x', x);
+        document.documentElement.style.setProperty('--click-y', y);
+  
+        if (!document.startViewTransition) {
+          this.theme = newTheme;
+          return;
+        }
+  
+        document.startViewTransition(() => {
+          this.theme = newTheme;
+        });
+  
+      },
+    }
+  });
+  
   // tooltip
   // magic: @focus="$tooltip('some tooltip')"
   Alpine.magic('tooltip', el => message => {

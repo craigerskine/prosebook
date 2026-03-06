@@ -30,33 +30,7 @@ themes:
 {%- set page_title -%}{{ title +' ⇢ '+ site.meta.title if title else site.meta.title }}{%- endset -%}
 
 <!doctype html>
-<html
-  lang="en"
-  class="bg-transparent antialiased"
-  x-data="{
-    theme: $persist('prose'),
-    setTheme(newTheme, event) {
-      const btn = event.currentTarget;
-      const rect = btn.getBoundingClientRect();
-      const x = (rect.left + rect.width / 2) + 'px';
-      const y = (rect.top + rect.height / 2) + 'px';
-
-      document.documentElement.style.setProperty('--click-x', x);
-      document.documentElement.style.setProperty('--click-y', y);
-
-      if (!document.startViewTransition) {
-        this.theme = newTheme;
-        return;
-      }
-
-      document.startViewTransition(() => {
-        this.theme = newTheme;
-      });
-
-    }
-  }"
-  x-cloak
->
+<html lang="en" class="bg-transparent antialiased" x-data="app">
 
   <head>
     <meta charset="utf-8" />
@@ -155,7 +129,7 @@ themes:
 
   </head>
 
-  <body class="bg-base-100 text-base-content !block" style="display: none;" data-instant-intensity="mousedown" :data-theme="theme">
+  <body class="bg-base-100 text-base-content !block" style="display: none;" data-instant-intensity="mousedown" x-cloak :data-theme="theme">
 
     <div class="min-h-screen flex flex-col relative">
 
