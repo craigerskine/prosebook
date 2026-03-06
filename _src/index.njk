@@ -6,7 +6,7 @@ desc: Storybook without the language restrictions and dependencies.
 
 {%- set navList -%}
   {%- for item in collections.all | eleventyNavigation -%}
-    {{ listItem({slot: item.key, sub: item.title, color: item.data.color, url: item.url | url}) }}
+    {{ listItem({slot: item.key, sub: item.title, ico: item.data.ico, url: item.url | url}) }}
   {%- endfor -%}
 {%- endset -%}
 

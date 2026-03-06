@@ -1,6 +1,7 @@
 ---
 title: Blocks
 desc: Organisms, templates, and pages. The building blocks of your design system.
+ico: 'mdi:molecule'
 permalink: /blocks/
 override:tags: ''
 eleventyNavigation:
@@ -11,6 +12,7 @@ eleventyComputed:
     key: "{{ title }}"
 ---
 
+{#-
 {%- from 'macro.list.njk' import list, listItem -%}
 
 {%- set compList -%}
@@ -18,3 +20,6 @@ eleventyComputed:
 {%- endset -%}
 
 {{- list({slot: compList}) -}}
+-#}
+
+<p>Coming soon...</p>

@@ -6,7 +6,7 @@
 
 {%- macro listItem(param) %}
 <li class="group font-bold grow flex flex-col flex-col-reverse relative">
-  {%- if param.url %}<a href="{{ param.url }}" class="p-4 min-h-[7.5rem] text-current border border-current/50 border-dashed grow flex flex-col flex-col-reverse rounded-2xl -rotate-3 transition group-hover:bg-(--color-secondary) group-hover:text-(--color-secondary-content) group-hover:border-transparent group-hover:rotate-0">{%- endif %}
+  {%- if param.url %}<a href="{{ param.url }}" class="p-4 min-h-[7.5rem] text-current border border-current/50 border-dashed grow flex flex-col flex-col-reverse rounded-2xl -rotate-3 transition group-hover:ring-4 group-hover:ring-(--color-secondary) group-hover:bg-(--color-secondary) group-hover:text-(--color-secondary-content) group-hover:border-transparent group-hover:rotate-0">{%- endif %}
     <span class="line-clamp-2">{{ param.slot | safe }}</span>
     {%- if param.sub %}<small class="text-xs leading-none block opacity-70">{{ param.sub }}</small>{%- endif %}
     {% if param.ico %}<iconify-icon icon="{{ param.ico }}" class="text-5xl self-end block pointer-events-none opacity-50" noobserver></iconify-icon>{% endif %}

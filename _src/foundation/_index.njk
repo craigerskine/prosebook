@@ -1,6 +1,7 @@
 ---
 title: Foundation
 desc: The core concepts and utilities that power your design system.
+ico: 'mdi:layers-outline'
 permalink: /foundation/
 override:tags: ''
 eleventyNavigation:
@@ -13,8 +14,12 @@ eleventyComputed:
 
 {%- from 'macro.list.njk' import list, listItem -%}
 
+{#-
 {%- set compList -%}
   {{ listItem({slot: 'Back', sub: '⇠', url: '/' | url}) }}
 {%- endset -%}
 
 {{- list({slot: compList}) -}}
+-#}
+
+<p>Coming soon...</p>
