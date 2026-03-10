@@ -111,9 +111,9 @@ preview: |
     }"
     :disabled="state === 'disabled'"
   >
-    <iconify-icon x-show="shape !== 'default' || (withIcon === 'leading')" icon="mdi:close" class="icon" noobserver></iconify-icon>
-    <span x-show="shape === 'default'" x-text="text ? text : 'Button'" class="line-clamp-1"></span>
-    <iconify-icon x-show="(withIcon === 'trailing' && shape === 'default')" icon="mdi:close" class="icon" noobserver></iconify-icon>
+    <iconify-icon x-show="shape !== 'default' || (withIcon === 'leading')" icon="mdi:close" class="icon pointer-events-none" noobserver></iconify-icon>
+    <span x-show="shape === 'default'" x-text="text ? text : 'Button'" class="line-clamp-1 pointer-events-none"></span>
+    <iconify-icon x-show="(withIcon === 'trailing' && shape === 'default')" icon="mdi:close" class="icon pointer-events-none" noobserver></iconify-icon>
   </button>
 
 code:

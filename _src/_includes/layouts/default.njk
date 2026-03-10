@@ -70,26 +70,26 @@ themes:
     <style>
       :root,:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {
         color-scheme: light;
-        --color-base-content: #1D1B26;
-        --color-primary: #0600B4;
-        --color-primary-content: #FFFFFF;
-        --color-secondary: #FF2986;
-        --color-secondary-content: #1D1B26;
-        --color-accent: #A30283;
-        --color-accent-content: #FFFFFF;
-        --color-neutral: #69686F;
-        --color-neutral-content: #FFFFFF;
-        --color-info: #00BCFF;
-        --color-info-content: #1D1B26;
-        --color-success: #00F0A8;
-        --color-success-content: #1D1B26;
-        --color-warning: #E1FF00;
-        --color-warning-content: #1D1B26;
-        --color-error: #FF2986;
-        --color-error-content: #FFFFFF;
-        --color-base-100: #FFFFFF;
-        --color-base-200: color-mix(in oklab, var(--color-neutral), #FFF 95%);
-        --color-base-300: color-mix(in oklab, var(--color-neutral), #FFF 85%);
+        --color-base-content: var(--prs-c-gray-900);
+        --color-primary: var(--prs-c-primary);
+        --color-primary-content: var(--prs-c-white);
+        --color-secondary: var(--prs-c-secondary);
+        --color-secondary-content: var(--prs-c-gray-900);
+        --color-accent: var(--prs-c-accent);
+        --color-accent-content: var(--prs-c-white);
+        --color-neutral: var(--prs-c-gray-800);
+        --color-neutral-content: var(--prs-c-gray-50);
+        --color-info: var(--prs-c-info);
+        --color-info-content: var(--prs-c-gray-900);
+        --color-success: var(--prs-c-success);
+        --color-success-content: var(--prs-c-gray-900);
+        --color-warning: var(--prs-c-warning);
+        --color-warning-content: var(--prs-c-gray-900);
+        --color-error: var(--prs-c-danger);
+        --color-error-content: var(--prs-c-white);
+        --color-base-100: var(--prs-c-white);
+        --color-base-200: color-mix(in oklab, var(--color-neutral), var(--prs-c-white) 95%);
+        --color-base-300: color-mix(in oklab, var(--color-neutral), var(--prs-c-white) 85%);
         --radius-selector: 0.25rem;
         --radius-field: 0.25rem;
         --radius-box: 0.5rem;
@@ -131,77 +131,95 @@ themes:
 
   <body class="bg-base-100 text-base-content !block" style="display: none;" data-instant-intensity="mousedown" x-cloak :data-theme="theme">
 
-    <div class="min-h-screen flex flex-col relative">
-
-      <header class="w-full flex-none">
-        <nav class="mx-auto py-8 px-4 max-w-5xl flex flex-col items-center gap-4 md:flex-row md:justify-between">
-          <a href="{{ '/' | url }}" class="group flex flex-none items-center gap-2 transform transition hover:opacity-50">
-            {%- set width = '8' -%}
-            {%- include '_logo.njk' %}
-          </a>
-          <ul class="flex items-center gap-4 md:gap-10">
-            {%- for item in collections.all | eleventyNavigation %}
-            <li>
-              <a href="{{ item.url | url }}" class="flex text-current font-semibold relative transition hover:text-(--color-primary) [&[aria-current=page]]:text-(--color-primary)"{% if item.url == page.url or item.url in page.url %} aria-current="page"{% endif %}>
-                {{ item.key }}
-                {% if item.url == page.url or item.url in page.url %}<b class="w-full h-[2px] bg-current absolute inset-x-0 -bottom-1 opacity-25"></b>{% endif %}
+    <div class="drawer">
+      <input id="nav-aside" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content">
+        <div class="min-h-screen flex flex-col relative">
+          <header class="w-full flex-none">
+            <nav class="mx-auto py-8 px-4 max-w-5xl flex flex-col items-center gap-4 md:flex-row md:justify-between">
+              <a href="{{ '/' | url }}" class="group flex flex-none items-center gap-2 transform transition hover:opacity-50">
+                {%- set width = '8' -%}
+                {%- include '_logo.njk' %}
               </a>
-            </li>
-            {%- endfor %}
-            <li>
-              <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
-                <div tabindex="0" class="btn btn-ghost btn-sm gap-1 pl-1.5 pr-1">
-                  <span :data-theme="theme" class="border border-(--color-base-content)/10 p-0.5 w-5 h-5 bg-base-100 shrink-0 grid grid-cols-2 gap-0.5 rounded-md shadow-sm">
-                    <span class="bg-base-content rounded-xs"></span>
-                    <span class="bg-primary rounded-xs"></span>
-                    <span class="bg-secondary rounded-xs"></span>
-                    <span class="bg-accent rounded-xs"></span>
-                  </span>
-                  <iconify-icon icon="mdi:chevron-down" class="text-base iconify" noobserver></iconify-icon>
+              <ul class="flex items-center gap-4 md:gap-10">
+                {%- for item in collections.all | eleventyNavigation %}
+                <li>
+                  <a href="{{ item.url | url }}" class="flex text-current font-semibold relative transition hover:text-(--color-primary) [&[aria-current=page]]:text-(--color-primary)"{% if item.url == page.url or item.url in page.url %} aria-current="page"{% endif %}>
+                    {{ item.key }}
+                    {% if item.url == page.url or item.url in page.url %}<b class="w-full h-[2px] bg-current absolute inset-x-0 -bottom-1 opacity-25"></b>{% endif %}
+                  </a>
+                </li>
+                {%- endfor %}
+                <li>
+                  <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
+                    <div tabindex="0" class="btn btn-ghost btn-sm gap-1 pl-1.5 pr-1">
+                      <span :data-theme="theme" class="border border-(--color-base-content)/10 p-0.5 w-5 h-5 bg-base-100 shrink-0 grid grid-cols-2 gap-0.5 rounded-md shadow-sm">
+                        <span class="bg-base-content rounded-xs"></span>
+                        <span class="bg-primary rounded-xs"></span>
+                        <span class="bg-secondary rounded-xs"></span>
+                        <span class="bg-accent rounded-xs"></span>
+                      </span>
+                      <iconify-icon icon="mdi:chevron-down" class="text-base iconify" noobserver></iconify-icon>
+                    </div>
+                    <div tabindex="-1" class="dropdown-content my-2 border border-white/5 h-[30.5rem] max-h-[calc(100vh-8.6rem)] outline outline-black/5 bg-base-100 overflow-y-auto rounded-box shadow-2xl">
+                      <ul class="menu w-52">
+                        <li class="menu-title text-xs">Theme</li>
+                        {%- for item in themes %}
+                          <li>
+                            <a href="#{{ item }}" @click.prevent="setTheme('{{ item }}', $event); document.activeElement.blur();" :class="theme === '{{ item }}' && 'menu-active'">
+                              <span data-theme="{{ item }}" class="border border-(--color-base-content)/10 p-0.5 w-5 h-5 bg-base-100 shrink-0 grid grid-cols-2 gap-0.5 rounded-md shadow-sm">
+                                <span class="bg-base-content rounded-xs"></span>
+                                <span class="bg-primary rounded-xs"></span>
+                                <span class="bg-secondary rounded-xs"></span>
+                                <span class="bg-accent rounded-xs"></span>
+                              </span>
+                              {{ item | title }}
+                              <iconify-icon x-show="theme === '{{ item }}'" icon="mdi:check" class="iconify text-base" noobserver style="display: none;"></iconify-icon>
+                            </a>
+                          </li>
+                        {%- endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </nav>
+          </header>
+    
+          <main class="pb-8 w-full flex-1 md:pb-24">
+            <section class="mx-auto px-4 max-w-5xl">
+              <div class="pt-12">
+                <div class="flex gap-4 md:gap-6">
+                  {{ heading({slot: title if title else site.meta.title, desc: desc, divider: true}) }}
+                  {%- if ico %}
+                    <div class="mt-3 w-12 h-12 text-3xl text-current/50 shrink-0 flex items-center justify-center md:w-24 md:h-24 md:text-6xl">
+                      <iconify-icon icon="{{ ico }}" class="block" noobserver></iconify-icon>
+                    </div>
+                  {%- endif %}
                 </div>
-                <div tabindex="-1" class="dropdown-content my-2 border border-white/5 h-[30.5rem] max-h-[calc(100vh-8.6rem)] outline outline-black/5 bg-base-100 overflow-y-auto rounded-box shadow-2xl">
-                  <ul class="menu w-52">
-                    <li class="menu-title text-xs">Theme</li>
-                    {%- for item in themes %}
-                      <li>
-                        <a href="#{{ item }}" @click.prevent="setTheme('{{ item }}', $event); document.activeElement.blur();" :class="theme === '{{ item }}' && 'menu-active'">
-                          <span data-theme="{{ item }}" class="border border-(--color-base-content)/10 p-0.5 w-5 h-5 bg-base-100 shrink-0 grid grid-cols-2 gap-0.5 rounded-md shadow-sm">
-                            <span class="bg-base-content rounded-xs"></span>
-                            <span class="bg-primary rounded-xs"></span>
-                            <span class="bg-secondary rounded-xs"></span>
-                            <span class="bg-accent rounded-xs"></span>
-                          </span>
-                          {{ item | title }}
-                          <iconify-icon x-show="theme === '{{ item }}'" icon="mdi:check" class="iconify text-base" noobserver style="display: none;"></iconify-icon>
-                        </a>
-                      </li>
-                    {%- endfor %}
-                  </ul>
-                </div>
+                {{ content | safe }}
               </div>
+            </section>
+          </main>
+    
+          {%- include '_footer.njk' %}
+    
+        </div>
+      </div>
+      <aside class="drawer-side">
+        <div class="bg-base-100 w-80">
+          <ul class="menu w-full">
+            <li>
+              <details open>
+                <summary>Group Name</summary>
+                <ul>
+                  <li><a href="#">Some nav item</a></li>
+                </ul>
+              </details>
             </li>
           </ul>
-        </nav>
-      </header>
-
-      <main class="pb-8 w-full flex-1 md:pb-24">
-        <section class="mx-auto px-4 max-w-5xl">
-          <div class="pt-12">
-            <div class="flex gap-4 md:gap-6">
-              {{ heading({slot: title if title else site.meta.title, desc: desc, divider: true}) }}
-              {%- if ico %}
-                <div class="mt-3 w-12 h-12 text-3xl text-current/50 shrink-0 flex items-center justify-center md:w-24 md:h-24 md:text-6xl">
-                  <iconify-icon icon="{{ ico }}" class="block" noobserver></iconify-icon>
-                </div>
-              {%- endif %}
-            </div>
-            {{ content | safe }}
-          </div>
-        </section>
-      </main>
-
-      {%- include '_footer.njk' %}
-
+        </div>
+      </aside>
     </div>
 
     {%- renderblock 'js' %}

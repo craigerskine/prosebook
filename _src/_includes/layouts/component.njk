@@ -28,7 +28,7 @@ role="tab"
 >
 
   <div x-id="['tab']">
-    <div class="mb-4 flex items-center justify-between">
+    <div class="mb-4 flex items-center justify-between gap-2">
       <div
         x-ref="tablist"
         @keydown.right.prevent.stop="$focus.wrap().next()"
@@ -48,16 +48,21 @@ role="tab"
           </button>
         {%- endfor %}
       </div>
-      <div class="relative z-20">
-        <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
-          <div tabindex="0" class="btn btn-outline btn-circle btn-sm border-current/10 text-base" role="button" aria-label="AI"><iconify-icon icon="mdi:stars-outline" class="iconify" noobserver></iconify-icon></div>
-          <ul tabindex="-1" class="dropdown-content menu menu-sm my-2 border border-white/5 outline outline-black/5 w-52 bg-base-200 rounded-box shadow-2xl">
-            <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="mdi:content-copy" class="text-base iconify" noobserver></iconify-icon> Copy docs</a></li>
-            <li></li>
-            <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:openai-chatgpt" class="text-base iconify" noobserver></iconify-icon> Open in ChatGPT</a></li>
-            <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:claude" class="text-base iconify" noobserver></iconify-icon> Open in Claude</a></li>
-            <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:google-gemini" class="text-base iconify" noobserver></iconify-icon> Open in Gemini</a></li>
-          </ul>
+      <div class="flex items-center gap-2">
+        <button @click="inspectMode = !inspectMode" class="btn btn-outline btn-circle btn-sm border-current/10 text-base">
+          <iconify-icon icon="mdi:select-search" class="iconify" noobserver></iconify-icon>
+        </button>
+        <div class="relative z-20">
+          <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
+            <div tabindex="0" class="btn btn-outline btn-circle btn-sm border-current/10 text-base" role="button" aria-label="AI"><iconify-icon icon="mdi:stars-outline" class="iconify" noobserver></iconify-icon></div>
+            <ul tabindex="-1" class="dropdown-content menu menu-sm my-2 border border-white/5 outline outline-black/5 w-52 bg-base-200 rounded-box shadow-2xl">
+              <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="mdi:content-copy" class="text-base iconify" noobserver></iconify-icon> Copy docs</a></li>
+              <li></li>
+              <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:openai-chatgpt" class="text-base iconify" noobserver></iconify-icon> Open in ChatGPT</a></li>
+              <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:claude" class="text-base iconify" noobserver></iconify-icon> Open in Claude</a></li>
+              <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:google-gemini" class="text-base iconify" noobserver></iconify-icon> Open in Gemini</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -71,6 +76,7 @@ role="tab"
       >
         <div
           x-html="previewRendered"
+          class="preview-scope"
         >
         </div>
       </div>
@@ -90,7 +96,80 @@ role="tab"
           </button>
         </div>
       </div>
-      
+    </div>
+
+    {#- INSPECT -#}
+    <div
+      @keydown.escape.window="inspectMode = false"
+      x-show="inspectMode"
+      x-transition
+      class="border border-(--color-base-content)/25 w-80 max-h-[60vh] text-xs bg-neutral text-neutral-content font-mono overflow-auto fixed top-1/2 right-6 z-50 -translate-y-1/2 rounded-2xl shadow-xl shadow-current/10"
+    >
+      <div class="border-b border-(--color-neutral-content)/10 py-2 pr-1.5 pl-4 bg-neutral font-semibold flex justify-between items-center sticky top-0 z-10">
+        <span>Inspector</span>
+        <button @click="inspectMode = false" class="btn btn-ghost btn-circle btn-xs text-lg">&times;</button>
+      </div>
+
+      <div class="p-4 text-[85%] leading-none">
+        <div x-show="selectedEl">
+          <div class="text-current/60 mb-4">
+            <span x-text="selectedEl.className ? '.' + selectedEl.className.split(' ').join('.') : ''"></span>
+          </div>
+
+          <div class="inspect-spacing mb-3 text-base-content text-center [&_.space-unit]:p-1">
+            <div class="inpect-m border border-dashed border-current/30 bg-base-300 grid grid-cols-[auto_1fr_auto] items-center relative">
+              <p class="text-current/60 absolute top-1 left-1">margin</p>
+              <div class="space-unit col-span-3" x-text="getComputed('margin-top')"></div>
+              <div class="space-unit" x-text="getComputed('margin-left')"></div>
+              <div>
+                <div class="inpect-b border border-dashed border-current/30 bg-base-200 grid grid-cols-[auto_1fr_auto] items-center relative">
+                  <p class="text-current/60 absolute top-1 left-1">border</p>
+                  <div class="space-unit col-span-3" x-text="getComputed('border-top-width')"></div>
+                  <div class="space-unit" x-text="getComputed('border-left-width')"></div>
+                  <div>
+                    <div class="inpect-p border border-dashed border-current/30 bg-base-100 grid grid-cols-[auto_1fr_auto] items-center relative">
+                      <p class="text-current/60 absolute top-1 left-1">padding</p>
+                      <div class="space-unit col-span-3" x-text="getComputed('padding-top')"></div>
+                      <div class="space-unit" x-text="getComputed('padding-left')"></div><div class="border border-dashed border-current/30 p-0.5 bg-neutral text-neutral-content">&nbsp;{#<span x-text="getComputed('min-width')">w</span> &times; <span x-text="getComputed('min-height')">h</span>#}</div><div class="space-unit" x-text="getComputed('padding-right')"></div>
+                      <div class="space-unit col-span-3" x-text="getComputed('padding-bottom')"></div>
+                    </div>
+                  </div>
+                  <div class="space-unit" x-text="getComputed('border-right-width')"></div>
+                  <div class="space-unit col-span-3" x-text="getComputed('border-bottom-width')"></div>
+                </div>
+              </div>
+              <div class="space-unit" x-text="getComputed('margin-right')"></div>
+              <div class="space-unit col-span-3" x-text="getComputed('margin-bottom')"></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 divide-y divide-current/10">
+            <div class="py-1.5 grid grid-cols-2">
+              <div class="text-current/60">border-color:</div>
+              <div><span x-text="getComputed('border-color')"></span></div>
+            </div>
+            <div class="py-1.5 grid grid-cols-2">
+              <div class="text-current/60">background-color:</div>
+              <div><span x-text="getComputed('background-color')"></span></div>
+            </div>
+            <div class="py-1.5 grid grid-cols-2">
+              <div class="text-current/60">color:</div>
+              <div><span x-text="getComputed('color')"></span></div>
+            </div>
+            <div class="py-1.5 grid grid-cols-2">
+              <div class="text-current/60">text:</div>
+              <div><div x-text="getComputed('font')"></div></div>
+            </div>
+            <div class="py-1.5 grid grid-cols-2">
+              <div class="text-current/60">border-radius:</div>
+              <div><div x-text="getComputed('border-radius')"></div></div>
+            </div>
+          </div>
+        </div>
+        <div x-show="!selectedEl" class="text-current/60 italic py-4 text-center">
+          Click an element in the preview.
+        </div>
+      </div>
     </div>
 
     {#- STYLES -#}
@@ -175,7 +254,91 @@ role="tab"
     return {
       ...config,
       previewHeight: 10,
-      defaults: {},
+      inspectMode: false,
+      selectedEl: null,
+      hoveredEl: null,
+      selectedElClasses: [],
+
+      updateInspector() {
+        if (!this.selectedEl) {
+          this.selectedElClasses = [];
+          return;
+        }
+        this.selectedElClasses = this.selectedEl.classList;
+      },
+
+      rgbToHex(color) {
+        if (!color) return '—';
+        if (color === 'transparent' ||
+            color === 'currentColor' ||
+            color === 'inherit' ||
+            color === 'initial' ||
+            color === 'unset') {
+          return color;
+        }
+        if (color === 'rgba(0, 0, 0, 0)' ||
+            color === 'rgba(0,0,0,0)' ||
+            color === 'rgb(0 0 0 / 0)' ||
+            color.replace(/\s+/g, '') === 'rgba(0,0,0,0)') {
+          return 'transparent';
+        }
+        if (!color.startsWith('rgb')) {
+          return color;
+        }
+        const matches = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?\)/);
+        if (!matches) {
+          return color;
+        }
+        const r = parseInt(matches[1], 10);
+        const g = parseInt(matches[2], 10);
+        const b = parseInt(matches[3], 10);
+        const hex = '#' +
+          [r, g, b]
+            .map(x => x.toString(16).padStart(2, '0'))
+            .join('')
+            .toUpperCase();
+
+        return hex;
+      },
+
+      getCleanStyle(el, prop) {
+        if (!el) return '—';
+        const clone = el.cloneNode(true);
+        clone.style.position = 'absolute';
+        clone.style.left = '-9999px';
+        clone.style.top = '-9999px';
+        clone.style.visibility = 'hidden';
+        clone.style.pointerEvents = 'none';
+        clone.style.userSelect = 'none';
+        document.body.appendChild(clone);
+        void clone.offsetWidth;
+        const styles = window.getComputedStyle(clone);
+        let value = styles.getPropertyValue(prop).trim();
+        document.body.removeChild(clone);
+        return value || '—';
+      },
+
+      getComputed(prop) {
+        const raw = this.getCleanStyle(this.selectedEl, prop);
+        if (prop.includes('color') && raw.startsWith('rgb')) {
+          return this.rgbToHex(raw);
+        }
+        if (prop === 'font') {
+          const styles = window.getComputedStyle(this.selectedEl);
+          return `${styles.fontSize.replace('px','')} / ${styles.lineHeight.replace('px','')}`;
+        }
+        return raw.replace('px', '') || '—';
+      },
+
+      clickHandler(e) {
+        if (!this.inspectMode) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const target = e.target.closest('[class]') || this.$el.querySelector('[x-html="previewRendered"]');
+        this.selectedEl = target;
+        this.selectedElClasses = Array.from(target.classList);
+        this.$nextTick(() => this.updateInspector());
+      },
 
       get previewRendered() {
         let html = `{{ preview | safe }}`;
@@ -184,9 +347,7 @@ role="tab"
 
       get codeRendered() {
         let html = `{{ code.html | safe }}`;
-
         {{ codeLogic | safe }}
-
         return html.trim();
       },
 
@@ -253,10 +414,20 @@ role="tab"
 
         this.syncFromUrl();
 
+        this.$watch('inspectMode', (enabled) => {
+          if (!enabled) {
+            this.selectedEl = null;
+          }
+        });
+
+        const preview = this.$el.querySelector('[x-html="previewRendered"]');
+        if (preview) {
+          preview.addEventListener('click', (e) => this.clickHandler(e));
+        };
+
         this.$watch(
           () => JSON.stringify(this),
           (newVal, oldVal) => {
-            // console.log('[Watcher] State changed');
             this.syncToUrl();
           },
           { deep: true }
