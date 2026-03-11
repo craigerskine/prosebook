@@ -2,24 +2,22 @@
 title: Foundation
 desc: The core concepts and utilities that power your design system.
 ico: 'mdi:layers-outline'
+category: UX
 permalink: /foundation/
-override:tags: ''
-eleventyNavigation:
-  title: UX
-  order: 3
+override:tags: navMain
 eleventyComputed:
   eleventyNavigation:
+    title: "{{ category if category else '' }}"
     key: "{{ title }}"
+    order: 1
 ---
 
 {%- from 'macro.list.njk' import list, listItem -%}
 
-{#-
-{%- set compList -%}
-  {{ listItem({slot: 'Back', sub: '⇠', url: '/' | url}) }}
+{%- set navList -%}
+  {%- for item in collections.foundation -%}
+    {{ listItem({slot: item.data.title, sub: 'UX', ico: item.data.ico, url: item.url | url}) }}
+  {%- endfor -%}
 {%- endset -%}
 
-{{- list({slot: compList}) -}}
--#}
-
-<p>Coming soon...</p>
+{{- list({slot: navList}) -}}

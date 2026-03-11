@@ -1,3 +1,10 @@
 {
-  "layout": "layouts/default.njk"
+  "layout": "layouts/default.njk",
+  "eleventyComputed": {
+    "eleventyNavigation": {
+      "id": "__{{ title | slugify }}",
+      "key": "{{ title }}",
+      "category": "{{ category if category else '' }}"
+    }
+  }
 }

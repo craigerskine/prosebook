@@ -131,62 +131,11 @@ themes:
 
   <body class="bg-base-100 text-base-content !block" style="display: none;" data-instant-intensity="mousedown" x-cloak :data-theme="theme">
 
-    <div class="drawer">
-      <input id="nav-aside" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content">
-        <div class="min-h-screen flex flex-col relative">
-          <header class="w-full flex-none">
-            <nav class="mx-auto py-8 px-4 max-w-5xl flex flex-col items-center gap-4 md:flex-row md:justify-between">
-              <a href="{{ '/' | url }}" class="group flex flex-none items-center gap-2 transform transition hover:opacity-50">
-                {%- set width = '8' -%}
-                {%- include '_logo.njk' %}
-              </a>
-              <ul class="flex items-center gap-4 md:gap-10">
-                {%- for item in collections.all | eleventyNavigation %}
-                <li>
-                  <a href="{{ item.url | url }}" class="flex text-current font-semibold relative transition hover:text-(--color-primary) [&[aria-current=page]]:text-(--color-primary)"{% if item.url == page.url or item.url in page.url %} aria-current="page"{% endif %}>
-                    {{ item.key }}
-                    {% if item.url == page.url or item.url in page.url %}<b class="w-full h-[2px] bg-current absolute inset-x-0 -bottom-1 opacity-25"></b>{% endif %}
-                  </a>
-                </li>
-                {%- endfor %}
-                <li>
-                  <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
-                    <div tabindex="0" class="btn btn-ghost btn-sm gap-1 pl-1.5 pr-1">
-                      <span :data-theme="theme" class="border border-(--color-base-content)/10 p-0.5 w-5 h-5 bg-base-100 shrink-0 grid grid-cols-2 gap-0.5 rounded-md shadow-sm">
-                        <span class="bg-base-content rounded-xs"></span>
-                        <span class="bg-primary rounded-xs"></span>
-                        <span class="bg-secondary rounded-xs"></span>
-                        <span class="bg-accent rounded-xs"></span>
-                      </span>
-                      <iconify-icon icon="mdi:chevron-down" class="text-base iconify" noobserver></iconify-icon>
-                    </div>
-                    <div tabindex="-1" class="dropdown-content my-2 border border-white/5 h-[30.5rem] max-h-[calc(100vh-8.6rem)] outline outline-black/5 bg-base-100 overflow-y-auto rounded-box shadow-2xl">
-                      <ul class="menu w-52">
-                        <li class="menu-title text-xs">Theme</li>
-                        {%- for item in themes %}
-                          <li>
-                            <a href="#{{ item }}" @click.prevent="setTheme('{{ item }}', $event); document.activeElement.blur();" :class="theme === '{{ item }}' && 'menu-active'">
-                              <span data-theme="{{ item }}" class="border border-(--color-base-content)/10 p-0.5 w-5 h-5 bg-base-100 shrink-0 grid grid-cols-2 gap-0.5 rounded-md shadow-sm">
-                                <span class="bg-base-content rounded-xs"></span>
-                                <span class="bg-primary rounded-xs"></span>
-                                <span class="bg-secondary rounded-xs"></span>
-                                <span class="bg-accent rounded-xs"></span>
-                              </span>
-                              {{ item | title }}
-                              <iconify-icon x-show="theme === '{{ item }}'" icon="mdi:check" class="iconify text-base" noobserver style="display: none;"></iconify-icon>
-                            </a>
-                          </li>
-                        {%- endfor %}
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </nav>
-          </header>
-    
-          <main class="pb-8 w-full flex-1 md:pb-24">
+    <div class="min-h-screen flex flex-col relative">
+      <div class="grow flex flex-col lg:ml-72 xl:ml-80">
+        {%- include '_header.njk' %}
+        <div class="grow flex flex-col">
+          <main class="pb-8 w-full grow md:pb-24">
             <section class="mx-auto px-4 max-w-5xl">
               <div class="pt-12">
                 <div class="flex gap-4 md:gap-6">
@@ -203,23 +152,10 @@ themes:
           </main>
     
           {%- include '_footer.njk' %}
-    
         </div>
       </div>
-      <aside class="drawer-side">
-        <div class="bg-base-100 w-80">
-          <ul class="menu w-full">
-            <li>
-              <details open>
-                <summary>Group Name</summary>
-                <ul>
-                  <li><a href="#">Some nav item</a></li>
-                </ul>
-              </details>
-            </li>
-          </ul>
-        </div>
-      </aside>
+      
+
     </div>
 
     {%- renderblock 'js' %}

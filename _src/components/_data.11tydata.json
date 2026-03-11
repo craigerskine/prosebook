@@ -1,4 +1,6 @@
 {
   "layout": "layouts/component.njk",
-  "tags": ["component"]
+  "tags": ["component"],
+  "category": "Components",
+  "date": "0002-01-01"
 }

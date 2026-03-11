@@ -1,24 +1,24 @@
 ---
 layout: layouts/default.njk
+title: Components
 desc: A collection of reusable UI components from your design system.
 ico: 'mdi:atom'
+category: UI
 permalink: /components/
-title: Components
-override:tags: ''
-eleventyNavigation:
-  title: UI
-  order: 1
+override:tags: navMain
 eleventyComputed:
   eleventyNavigation:
+    title: "{{ category if category else '' }}"
     key: "{{ title }}"
+    order: 2
 ---
 
 {%- from 'macro.list.njk' import list, listItem -%}
 
-{%- set compList -%}
+{%- set navList -%}
   {%- for item in collections.component -%}
     {{ listItem({slot: item.data.title, sub: 'UI', ico: item.data.ico, url: item.url | url}) }}
   {%- endfor -%}
 {%- endset -%}
 
-{{- list({slot: compList}) -}}
+{{- list({slot: navList}) -}}

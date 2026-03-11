@@ -2,24 +2,22 @@
 title: Blocks
 desc: Organisms, templates, and pages. The building blocks of your design system.
 ico: 'mdi:molecule'
+category: Layout
 permalink: /blocks/
-override:tags: ''
-eleventyNavigation:
-  title: UI
-  order: 2
+override:tags: navMain
 eleventyComputed:
   eleventyNavigation:
+    title: "{{ category if category else '' }}"
     key: "{{ title }}"
+    order: 3
 ---
 
-{#-
 {%- from 'macro.list.njk' import list, listItem -%}
 
-{%- set compList -%}
-  {{ listItem({slot: 'Back', sub: '⇠', url: '/' | url}) }}
+{%- set navList -%}
+  {%- for item in collections.block -%}
+    {{ listItem({slot: item.data.title, sub: 'Layout', ico: item.data.ico, url: item.url | url}) }}
+  {%- endfor -%}
 {%- endset -%}
 
-{{- list({slot: compList}) -}}
--#}
-
-<p>Coming soon...</p>
+{{- list({slot: navList}) -}}

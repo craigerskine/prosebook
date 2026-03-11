@@ -14,7 +14,7 @@ layout: layouts/default.njk
 :tabindex="{{ param.i }} === tabActive ? 0 : -1"
 :aria-selected="{{ param.i }} === tabActive"
 :class="{{ param.i }} === tabActive ? 'tab-active border-(--color-base-content)/10 shadow' : 'border-transparent'"
-class="tab border rounded-xl"
+class="tab border rounded-box"
 role="tab"
 {%- endmacro -%}
 
@@ -38,7 +38,7 @@ role="tab"
         @keydown.end.prevent.stop="$focus.last()"
         @keydown.page-down.prevent.stop="$focus.last()"
         role="tablist"
-        class="tabs tabs-box tabs-sm border border-base-300 w-fit bg-grid shadow-inner rounded-2xl"
+        class="tabs tabs-box tabs-sm border border-base-300 w-fit bg-grid shadow-inner rounded-[calc(var(--radius-box)*1.25)]"
       >
         {%- for item in ['Preview', 'Styles'] %}
           <button
@@ -69,19 +69,17 @@ role="tab"
 
     {#- PREVIEW -#}
     <div x-show="tabActive === 0" class="" role="tabpanel" x-transition:enter.opacity.duration.500ms x-transition:leave.opacity.duration.0ms style="display: none;">
-      <div
-        data-theme="light"
-        class="p-6 border-x border-t border-base-300 bg-base-100 bg-artboard flex items-center justify-center rounded-t-2xl"
-        :class="'min-h-['+ previewHeight +'rem]'"
-      >
+      <div class="border-x border-t border-base-300 overflow-auto rounded-t-box">
         <div
+          data-theme="light"
           x-html="previewRendered"
-          class="preview-scope"
+          class="preview-scope p-6 bg-base-100 flex items-center justify-center bg-artboard"
+          :class="'min-h-['+ previewHeight +'rem]'"
         >
         </div>
       </div>
       <div>
-        <div class="mockup-code mb-6 bg-grid rounded-t-none rounded-b-2xl before:hidden">
+        <div class="mockup-code mb-6 bg-grid rounded-t-none before:hidden">
           <pre data-prefix="&lt;!-- html --&gt;" class="language-html px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
           <button
             @click="
@@ -103,7 +101,7 @@ role="tab"
       @keydown.escape.window="inspectMode = false"
       x-show="inspectMode"
       x-transition
-      class="border border-(--color-base-content)/25 w-80 max-h-[60vh] text-xs bg-neutral text-neutral-content font-mono overflow-auto fixed top-1/2 right-6 z-50 -translate-y-1/2 rounded-2xl shadow-xl shadow-current/10"
+      class="border border-(--color-base-content)/25 w-80 max-h-[60vh] text-xs bg-neutral text-neutral-content font-mono overflow-auto fixed top-1/2 right-6 z-50 -translate-y-1/2 rounded-box shadow-xl shadow-current/10"
     >
       <div class="border-b border-(--color-neutral-content)/10 py-2 pr-1.5 pl-4 bg-neutral font-semibold flex justify-between items-center sticky top-0 z-10">
         <span>Inspector</span>
@@ -174,7 +172,7 @@ role="tab"
 
     {#- STYLES -#}
     <div x-show="tabActive === 1" class="" role="tabpanel" x-transition:enter.opacity.duration.500ms x-transition:leave.opacity.duration.0ms style="display: none;">
-      <div class="mockup-code bg-grid rounded-2xl">
+      <div class="mockup-code bg-grid">
         <pre data-prefix="/* css */" class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{{ styles }}</code></pre>
         <button
           @click="
@@ -199,7 +197,7 @@ role="tab"
         <button @click="restoreDefaults" class="btn btn-ghost btn-circle btn-xs text-lg" aria-label="Restore default values"><iconify-icon icon="mdi:restore" class="iconify" noobserver></iconify-icon></button>
       </div>
     </div>
-    <div class="border border-base-300 max-h-[25rem] bg-base-100 overflow-hidden overflow-y-scroll rounded-2xl after:h-16 after:bg-(--color-base-100) after:text-current/50 after:flex after:items-end after:justify-center after:pointer-events-none after:sticky after:bottom-0 after:[mask-image:linear-gradient(transparent,#000000)] after:content-['⇣_⇣']">
+    <div class="border border-base-300 max-h-[25rem] bg-base-100 overflow-hidden overflow-y-scroll rounded-box after:h-16 after:bg-(--color-base-100) after:text-current/50 after:flex after:items-end after:justify-center after:pointer-events-none after:sticky after:bottom-0 after:[mask-image:linear-gradient(transparent,#000000)] after:content-['⇣_⇣']">
       <div class="pt-2 px-6 divide-y divide-(--color-base-300)">
         {%- for c in controls %}
           <div class="prs-form-control-col py-4">

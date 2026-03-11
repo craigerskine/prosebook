@@ -1,12 +1,14 @@
 ---
 desc: Storybook without the language restrictions and dependencies.
+ico: 'mdi:book-settings'
+eleventyExcludeFromCollections: true
 ---
 
 {%- from 'macro.list.njk' import list, listItem -%}
 
 {%- set navList -%}
-  {%- for item in collections.all | eleventyNavigation -%}
-    {{ listItem({slot: item.key, sub: item.title, ico: item.data.ico, url: item.url | url}) }}
+  {%- for item in collections.navMain | eleventyNavigation %}
+    {{ listItem({slot: item.data.title, sub: item.data.category, ico: item.data.ico, url: item.url | url}) }}
   {%- endfor -%}
 {%- endset -%}
 

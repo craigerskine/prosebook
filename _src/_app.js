@@ -14,26 +14,47 @@ import tippy from 'tippy.js';
 document.addEventListener('alpine:init', () => {
   Alpine.data('app', function() {
     return {
+      menu: false,
       theme: this.$persist('light'),
       setTheme(newTheme, event) {
         const btn = event.currentTarget;
         const rect = btn.getBoundingClientRect();
         const x = (rect.left + rect.width / 2) + 'px';
         const y = (rect.top + rect.height / 2) + 'px';
-  
         document.documentElement.style.setProperty('--click-x', x);
         document.documentElement.style.setProperty('--click-y', y);
-  
         if (!document.startViewTransition) {
           this.theme = newTheme;
           return;
         }
-  
         document.startViewTransition(() => {
           this.theme = newTheme;
         });
-  
       },
+      init() {
+        // menu focus/blur
+        this.$watch('menu', (value) => {
+          if (value) {
+            this.$nextTick(() => {
+              this.$refs.menuMain.focus();
+            });
+          } else {
+            this.$nextTick(() => {
+              this.$refs.menuMain.blur();
+            });
+          }
+        });
+
+        // menu open details
+        const details = Array.from(this.$el.querySelectorAll('details[name=menu-main]'));
+        if (!details.length) return;
+        const activeDetails = details.find(d =>
+          d.querySelector('[aria-current=page],.menu-current')
+        );
+        const toOpen = activeDetails ?? details[0];
+        details.forEach(d => (d.open = false));
+        toOpen.open = true;
+      }
     }
   });
   

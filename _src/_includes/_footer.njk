@@ -7,7 +7,7 @@
 </li>
 {%- endmacro %}
 
-<footer class="border-t border-base-300 border-dashed pt-8 w-full bg-base-200/50 flex-none md:pt-24">
+<footer class="mt-auto border-t border-base-300 pt-8 w-full bg-base-200/50 shrink-0 md:pt-24">
   <div class="mx-auto px-4 max-w-5xl">
     <div class="pb-8 text-center space-y-5 md:pb-12 md:text-start md:flex md:items-start md:justify-between md:gap-5 md:space-y-0">
       <nav class="shrink-0">
@@ -31,12 +31,12 @@
           <li>
             <strong class="pb-1.5 uppercase block opacity-70">{{ cat.title }}</strong>
             <ul>
-              {# sitemap #}
+              {#- sitemap -#}
               {%- if cat.title == 'Sitemap' %}
-                {%- for item in collections.all | eleventyNavigation %}
-                {{ footerLink(title=item.key,sub=item.title,url=item.url | url) }}
+                {%- for item in collections.navMain | eleventyNavigation %}
+                {{ footerLink(title=item.key,sub=item.title,url=item.url) }}
                 {%- endfor %}
-              {# tech stack #}
+              {#- tech stack -#}
               {%- else %}
                 {%- for item in cat.nav %}
                 {{ footerLink(title=item.title,sub=item.sub,url=item.url | url) }}
