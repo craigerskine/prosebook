@@ -1,0 +1,96 @@
+.prs-progress {
+  --accent: var(--prs-c-primary);
+  appearance: none;
+  width: 100%;
+  height: 0.75rem;
+  background-color: var(--prs-c-white);
+  border: 1px solid var(--prs-c-gray-300);
+  overflow: hidden;
+  position: relative;
+  border-radius: 9999px;
+
+  &::-webkit-progress-bar {
+    background-color: transparent;
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--accent);
+  }
+
+  &::-webkit-progress-value {
+    background-color: var(--accent);
+    border-radius: 9999px;
+    transition-property: width;
+    transition-timing-function: var(--prs-transition-timing);
+    transition-duration: var(--prs-transition-duration);
+  }
+
+  &:indeterminate {
+    color: var(--prs-c-gray-300);
+    background-image: repeating-linear-gradient(90deg, currentColor -1%, currentColor 10%, transparent 10%, transparent 90%);
+    background-size: 200%;
+    background-position-x: 15%;
+    animation: progress-loading 5s ease-in-out infinite;
+
+    &::-moz-progress-bar {
+      color: var(--prs-c-gray-300);
+      background-color: transparent;
+      background-image: repeating-linear-gradient(90deg, currentColor -1%, currentColor 10%, transparent 10%, transparent 90%);
+      background-size: 200%;
+      background-position-x: 15%;
+      animation: progress-loading 5s ease-in-out infinite;
+    }
+  }
+}
+
+.prs-progress-info { --accent: var(--prs-c-info); }
+.prs-progress-success { --accent: var(--prs-c-success-600); }
+.prs-progress-warning { --accent: var(--prs-c-warning-700); }
+.prs-progress-danger { --accent: var(--prs-c-danger); }
+.prs-progress-neutral { --accent: var(--prs-c-gray-300); }
+
+.prs-progress-label {
+  width: 100%;
+  display: flex;
+  gap: 0.25rem;
+  flex-direction: column;
+
+  progress + label {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+  }
+}
+
+.prs-progress-radial {
+  --value: 0;
+  --size: 5rem;
+  --thickness: calc(var(--size) / 10);
+  --track: transparent;
+  --radialprogress: calc(var(--value) * 1%);
+  box-sizing: content-box;
+  width: var(--size);
+  height: var(--size);
+  background-color: transparent;
+  display: inline-grid;
+  place-content: center;
+  vertical-align: middle;
+  position: relative;
+  border-radius: 3.40282e38px;
+  transition: --radialprogress 0.3s linear;
+
+  &:before {
+    background: conic-gradient(currentColor var(--radialprogress), var(--track, transparent) 0);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% + 0.5px - var(--thickness)));
+    mask: radial-gradient(farthest-side, transparent calc(100% - var(--thickness)), #000 calc(100% + 0.5px - var(--thickness)));
+    position: absolute;
+    inset: 0;
+    content: '';
+    border-radius: 3.40282e38px;
+  }
+}
+
+@keyframes progress-loading {
+  50% {
+    background-position-x: -115%;
+  }
+}

@@ -1,0 +1,152 @@
+.prs-table-container {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  overflow-x: auto;
+}
+
+.prs-table {
+  width: 100%;
+  font-size: inherit;
+  line-height: inherit;
+
+  :where(th, td) {
+    padding: 1rem;
+    color: var(--prs-c-gray-900);
+    vertical-align: middle;
+  }
+
+  &.prs-table-compact {
+    :where(th, td) {
+      padding: 0.5rem;
+    }
+  }
+
+  :where(th, thead td, tfoot td) {
+    color: var(--prs-c-gray-600);
+    font-weight: 600;
+    text-align: start;
+    vertical-align: bottom;
+    position: relative;
+  }
+
+  :where(tfoot th) {
+    vertical-align: top;
+  }
+
+  &.prs-table-bordered {
+    :where(thead tr, tbody tr:not(:last-child), tbody tr:first-child:last-child) {
+      border-bottom: 1px solid var(--prs-c-gray-300);
+    }
+
+    :where(tfoot tr:last-child) {
+      border-top: 1px solid var(--prs-c-gray-300);
+    }
+  }
+
+  &.prs-table-striped {
+    tbody tr:nth-child(2n) {
+      background-color: var(--prs-c-gray-100);
+    }
+
+    tbody tr:nth-child(2n) :where(.prs-table-pin-cols tr th) {
+      background-color: var(--prs-c-gray-100);
+    }
+  }
+
+  :where(.prs-table-pin-rows thead tr, .prs-table-pin-rows tfoot tr) {
+    background: var(--prs-c-white);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  :where(.prs-table-pin-rows thead th, .prs-table-pin-rows tfoot th) {
+    z-index: 1;
+  }
+
+  :where(.prs-table-pin-rows tfoot tr) {
+    top: auto;
+    bottom: 0;
+  }
+
+  :where(.prs-table-pin-cols tr th) {
+    background: var(--prs-c-white);
+    position: sticky;
+    left: 0;
+    right: 0;
+  }
+}
+
+.prs-cell-name > :where(:first-child) {
+  color: var(--prs-c-primary);
+}
+
+.prs-cell-stacked {
+  display: flex;
+  flex-direction: column;
+
+  &:where(td) > :where(:not(:first-child)) {
+    color: var(--prs-c-gray-600);
+    font-size: 0.75em;
+    line-height: 1.125em;
+  }
+
+  &:where(th) > :where(:not(:first-child)) {
+    font-weight: 600;
+    font-size: inherit;
+    color: var(--prs-c-gray-900);
+  }
+}
+
+.prs-cell-end {
+  text-align: end;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.prs-cell-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.prs-cell-info {
+  color: inherit;
+  display: block;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.prs-cell-sort {
+  color: inherit;
+  display: block;
+  flex-shrink: 0;
+
+  &:after {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    content: '';
+  }
+
+  svg,
+  .icon,
+  iconify-icon {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+    transition-property: var(--prs-transition-property);
+    transition-timing-function: var(--prs-transition-timing);
+    transition-duration: var(--prs-transition-duration);
+  }
+
+  &.desc {
+    svg,
+    .icon,
+    iconify-icon {
+      transform: rotate(180deg);
+    }
+  }
+}

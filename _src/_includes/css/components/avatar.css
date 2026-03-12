@@ -1,0 +1,85 @@
+.prs-avatar {
+  width: 3.125rem;
+  aspect-ratio: 1 / 1;
+  vertical-align: middle;
+  display: inline-flex;
+  position: relative;
+  & :where(img,svg,.prs-avatar-placeholder) {
+    width: 100%;
+    height: 100%;
+    background-color: var(--prs-c-gray-300);
+    color: var(--prs-c-gray-900);
+    font-weight: 700;
+    letter-spacing: -1px;
+    border-radius: calc(infinity * 1px);
+    &:where(svg) {
+      padding: 0.25rem;
+      color: var(--prs-c-gray);
+    }
+    &:where(.prs-avatar-placeholder) {
+      font-size: 1.25rem;
+      overflow: hidden;
+    }
+  }
+}
+.prs-avatar-2xl {
+  width: 5rem;
+  & :where(.prs-avatar-placeholder) {
+    font-size: 2rem;
+  }
+}
+.prs-avatar-xl {
+  width: 4.375rem;
+  & :where(.prs-avatar-placeholder) {
+    font-size: 1.75rem;
+  }
+}
+.prs-avatar-lg {
+  width: 3.75rem;
+  & :where(.prs-avatar-placeholder) {
+    font-size: 1.5rem;
+  }
+}
+.prs-avatar-md {
+  width: 2.5rem;
+  & :where(.prs-avatar-placeholder) {
+    font-size: 1rem;
+  }
+}
+.prs-avatar-sm {
+  width: 1.875rem;
+  & :where(.prs-avatar-placeholder) {
+    font-size: 0.725rem;
+  }
+}
+.prs-avatar-xs {
+  width: 1.25rem;
+  & :where(.prs-avatar-placeholder) {
+    font-size: 0.5625rem;
+  }
+}
+.prs-avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.prs-avatar-online,.prs-avatar-offline {
+  &:before {
+    width: 15%;
+    height: 15%;
+    background-color: var(--prs-c-success-600);
+    display: block;
+    outline: 2px solid var(--prs-c-white);
+    position: absolute;
+    top: 7%;
+    right: 7%;
+    z-index: 1;
+    content: "";
+    border-radius: calc(infinity * 1px);
+  }
+}
+.prs-avatar-offline {
+  &:before {
+    background-color: var(--prs-c-gray-200);
+  }
+}

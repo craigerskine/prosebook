@@ -1,0 +1,92 @@
+.prs-range {
+  --filler: var(--prs-c-primary);
+  --filler-size: 100rem;
+  --filler-offset: 0.6rem;
+  appearance: none;
+  width: 100%;
+  height: 1rem;
+  background: transparent;
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+
+.prs-range::-webkit-slider-runnable-track {
+  appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  background-color: var(--prs-c-gray-300);
+  align-items: center;
+  border-radius: 9999px;
+}
+
+.prs-range::-moz-range-track {
+  appearance: none;
+  width: 100%;
+  height: 0.5rem;
+  background-color: var(--prs-c-gray-300);
+  align-items: center;
+  border-radius: 9999px;
+}
+
+.prs-range::-webkit-slider-thumb {
+  appearance: none;
+  border-style: none;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--prs-c-white);
+  color: var(--filler);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  box-shadow: 0 0 0 3px var(--filler) inset, 0 0, calc(var(--filler-size) * -1 - var(--filler-offset)) 0 0 var(--filler-size);
+  transition-property: var(--prs-transition-property);
+  transition-timing-function: var(--prs-transition-timing);
+  transition-duration: var(--prs-transition-duration);
+}
+
+.prs-range::-moz-range-thumb {
+  --filler-offset: 0.5rem;
+  appearance: none;
+  border-style: none;
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--prs-c-white);
+  color: var(--filler);
+  position: relative;
+  top: 50%;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 3px var(--filler) inset, 0 0, calc(var(--filler-size) * -1 - var(--filler-offset)) 0 0 var(--filler-size);
+  transition-property: var(--prs-transition-property);
+  transition-timing-function: var(--prs-transition-timing);
+  transition-duration: var(--prs-transition-duration);
+}
+
+.prs-range-info {
+  --filler: var(--prs-c-info);
+}
+
+.prs-range-success {
+  --filler: var(--prs-c-success-700);
+}
+
+.prs-range-warning {
+  --filler: var(--prs-c-warning-700);
+}
+
+.prs-range-danger {
+  --filler: var(--prs-c-danger);
+}
+
+.prs-range:focus-visible,.prs-range:where(.prs-range_focus) {
+  outline: 2px solid var(--filler);
+  outline-offset: 1px;
+}
+
+.prs-range:disabled {
+  --filler: var(--prs-c-gray-400);
+  background-color: transparent;
+  cursor: not-allowed;
+}

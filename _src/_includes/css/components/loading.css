@@ -1,0 +1,29 @@
+.prs-loading {
+  pointer-events: none;
+  aspect-ratio: 1;
+  vertical-align: middle;
+  width: calc(var(--size-selector, .625rem) * 6);
+  display: inline-block;
+
+  &:where(.prs-loading-reverse) svg {
+    --color-1: #00BCFF;
+    --color-2: #FF2986;
+    --color-3: #FFF;
+  }
+
+  &:where(.prs-loading-xs) {
+    width: calc(var(--size-selector, .625rem) * 2);
+  }
+  &:where(.prs-loading-sm) {
+    width: calc(var(--size-selector, .625rem) * 4);
+  }
+  &:where(.prs-loading-md) {
+    width: calc(var(--size-selector, .625rem) * 6);
+  }
+  &:where(.prs-loading-lg) {
+    width: calc(var(--size-selector, .625rem) * 8);
+  }
+  &:where(.prs-loading-xl) {
+    width: calc(var(--size-selector, .625rem) * 10);
+  }
+}

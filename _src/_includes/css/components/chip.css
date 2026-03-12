@@ -1,0 +1,85 @@
+.prs-chip {
+  padding: 0.25rem 0.5rem;
+  min-height: 2rem;
+  background-color: var(--prs-c-gray-200);
+  color: var(--prs-c-gray-900);
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  cursor: default;
+  border-radius: var(--prs-radius-badge);
+  transition-property: var(--prs-transition-property);
+  transition-timing-function: var(--prs-transition-timing);
+  transition-duration: var(--prs-transition-duration);
+
+  &[role=button]:hover,
+  &.prs-chip_hover,
+  &:where(button):hover {
+    background-color: var(--prs-c-gray-300);
+    color: var(--prs-c-gray-900);
+    cursor: pointer;
+  }
+
+  &:focus-visible,
+  &.prs-chip_focus {
+    outline: 2px solid var(--prs-c-primary);
+    outline-offset: 1px;
+  }
+
+  .icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--prs-c-gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .close {
+    width: 1.125rem;
+    height: 1.125rem;
+    background-color: var(--prs-c-gray-600);
+    color: var(--prs-c-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+    border-radius: var(--prs-radius-badge);
+  }
+
+  &.prs-chip_active {
+    background-color: var(--prs-c-primary-100);
+    color: var(--prs-c-primary-800);
+
+    &[role=button]:hover,
+    &.prs-chip_hover,
+    &:where(button):hover {
+      background-color: var(--prs-c-primary-200);
+      color: var(--prs-c-gray-900);
+      cursor: pointer;
+    }
+
+    .icon {
+      color: currentColor;
+    }
+
+    .close {
+      background-color: var(--prs-c-primary-700);
+      color: var(--prs-c-primary-100);
+    }
+  }
+
+  &:disabled,&.prs-chip_disabled {
+    pointer-events: none;
+  }
+}
+
+.prs-chip-label {
+  padding: 0 0.25rem;
+  display: block;
+}

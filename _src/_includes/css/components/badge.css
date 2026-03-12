@@ -1,0 +1,51 @@
+.prs-badge {
+  border: 1px solid var(--prs-c-gray-300);
+  padding: 0.1875rem 0.5rem;
+  background-color: var(--prs-c-gray-100);
+  color: var(--prs-c-gray-700);
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--prs-radius-btn);
+
+  &.prs-badge-pill {
+    border-radius: 9999px;
+  }
+
+  &.prs-badge-sharp {
+    border-radius: 0;
+  }
+
+  &.prs-badge-current {
+    border-color: currentColor;
+    background: transparent;
+    color: currentColor;
+  }
+
+  &.prs-badge-info {
+    border-color: var(--prs-c-info);
+    background-color: var(--prs-c-info-100);
+    color: var(--prs-c-info-900);
+  }
+
+  &.prs-badge-success {
+    border-color: var(--prs-c-success);
+    background-color: var(--prs-c-success-100);
+    color: var(--prs-c-success-900);
+  }
+
+  &.prs-badge-warning {
+    border-color: var(--prs-c-warning-600);
+    background-color: var(--prs-c-warning-100);
+    color: var(--prs-c-warning-900);
+  }
+
+  &.prs-badge-danger {
+    border-color: var(--prs-c-danger);
+    background-color: var(--prs-c-danger-100);
+    color: var(--prs-c-danger-900);
+  }
+}

@@ -1,0 +1,170 @@
+html:has(:is(dialog[open])) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+.prs-dialog {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: none;
+  min-width: 100vw;
+  height: 100%;
+  max-height: none;
+  min-height: 100vh;
+  background-color: transparent;
+  visibility: hidden;
+  display: grid;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+  opacity: 0;
+
+  &[open] {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+
+    .prs-dialog-box {
+      transform: scale(1);
+    }
+  }
+
+  &::backdrop {
+    background-color: rgb(var(--prs-dialog-backdrop));
+    animation: dialog-pop .2s ease-out;
+  }
+}
+
+.prs-dialog-box {
+  width: 91.666667%;
+  max-width: 32rem;
+  max-height: calc(100vh - 5em);
+  background-color: var(--prs-c-white);
+  grid-column-start: 1;
+  grid-row-start: 1;
+  place-self: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  position: relative;
+  border-radius: 0;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  transform: scale(0.9);
+}
+
+.prs-dialog-bordered .prs-dialog-box > :not([hidden]) ~ :not([hidden]) {
+  border-top: 1px solid var(--prs-c-gray-300);
+}
+
+.prs-dialog-header {
+  padding: 1rem 1.5rem;
+  background-color: var(--prs-c-white);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+  position: sticky;
+  top: 0;
+
+  h2 {
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    flex: 1 1 0%;
+  }
+}
+
+.prs-dialog-close {
+  flex-shrink: 0;
+
+  &:where(button,[role="button"]) {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    border-radius: var(--prs-radius-badge);
+    &::after {
+      outline: 2px solid transparent;
+      outline-offset: -3px;
+      width: 2.5rem;
+      aspect-ratio: 1;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: -1;
+      border-radius: inherit;
+      transform: translate(-50%, -50%);
+      transition-property: var(--prs-transition-property);
+      transition-timing-function: var(--prs-transition-timing);
+      transition-duration: var(--prs-transition-duration);
+    }
+    &:where(:hover,:focus) {
+      outline: 0 none;
+      &::after { background-color: var(--prs-c-gray-200); outline-color: currentColor; };
+    }
+  }
+}
+
+.prs-dialog-body {
+  padding: 1.5rem 1.5rem 1rem;
+}
+
+.prs-dialog-action {
+  margin-top: .5rem;
+  padding: 1.5rem;
+  background-color: var(--prs-c-white);
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+  position: sticky;
+  bottom: 0;
+
+  [method="dialog"] {
+    display: flex;
+    justify-content: end;
+    gap: 0.5rem;
+  }
+}
+
+.prs-dialog-backdrop {
+  color: transparent;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  display: grid;
+  align-self: stretch;
+  justify-self: stretch;
+  z-index: -1;
+
+  > button,
+  > [role="button"] {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .prs-dialog,
+  .prs-dialog-box {
+    transition-property: var(--prs-transition-property);
+    transition-timing-function: var(--prs-transition-timing);
+    transition-duration: var(--prs-transition-duration);
+  }
+
+  .prs-dialog-box {
+    --prs-transition-property: all;
+  }
+}
+
+@keyframes dialog-pop {
+  0% {
+    opacity: 0;
+  }
+}

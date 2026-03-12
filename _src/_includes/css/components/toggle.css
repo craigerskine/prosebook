@@ -1,0 +1,162 @@
+.prs-toggle {
+  --toggle-size: 1.75rem;
+  --toggle-pad: 1px;
+  --toggle-border: 1px;
+  --toggle-content: '';
+  --toggle-color: var(--prs-c-gray-400);
+  --toggle-radius-max: calc(var(--prs-radius-badge) + var(--prs-radius-badge) + var(--prs-radius-badge));
+  appearance: none;
+  padding: var(--toggle-pad);
+  border: var(--toggle-border) solid var(--toggle-color);
+  width: calc((var(--toggle-size) * 2) - (var(--toggle-border) + var(--toggle-pad)) * 3);
+  height: var(--toggle-size);
+  background-color: var(--toggle-color);
+  color: var(--prs-c-white);
+  vertical-align: middle;
+  display: inline-grid;
+  flex-shrink: 0;
+  grid-template-columns: 0fr 1fr 1fr;
+  place-content: center;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  border-radius: calc(var(--prs-radius-badge) + min(var(--toggle-pad), var(--toggle-radius-max)) + min(var(--toggle-border), var(--toggle-radius-max)));
+  box-shadow: 0 1px color-mix(in oklab, currentColor calc(var(--depth) * 10%), #0000) inset;
+  transition: background-color 0.3s, color 0.3s, grid-template-columns 0.2s;
+  & > * {
+    appearance: none;
+    padding: 0;
+    border: none;
+    height: 100%;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--prs-c-gray-800);
+    display: flex;
+    grid-column: 2 / span 1;
+    grid-row-start: 1;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: opacity 0.2s, rotate 0.4s;
+    &:focus-visible {
+      outline: 0 none;
+    }
+    &:nth-child(2) {
+      rotate: none;
+    }
+    &:nth-child(3) {
+      opacity: 0;
+      rotate: -15deg;
+    }
+    &:is(svg),& > :is(svg) {
+      width: 1em;
+      height: 1em;
+    }
+  }
+  &:has(:checked) {
+    & > :nth-child(2) {
+      opacity: 0;
+      rotate: 15deg;
+    }
+    & > :nth-child(3) {
+      opacity: 1;
+      rotate: none;
+    }
+  }
+  &:before {
+    height: 100%;
+    aspect-ratio: 1;
+    content: var(--toggle-content);
+    background-color: currentColor;
+    grid-row-start: 1;
+    grid-column-start: 2;
+    position: relative;
+    inset-inline-start: 0;
+    border-radius: var(--prs-radius-badge);
+    box-shadow: 0 -1px oklch(0% 0 0 / calc(var(--depth) * 0.1)) inset,
+    0 8px 0 -4px oklch(100% 0 0 / calc(var(--depth) * 0.1)) inset,
+    0 1px color-mix(in oklab, currentColor calc(var(--depth) * 10%), #0000);
+    translate: 0;
+    transition: background-color 0.1s, translate 0.2s, inset-inline-start 0.2s;
+  }
+  @media print {
+    &:before {
+      outline: 0.25rem solid;
+      outline-offset: -1rem;
+    }
+  }
+  &:focus-visible,
+  &.prs-toggle_focus,
+  &:has(:focus-visible),
+  &.prs-toggle_focus:has(:focus-visible) {
+    outline: 2px solid var(--prs-c-primary);
+    outline-offset: 1px;
+  }
+  &:checked,
+  &[aria-checked="true"],
+  &:has(> input:checked) {
+    --toggle-color: var(--prs-c-primary);
+    grid-template-columns: 1fr 1fr 0fr;
+    &:before {
+      background-color: currentColor;
+    }
+    @starting-style {
+      &:before {
+        opacity: 0;
+      }
+    }
+  }
+  &:indeterminate {
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+  }
+  &:disabled,
+  &.prs-toggle_disabled,
+  &:has(> input:disabled),
+  &.prs-toggle_disabled:has(> input:disabled) {
+    cursor: not-allowed;
+    opacity: 0.3;
+    & > * {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+}
+.prs-toggle-info {
+  &:checked,
+  &[aria-checked="true"] {
+    --toggle-color: var(--prs-c-info-700);
+  }
+}
+.prs-toggle-success {
+  &:checked,
+  &[aria-checked="true"] {
+    --toggle-color: var(--prs-c-success-700);
+  }
+}
+.prs-toggle-warning {
+  &:checked,
+  &[aria-checked="true"] {
+    --toggle-color: var(--prs-c-warning-700);
+  }
+}
+.prs-toggle-danger {
+  &:checked,
+  &[aria-checked="true"] {
+    --toggle-color: var(--prs-c-danger);
+  }
+}
+.prs-toggle-neutral {
+  &:checked,
+  &[aria-checked="true"] {
+    --toggle-color: var(--prs-c-gray-800);
+  }
+}
+.prs-toggle-sm {
+  font-size: 0.8125rem;
+  &[type='checkbox'],
+  &:has([type='checkbox']) {
+    --toggle-size: 1.125rem;
+    width: calc((var(--toggle-size) * 2) - (var(--toggle-border) + var(--toggle-pad)) * 2);
+  }
+}

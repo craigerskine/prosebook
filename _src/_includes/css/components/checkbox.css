@@ -1,0 +1,66 @@
+.prs-checkbox {
+  --chk-bg: var(--prs-c-primary);
+  --chk-fg: var(--prs-c-white);
+  --chk-size: 1rem;
+  appearance: none;
+  border: 1px solid currentColor;
+  width: var(--chk-size);
+  height: var(--chk-size);
+  background-color: var(--prs-c-white);
+  color: var(--prs-c-gray-600);
+  flex-shrink: 0;
+  cursor: pointer;
+  border-radius: var(--prs-radius-btn);
+
+  &:checked,
+  &[aria-checked=true] {
+    background-color: var(--chk-bg);
+    background-image:
+      linear-gradient(-45deg, transparent 65%, var(--chk-bg) 65.99%),
+      linear-gradient(45deg, transparent 75%, var(--chk-bg) 75.99%),
+      linear-gradient(-45deg, var(--chk-bg) 40%, transparent 40.99%),
+      linear-gradient(45deg, var(--chk-bg) 30%, var(--chk-fg) 30.99%, var(--chk-fg) 40%, transparent 40.99%),
+      linear-gradient(-45deg, var(--chk-fg) 50%, var(--chk-bg) 50.99%);
+    background-repeat: no-repeat;
+    animation: checkmark 0.2s ease-out;
+  }
+
+  &:indeterminate,
+  &.prs-checkbox_indeterminate {
+    background-color: var(--chk-fg);
+    background-image:
+      linear-gradient(90deg, transparent 80%, var(--chk-bg) 80%),
+      linear-gradient(-90deg, transparent 80%, var(--chk-bg) 80%),
+      linear-gradient(0deg, var(--chk-bg) 43%, var(--chk-fg) 43%, var(--chk-fg) 57%, var(--chk-bg) 57%);
+    background-repeat: no-repeat;
+    animation: checkmark 0.2s ease-out;
+  }
+
+  &:focus-visible,
+  &.prs-checkbox_focus {
+    outline: 2px solid var(--prs-c-primary);
+    outline-offset: 1px;
+  }
+
+  &:disabled {
+    --chk-bg: var(--prs-c-gray-100);
+    --chk-fg: currentColor;
+    background-color: var(--prs-c-gray-100);
+    color: var(--prs-c-gray-300);
+    cursor: not-allowed;
+  }
+
+  &.prs-checkbox-lg {
+    --chk-size: 1.5rem;
+  }
+
+  &.prs-checkbox-xl {
+    --chk-size: 2rem;
+  }
+}
+
+@keyframes checkmark {
+  0% { background-position-y: 5px }
+  50% { background-position-y: -2px }
+  100% { background-position-y: 0 }
+}

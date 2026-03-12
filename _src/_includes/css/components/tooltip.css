@@ -1,0 +1,120 @@
+/* tippy.js tooltips */
+.tippy-box {
+  background-color: var(--prs-c-gray-900);
+  color: var(--prs-c-white);
+  white-space: normal;
+  outline: 0;
+  position: relative;
+  opacity: 1;
+  box-shadow: 0 0 0 1px rgb(255 255 255), 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  border-radius: 0.25rem;
+  transform: translateY(0);
+  transition-property: var(--prs-transition-property);
+  transition-timing-function: var(--prs-transition-timing);
+  transition-duration: var(--prs-transition-duration);
+
+  &[data-state="hidden"] {
+    opacity: 0;
+    transform: translateY(0.25rem);
+  }
+
+  &[data-placement^="top"],&[data-placement^="bottom"],&[data-placement^="left"],&[data-placement^="right"] {
+    > .tippy-arrow {
+      width: 1rem;
+      height: 1rem;
+      color: var(--prs-c-gray-900);
+      position: absolute;
+
+      &::before {
+        content: '';
+        position: absolute;
+        border-style: solid;
+        border-color: transparent;
+      }
+    }
+  }
+
+  &[data-placement^="top"] > .tippy-arrow {
+    filter: drop-shadow(0 1px 0 rgb(255 255 255));
+    bottom: 0;
+    transform: translateX(-50%);
+    left: 50%;
+    transform-origin: top;
+
+    &::before {
+      bottom: -7px;
+      left: 0;
+      border-top: 8px solid currentColor;
+      border-right: 8px solid transparent;
+      border-bottom: 0;
+      border-left: 8px solid transparent;
+    }
+  }
+
+  &[data-placement^="bottom"] > .tippy-arrow {
+    filter: drop-shadow(0 -1px 0 rgb(255 255 255));
+    top: 0;
+    transform: translateX(-50%);
+    left: 50%;
+    transform-origin: bottom;
+
+    &::before {
+      top: -7px;
+      left: 0;
+      border-top: 0;
+      border-right: 8px solid transparent;
+      border-bottom: 8px solid currentColor;
+      border-left: 8px solid transparent;
+    }
+  }
+
+  &[data-placement^="left"] > .tippy-arrow {
+    right: 0;
+    filter: drop-shadow(1px 0 0 rgb(255 255 255));
+    transform: translateY(-50%);
+    top: 50%;
+    transform-origin: left;
+
+    &::before {
+      right: -7px;
+      border-top: 8px solid transparent;
+      border-right: 0;
+      border-bottom: 8px solid transparent;
+      border-left: 8px solid currentColor;
+    }
+  }
+
+  &[data-placement^="right"] > .tippy-arrow {
+    left: 0;
+    filter: drop-shadow(-1px 0 0 rgb(255 255 255));
+    transform: translateY(-50%);
+    top: 50%;
+    transform-origin: right;
+
+    &::before {
+      left: -7px;
+      border-top: 8px solid transparent;
+      border-right: 8px solid currentColor;
+      border-bottom: 8px solid transparent;
+      border-left: 0;
+    }
+  }
+}
+
+[data-tippy-root] {
+  max-width: calc(100vw - 10px);
+}
+
+.tippy-content {
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  line-height: 24px;
+  position: relative;
+  z-index: 1;
+
+  @media (min-width: 768px) {
+    padding: 0.25rem 1rem;
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
