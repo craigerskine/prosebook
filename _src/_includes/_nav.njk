@@ -27,13 +27,13 @@
             <summary{% if (category | slugify == page.url or category | slugify in page.url) %} class="menu-current"{% endif %}><span class="menu-title p-0 flex items-center gap-2"><iconify-icon icon="{{ cat.data.ico }}" class="iconify text-base-content text-lg" noobserver></iconify-icon> {{ category }}</span></summary>
           {%- endif %}
         {%- endfor %}
-          <ul>
+          <ul class="ms-5 text-[95%]">
             {%- for item in items %}  
               <li>
                 <a href="{{ item.url | url }}"{% if (item.url == page.url or item.url in page.url) %} class="menu-active" aria-current="page"{% endif %}>
                   <span>{{ item.key }}</span>
-                  {%- if item.data.beta %}
-                    <span class="badge badge-soft badge-xs" title="beta" aria-title="beta">beta</span>
+                  {%- if item.data.status %}
+                    <span class="badge badge-soft badge-xs" title="{{ item.data.status }}" aria-title="{{ item.data.status }}">{{ item.data.status }}</span>
                   {%- endif %}
                 </a>
               </li>

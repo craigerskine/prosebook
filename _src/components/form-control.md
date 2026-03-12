@@ -1,8 +1,8 @@
 ---
-beta: true
+status: beta
 title: Form Control
-desc: 🚧 **WORK IN PROGRESS:** Label positions and fieldset group options. 🚧
-ico: mdi:label
+desc: Label positions and fieldset group options.
+ico: mdi:grid
 keywords:
   - form
   - label

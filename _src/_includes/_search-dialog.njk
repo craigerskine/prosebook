@@ -1,5 +1,5 @@
 <dialog x-cloak x-ref="searchDialog" id="search-dialog" class="modal items-start">
-  <div @keydown.down="$focus.next()" @keydown.up="$focus.previous()" class="modal-box mt-8 p-0 max-w-xl h-fit max-h-[clamp(13rem,80vh,60vh)] relative">
+  <div @keydown.escape.window="searchTerm = ''" @keydown.down="$focus.next()" @keydown.up="$focus.previous()" class="modal-box mt-8 p-0 max-w-xl h-fit max-h-[clamp(13rem,80vh,60vh)] relative">
     <div class="h-full overflow-y-auto rounded-box [scrollbar-width:thin]">
       <label aria-label="Search" class="input input-lg lg:input-xl bg-base-100 border-base-300 sticky top-0 z-1 w-full rounded-none rounded-t-(--radius-box) border-0 border-b shadow-none focus-within:shadow-none focus-within:-outline-offset-4 lg:px-6">
         <iconify-icon icon="mdi:magnify" class="iconify size-5 shrink-0 opacity-30" noobserver></iconify-icon>

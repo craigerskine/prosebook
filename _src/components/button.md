@@ -1,7 +1,7 @@
 ---
 title: Button
 desc: Interactive element that users can click to perform an action or navigate to another page.
-ico: 'mdi:button-pointer'
+ico: mdi:button-pointer
 keywords:
   - form
   - link

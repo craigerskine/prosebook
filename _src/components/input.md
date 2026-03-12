@@ -16,7 +16,6 @@ keywords:
   - password
   - range
   - search
-  - select
   - tel
   - text
   - textarea

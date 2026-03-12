@@ -1,7 +1,7 @@
 ---
 title: Skeleton
 desc: ...
-ico: mdi:skull-crossbones
+ico: mdi:drive-document
 keywords:
   - loader
   - loading

@@ -1,8 +1,8 @@
 ---
-beta: true
+status: beta
 title: Separator
-desc: 🚧 **WORK IN PROGRESS:** A visual way to separate sections of content or elements either horizontally or vertically. 🚧
-ico: mdi:format-horizontal-align-center
+desc: A visual way to separate sections of content or elements either horizontally or vertically.
+ico: mdi:divide
 keywords:
   - divide
   - divider
