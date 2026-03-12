@@ -1,7 +1,10 @@
 ---
 title: Button
-desc: Interactive element to perform an action or navigate to another page.
-ico: 'mdi:button-cursor'
+desc: Interactive element that users can click to perform an action or navigate to another page.
+ico: 'mdi:button-pointer'
+keywords:
+  - form
+  - link
 
 styles: |
   .prs-btn {
@@ -122,13 +125,22 @@ code:
       {icon}{text}{iconEnd}
     </button>
   logic:
-    text: "this.shape === 'default' ? this.text : '<svg class=\"icon\" aria-label=\"'+ this.text +'\"></svg>'"
-    icon: "(this.shape === 'default' && this.withIcon === 'leading') ? '<svg class=\"icon\"></svg> ' : ''"
-    iconEnd: "(this.shape === 'default' && this.withIcon === 'trailing') ? ' <svg class=\"icon\"></svg>' : ''"
-    variant: "this.variant === 'primary' ? ' prs-btn-primary' : ' prs-btn-' +this.variant"
-    color: "this.color === 'default' ? '' : ' prs-btn-' +this.color"
-    size: "this.size === 'default' ? '' : ' prs-btn-' +this.size"
-    shape: "this.shape === 'default' ? '' : ' prs-btn-' +this.shape"
-    state: "(this.state === 'default' || this.state === 'disabled') ? '' : ' prs-btn_' +this.state"
-    disabled: "this.state === 'disabled' ? ' disabled' : ''"
+    text: |
+      this.shape === 'default' ? this.text : '<svg class="icon" aria-label="'+ this.text +'"></svg>'
+    icon: |
+      (this.shape === 'default' && this.withIcon === 'leading') ? '<svg class="icon"></svg> ' : ''
+    iconEnd: |
+      (this.shape === 'default' && this.withIcon === 'trailing') ? ' <svg class="icon"></svg>' : ''
+    variant: |
+      this.variant === 'primary' ? ' prs-btn-primary' : ' prs-btn-'+ this.variant
+    color: |
+      this.color === 'default' ? '' : ' prs-btn-'+ this.color
+    size: |
+      this.size === 'default' ? '' : ' prs-btn-'+ this.size
+    shape: |
+      this.shape === 'default' ? '' : ' prs-btn-'+ this.shape
+    state: |
+      (this.state === 'default' || this.state === 'disabled') ? '' : ' prs-btn_'+ this.state
+    disabled: |
+      this.state === 'disabled' ? ' disabled' : ''
 ---

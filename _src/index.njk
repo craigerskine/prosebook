@@ -13,3 +13,14 @@ eleventyExcludeFromCollections: true
 {%- endset -%}
 
 {{- list({slot: navList}) -}}
+
+
+<article class="prose pt-12">
+{% renderTemplate 'njk,md' %}
+
+## Get Started
+
+To include the entire Prose UI system, follow these steps. You can also include individual components as needed by using the resources tab on each component page.
+
+{% endrenderTemplate %}
+</article>

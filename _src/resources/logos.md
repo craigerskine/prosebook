@@ -1,0 +1,8 @@
+---
+title: Logos
+desc: Company and miscellaneous logos/icons in SVG Symbol, SVG, and PNG.
+ico: 'mdi:vector-polygon'
+date: 0002-01-01
+---
+
+Coming soon...

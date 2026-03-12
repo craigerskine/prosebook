@@ -7,8 +7,8 @@
 </li>
 {%- endmacro %}
 
-<footer class="mt-auto border-t border-base-300 pt-8 w-full bg-base-200/50 shrink-0 md:pt-24">
-  <div class="mx-auto px-4 max-w-5xl">
+<footer class="mt-auto border-t border-base-300 pt-8 w-full bg-base-200/50 shrink-0 md:pt-12">
+  <div class="mx-auto px-4 max-w-{{ site.prose.width }}">
     <div class="pb-8 text-center space-y-5 md:pb-12 md:text-start md:flex md:items-start md:justify-between md:gap-5 md:space-y-0">
       <nav class="shrink-0">
         <a href="{{ '/' | url }}" class="btn btn-ghost btn-circle group">
@@ -25,28 +25,30 @@
           {%- endfor %}
         </ul>
       </nav>
-      <nav class="w-full text-sm flex flex-col gap-10 md:max-w-xl md:flex-row md:justify-end md:gap-32">
-        {%- for cat in site.footer %}
-        <ul>
-          <li>
-            <strong class="pb-1.5 uppercase block opacity-70">{{ cat.title }}</strong>
-            <ul>
-              {#- sitemap -#}
-              {%- if cat.title == 'Sitemap' %}
-                {%- for item in collections.navMain | eleventyNavigation %}
-                {{ footerLink(title=item.key,sub=item.title,url=item.url) }}
-                {%- endfor %}
-              {#- tech stack -#}
-              {%- else %}
-                {%- for item in cat.nav %}
-                {{ footerLink(title=item.title,sub=item.sub,url=item.url | url) }}
-                {%- endfor %}
-              {%- endif %}
-            </ul>
-          </li>
-        </ul>
-        {%- endfor %}
-      </nav>
+      {%- if site.footer %}
+        <nav class="w-full text-sm flex flex-col gap-10 md:max-w-xl md:flex-row md:justify-end md:gap-32">
+          {%- for cat in site.footer %}
+          <ul>
+            <li>
+              <strong class="pb-1.5 uppercase block opacity-70">{{ cat.title }}</strong>
+              <ul>
+                {#- sitemap -#}
+                {%- if cat.title == 'Sitemap' %}
+                  {%- for item in collections.navMain | eleventyNavigation %}
+                  {{ footerLink(title=item.key,sub=item.title,url=item.url) }}
+                  {%- endfor %}
+                {#- tech stack -#}
+                {%- else %}
+                  {%- for item in cat.nav %}
+                  {{ footerLink(title=item.title,sub=item.sub,url=item.url | url) }}
+                  {%- endfor %}
+                {%- endif %}
+              </ul>
+            </li>
+          </ul>
+          {%- endfor %}
+        </nav>
+      {%- endif %}
     </div>
     <div class="border-t border-base-content/10 py-3 text-xs text-base-content/50 text-center leading-relaxed space-y-3 [&_p+p]:md:text-end md:py-6 md:text-start md:flex md:flex-wrap md:justify-between md:space-y-0">
       <p>

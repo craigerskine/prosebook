@@ -13,4 +13,33 @@ social:
     color: accent
 
 footer:
-  - title: Sitemap
+  # - title: Sitemap
+
+prose:
+  width: 4xl
+
+themes:
+  - light
+  - dark
+  - emerald
+  - synthwave
+  - retro
+  - valentine
+  - halloween
+  - garden
+  - forest
+  - fantasy
+  - black
+  - luxury
+  - dracula
+  - business
+  - acid
+  - lemonade
+  - coffee
+  - winter
+  - dim
+  - nord
+  - sunset
+  - caramellatte
+  - abyss
+  - silk

@@ -1,0 +1,46 @@
+{%- set nav = [] -%}
+{%- set nav = nav.concat(collections.foundation | eleventyNavigation) -%}
+{%- set nav = nav.concat(collections.component | eleventyNavigation) -%}
+{%- set nav = nav.concat(collections.resource | eleventyNavigation) -%}
+{%- set nav = nav.concat(collections.block | eleventyNavigation) -%}
+<nav
+  id="menu-main"
+  @click.outside="menu = false"
+  @keydown.escape.window="menu = false"
+  x-ref="menuMain"
+  :tabindex="menu ? 0 : false"
+  :class="menu ? 'border border-base-300 p-3 w-full max-w-80 h-fit max-h-[calc(100vh-8.6rem)] bg-base-100 overflow-y-auto fixed top-12 left-2 z-50 shadow-2xl rounded-box focus:outline-none' : 'px-3 hidden lg:block'"
+  x-cloak
+>
+  <ul class="menu p-0 w-full">
+    {%- for category, items in nav | groupby('category') %}
+      <li>
+        <details
+          class="
+            [&::details-content]:motion-safe:transition-all
+            [&::details-content]:[transition-behavior:allow-discrete]
+          "
+          name="menu-main"
+        >
+        {%- for cat in collections.navMain %}
+          {%- if cat.data.title === category %}
+            <summary{% if (category | slugify == page.url or category | slugify in page.url) %} class="menu-current"{% endif %}><span class="menu-title p-0 flex items-center gap-2"><iconify-icon icon="{{ cat.data.ico }}" class="iconify text-base-content text-lg" noobserver></iconify-icon> {{ category }}</span></summary>
+          {%- endif %}
+        {%- endfor %}
+          <ul>
+            {%- for item in items %}  
+              <li>
+                <a href="{{ item.url | url }}"{% if (item.url == page.url or item.url in page.url) %} class="menu-active" aria-current="page"{% endif %}>
+                  <span>{{ item.key }}</span>
+                  {%- if item.data.beta %}
+                    <span class="badge badge-soft badge-xs" title="beta" aria-title="beta">beta</span>
+                  {%- endif %}
+                </a>
+              </li>
+            {%- endfor %}
+          </ul>
+        </details>
+      </li>
+    {%- endfor %}
+  </ul>
+</nav>

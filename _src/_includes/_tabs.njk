@@ -1,0 +1,29 @@
+  <div
+    x-ref="tabButtons"
+    @keydown.left.prevent.stop="$focus.wrap().prev()"
+    @keydown.right.prevent.stop="$focus.wrap().next()"
+    @keydown.home.prevent.stop="$focus.first()"
+    @keydown.page-up.prevent.stop="$focus.first()"
+    @keydown.end.prevent.stop="$focus.last()"
+    @keydown.page-down.prevent.stop="$focus.last()"
+    class="tabs tabs-box tabs-sm border border-base-300 w-fit bg-grid shadow-inner rounded-[calc(var(--radius-box)*1.25)]"
+    role="tablist"
+  >
+    <template x-for="(item, index) in tabs" hidden>
+      <button
+        @mousedown.prevent
+        @click.prevent="tabActive = (index + 1)"
+        @focus="tabActive = (index + 1)"
+        :id="tabId +'-'+ (index + 1)"
+        :tabindex="tabActive == (index + 1) ? 0 : -1"
+        :aria-selected="tabActive == (index + 1)"
+        :aria-controls="tabId +'-'+ (index + 1) +'-panel'"
+        :class="tabActive == (index + 1) ? 'tab-active border-(--color-base-content)/10 shadow' : ''"
+        class="tab border rounded-box transition"
+        role="tab"
+      >
+        <span x-show="item.icon" style="display: none;" class="mr-1 text-base opacity-50"><iconify-icon :icon="item.icon" class="iconify block" noobserver></iconify-icon></span>
+        <span x-text="item.title"></span>
+      </button>
+    </template>
+  </div>

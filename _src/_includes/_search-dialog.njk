@@ -1,0 +1,27 @@
+<dialog x-cloak x-ref="searchDialog" id="search-dialog" class="modal modal-top">
+  <div @keydown.down="$focus.next()" @keydown.up="$focus.previous()" class="modal-box mx-auto max-w-3xl bg-transparent shadow-none">
+    <label class="dialog-content input input-xl mx-auto w-full rounded-box">
+      <iconify-icon icon="mdi:magnify" class="iconify" noobserver></iconify-icon>
+      <input x-ref="searchInput" x-model="searchTerm" @keydown.window.prevent.meta.k="searchOpen()" type="text" placeholder="Search" class="placeholder:italic" />
+      <kbd class="kbd kbd-xs">esc</kbd>
+    </label>
+    <ol x-show="searchTerm.length >= 2 && filteredResults.length > 0" x-transition class="mt-4 p-2 bg-base-100 space-y-2 rounded-box">
+      <template x-for="result in filteredResults" hidden>
+        <li>
+          <a :href="result.url" class="group p-4 flex items-center gap-3 rounded-box transition [&:hover,&:focus]:bg-(--color-base-200) [&:hover,&:focus]:ring-inset [&:hover,&:focus]:ring-1 [&:hover,&:focus]:ring-(--color-base-300) [&:hover,&:focus]:outline-none">
+            <span class="w-10 h-10 flex items-center justify-center shrink-0 rounded-full ring-inset ring-2 ring-(--color-base-300) pointer-events-none transition group-hover:ring-0 group-hover:bg-(--color-base-300) group-focus:ring-0 group-focus:bg-(--color-base-300)">
+              <iconify-icon :icon="result.ico ? result.ico : 'mdi:check'" class="iconify" noobserver></iconify-icon>
+            </span>
+            <div class="min-w-0 grow">
+              <p class="truncate" x-text="result.title"></p>
+              <small class="pt-1 text-xs font-semibold uppercase block opacity-70" x-text="result.category"></small>
+            </div>
+          </a>
+        </li>
+      </template>
+    </ol>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>Close</button>
+  </form>
+</dialog>

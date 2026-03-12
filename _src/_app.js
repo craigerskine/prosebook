@@ -16,6 +16,36 @@ document.addEventListener('alpine:init', () => {
     return {
       menu: false,
       theme: this.$persist('light'),
+      searchTerm: '',
+      searchData: [],
+
+      slugify(text) {
+        return text?.toString()
+          .toLowerCase()
+          .normalize('NFKD')
+          .trim()
+          .toLowerCase()
+          .replace(/[^\w\-]+/g, '-')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+      },
+
+      get filteredResults() {
+        return this.searchData.filter(item =>
+          item.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          item.category.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          item.keywords.some(keyword => keyword.toLowerCase().includes(this.searchTerm.toLowerCase()))
+        );
+      },
+      searchOpen() {
+        this.$refs.searchDialog.showModal();
+        setTimeout(() => {
+          this.$nextTick(() => {
+            this.$refs.searchInput.focus();
+          });
+        }, 50);
+      },
+
       setTheme(newTheme, event) {
         const btn = event.currentTarget;
         const rect = btn.getBoundingClientRect();
@@ -31,7 +61,12 @@ document.addEventListener('alpine:init', () => {
           this.theme = newTheme;
         });
       },
-      init() {
+
+      async init() {
+        // search
+        const response = await fetch('/search/search.json');
+        this.searchData = await response.json();
+
         // menu focus/blur
         this.$watch('menu', (value) => {
           if (value) {

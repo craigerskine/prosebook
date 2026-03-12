@@ -1,0 +1,16 @@
+---
+layout: ''
+eleventyExcludeFromCollections: true
+permalink: '{{ page.filePathStem }}.json'
+---
+[
+{%- for item in collections.all | sort(false, false, 'data.title') %}
+  {
+    "title": "{{ item.data.title | safe }}",
+    "ico": "{{ item.data.ico | safe }}",
+    "url": "{{ item.url | url | safe }}",
+    "category": "{{ item.data.category | lower | safe }}",
+    "keywords": [{%- for k in item.data.keywords %}"{{ k }}"{% if not loop.last %}, {% endif %}{%- endfor %}]
+  }{% if not loop.last %},{% endif %}
+{%- endfor %}
+]
