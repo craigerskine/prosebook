@@ -64,7 +64,7 @@ document.addEventListener('alpine:init', () => {
 
       async init() {
         // search
-        const response = await fetch('/search/search.json');
+        const response = await fetch(`${window.BASE_PATH}search/search.json`);
         this.searchData = await response.json();
 
         // menu focus/blur

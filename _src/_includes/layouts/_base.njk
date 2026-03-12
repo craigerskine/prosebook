@@ -158,6 +158,10 @@
 
     {%- include '_search-dialog.njk' -%}
 
+    <script>
+      // for github
+      window.BASE_PATH = "{{ '/' | url }}";
+    </script>
     {%- renderblock 'js' %}
     <script src="{{ '/' | url }}_assets/js/_app.js?v={% bust %}"></script>
 
