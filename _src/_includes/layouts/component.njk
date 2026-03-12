@@ -33,7 +33,7 @@ layout: layouts/_base.njk
         <div class="flex items-center gap-2">
           <div class="relative z-20">
             <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
-              <div tabindex="0" class="btn btn-outline btn-circle btn-sm border-current/10 text-base" role="button" aria-label="AI"><iconify-icon icon="mdi:stars-outline" class="iconify" noobserver></iconify-icon></div>
+              <div class="tooltip" data-tip="AI"><div tabindex="0" class="btn btn-outline btn-circle btn-sm border-current/10 text-base" role="button" aria-label="AI"><iconify-icon icon="mdi:stars-outline" class="iconify" noobserver></iconify-icon></div></div>
               <ul tabindex="-1" class="dropdown-content menu menu-sm my-2 border border-white/5 outline outline-black/5 w-52 bg-base-200 rounded-box shadow-2xl">
                 <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="mdi:content-copy" class="text-base iconify" noobserver></iconify-icon> Copy docs</a></li>
                 <li></li>
@@ -69,7 +69,7 @@ layout: layouts/_base.njk
           <div class="mockup-code mb-6 bg-grid rounded-t-none before:hidden">
             <pre data-prefix="&lt;!-- html --&gt;" class="language-html px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
             <div class="flex items-center gap-2 absolute top-1 right-1">
-              <button @click="inspectMode = !inspectMode" class="btn btn-outline btn-circle btn-xs border-current/20 text-base">
+              <button @click="inspectMode = !inspectMode" class="btn btn-outline btn-circle btn-xs border-current/20 text-base tooltip tooltip-bottom" data-tip="Inspect">
                 <iconify-icon icon="mdi:select-search" class="iconify" noobserver></iconify-icon>
               </button>
               <button
