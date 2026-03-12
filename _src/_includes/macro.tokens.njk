@@ -1,0 +1,78 @@
+{%- macro tokens(param) -%}
+  {%- set spacing %}{% if param.spacing %}{% raw %}      {% endraw %}{% endif %}{%- endset %}
+
+  {%- macro hexToRgb(hex) -%}
+    {%- set r = hex.substring(1, 3) -%}
+    {%- set g = hex.substring(3, 5) -%}
+    {%- set b = hex.substring(5, 7) -%}
+    {{ r | parseInt(16) }} {{ g | parseInt(16) }} {{ b | parseInt(16) }}
+  {%- endmacro -%}
+  {#-
+    rgb({{ hexToRgb(hex) }} / var(--prs-c-opacity))
+  -#}
+
+{%- for name, group in prose.colors %}
+{%- if not loop.first %}
+{% endif %}
+  /* {{ name }} */
+{%- if group is string %}
+  --{{ prose.base.prefix }}-c-{{ name }}: {{ group }};
+{%- else %}
+  {%- for shade, hex in group %}
+  --{{ prose.base.prefix }}-c-{{ name }}-{{ shade }}: {{ hex }};
+  {%- if shade === '500' %}
+  --{{ prose.base.prefix }}-c-{{ name }}: var(--{{ prose.base.prefix }}-c-{{ name }}-{{ shade }});
+  {%- endif %}
+  {%- endfor %}
+{%- endif %}
+{%- endfor %}
+
+{%- if not param.colors %}
+
+  {{ spacing }}/* typography */
+  {{ spacing }}--{{ prose.base.prefix }}-ff-sans: {{ prose.typography.sans | safe }};
+  {{ spacing }}--{{ prose.base.prefix }}-ff-serif: {{ prose.typography.serif | safe }};
+  {{ spacing }}--{{ prose.base.prefix }}-ff-mono: {{ prose.typography.mono | safe }};
+  {{ spacing }}--{{ prose.base.prefix }}-ff-websafe: {{ prose.typography.websafe | safe }};
+
+  {{ spacing }}/* typography - base */
+  {{ spacing }}--{{ prose.base.prefix }}-fs-base: {{ prose.typography.weight }};
+  {{ spacing }}--{{ prose.base.prefix }}-fz-base: {{ prose.typography.size }};
+  {{ spacing }}--{{ prose.base.prefix }}-fl-base: {{ prose.typography.leading }};
+
+{%- for item in prose.typography.styles %}
+
+  {{ spacing }}/*
+  {{ spacing }}  typography - {{ item.title | slugify }}
+  {{ spacing }}  fw = font-weight; fz = font-size; fl = leading/line-height
+  {{ spacing }}*/
+{%- for type, prop in item.items %}
+{%- set scale %}
+{%- if type === 'X-Large' -%}
+  -xl
+{%- elseif type === 'Large' -%}
+  -lg
+{%- elseif type === 'Medium' -%}
+  -md
+{%- elseif type === 'Small' -%}
+  -sm
+{%- elseif type === 'Base' -%}
+{%- else -%}
+  {{- '-'+ type | slugify -}}
+{%- endif -%}
+{%- endset %}
+  {{ spacing }}--{{ prose.base.prefix }}-fw-{{ item.title | slugify }}{{ scale }}: {{ item.weight }};
+  {{ spacing }}--{{ prose.base.prefix }}-fz-{{ item.title | slugify }}{{ scale }}: {{ prop.size }}rem;
+  {{ spacing }}--{{ prose.base.prefix }}-fl-{{ item.title | slugify }}{{ scale }}: {{ prop.leading }};
+{%- endfor %}
+{%- endfor %}
+
+{%- for item in prose.utility %}
+
+  {{ spacing }}/* {{ item.title }} */
+  {%- for category, val in item.items %}
+  {{ spacing }}--{{ prose.base.prefix }}-{{ item.title }}-{{ category }}: {{ val }};
+  {%- endfor %}
+{%- endfor %}
+{%- endif %}
+{%- endmacro -%}

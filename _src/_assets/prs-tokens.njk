@@ -1,0 +1,19 @@
+---
+layout: ''
+title: ''
+eleventyExcludeFromCollections: true
+permalink: './_assets/css/prs-tokens_v{{ site.version }}.css'
+---
+
+{%- from 'macro.tokens.njk' import tokens with context -%}
+
+/*
+  {{ site.meta.title }} - tokens
+*/
+{% set tokens -%}
+:root {
+  {{- tokens({spacing: false}) }}
+}
+{%- endset -%}
+
+{{ tokens | safe }}

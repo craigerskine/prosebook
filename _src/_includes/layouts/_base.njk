@@ -26,8 +26,6 @@
     <script src="{{ '/' | url }}_assets/js/tailwind.js"></script>
 
     {%- set css -%}
-      {%- include 'css/prose-tokens.css' -%}
-      {%- include 'css/prose-styles.css' -%}
       {%- include 'css/daisyui.css' -%}
       {%- include 'css/daisyui-themes.css' -%}
       {%- include 'css/typography.css' -%}
@@ -35,6 +33,11 @@
     {%- endset -%}
 
     <style data-twind></style>
+
+    <style>
+      @import url("{{ '/' | url }}_assets/css/prs-tokens_v{{ site.version }}.css");
+      @import url("{{ '/' | url }}_assets/css/prs-styles_v{{ site.version }}.css");
+    </style>
 
     <style type="text/tailwindcss">
       {{ css | cssmin | safe }}

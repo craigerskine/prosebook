@@ -220,7 +220,7 @@ layout: layouts/_base.njk
         style="display: none;"
       >
         <div class="mockup-code bg-grid">
-          <pre data-prefix="/* css */" class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{{ styles }}</code></pre>
+          <pre data-prefix="/* css */" class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{%- include 'css/components/'+ title | slugify +'.css' -%}</code></pre>
           <button
             @click="
               navigator.clipboard.writeText($refs.stylesBlock.textContent).then(() => {

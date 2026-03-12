@@ -1,0 +1,20 @@
+---
+layout: ''
+title: ''
+eleventyExcludeFromCollections: true
+permalink: './_assets/css/prs-styles_v{{ site.version }}.css'
+---
+/*
+  {{ site.meta.title }} - styles
+*/
+
+/* === components === */
+{% set cssComponents -%}
+{%- for item in collections.component %}
+  /* === {{ item.data.title | upper }} === */
+  {%- include 'css/components/'+ item.data.title | slugify +'.css' -%}
+{%- endfor %}
+{%- endset -%}
+{{- cssComponents | cssmin | safe }}
+
+/* === typography === */
