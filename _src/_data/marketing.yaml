@@ -1,0 +1,23 @@
+colors:
+  Brand:
+    Magenta: '#FF2986'
+    Cobalt: '#0900DA'
+    Sky: '#00BCFF'
+  Primary:
+    Berry: '#A30283'
+    Royal Purple: '#5A02B7'
+    CTA Cobalt: '#0600B4'
+    Indigo: '#00057F'
+    Dark Teal: '#005A76'
+    Deep Indigo: '#131327'
+  Secondary:
+    Mauve: '#F0C0FE'
+    Cornflower: '#A7CCFF'
+    Aqua: '#09FEFF'
+    Spring: '#00F0A8'
+    Chartreuse: '#E1FF00'
+    Lemon: '#FFFF00'
+  Neutral:
+    Chalk: '#F1F0F2'
+    Ash: '#B5BDD6'
+    Charcoal: '#49597D'

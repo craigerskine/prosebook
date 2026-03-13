@@ -1,0 +1,59 @@
+sans: "'Figtree', ui-sans-serif, system-ui, -apple-system, 'system-ui', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
+serif: "Literata, ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif"
+mono: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
+websafe: "Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
+size: 16
+leading: 1.5
+weight: normal
+styles:
+  - title: Heading
+    weight: 600
+    items:
+      X-Large:
+        size: 2
+        leading: 1.5
+      Large:
+        size: 1.5
+        leading: 1.33
+      Medium:
+        size: 1.125
+        leading: 1.33
+      Small:
+        size: 1
+        leading: 1.25
+  - title: Content
+    weight: normal
+    items:
+      Base:
+        size: 1.0625
+        leading: 1.59
+      Footnote:
+        size: 0.8125
+        leading: 1.54
+  - title: UI
+    weight: normal
+    items:
+      Large:
+        size: 1.125
+        leading: 1.33
+      Medium:
+        size: 1
+        leading: 1.5
+      Small:
+        size: 0.875
+        leading: 1.375rem
+      Subtext:
+        size: 0.8125
+        leading: 1.38
+  - title: Button
+    weight: normal
+    items:
+      Large:
+        size: 1.125
+        leading: 1.11
+      Medium:
+        size: 0.9375
+        leading: 1.33
+      Small:
+        size: 0.75
+        leading: 1.67

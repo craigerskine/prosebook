@@ -1,9 +1,24 @@
 {%- macro heading(param) %}
-<{{ param.tag if param.tag else 'h1' }} class="w-full text-2xl leading-tight font-black flex items-center space-x-4 lg:text-[calc(3vw)] lg:tracking-tight">
-  <span class="{{ 'shrink-0' if param.divider else 'grow' }}">
-    {{ param.slot | safe }}
-    <small class="max-w-xs text-xs text-current/60 font-normal text-balance tracking-normal block lg:text-base">{{ param.desc | safe }}</small>
-  </span>
-  {%- if param.divider %}<i class="h-0 border-b border-base-content/10 grow" aria-hidden="true"></i>{%- endif %}
-</{{ param.tag if param.tag else 'h1' }}>
+
+  {#- tag -#}
+  {%- set tag = param.tag if param.tag else 'h1' -%}
+
+  {#- size -#}
+  {%- set size -%}
+    {%- if tag === 'h1' -%}
+      text-2xl lg:text-[calc(3vw)] lg:tracking-tight
+    {%- elseif tag === 'h2' -%}
+      text-xl lg:text-3xl
+    {%- else -%}
+      text-lg lg:text-2xl
+    {%- endif -%}
+  {%- endset -%}
+
+  <{{ tag }} class="w-full leading-tight font-black flex items-center space-x-4 {{ size }}">
+    <span class="{{ 'shrink-0' if param.divider else 'grow' }}">
+      {{ param.slot | safe }}
+      <small class="max-w-xs text-xs text-current/60 font-normal text-balance tracking-normal block lg:text-base">{{ param.desc | safe }}</small>
+    </span>
+    {%- if param.divider %}<i class="h-0 border-b border-base-300 grow" aria-hidden="true"></i>{%- endif %}
+  </{{ tag }}>
 {%- endmacro %}

@@ -43,36 +43,6 @@
       {{ css | cssmin | safe }}
 
       :root,:root:has(input.theme-controller[value=light]:checked),[data-theme=light] {
-        color-scheme: light;
-        --color-base-content: var(--prs-c-gray-900);
-        --color-primary: var(--prs-c-primary);
-        --color-primary-content: var(--prs-c-white);
-        --color-secondary: var(--prs-c-secondary);
-        --color-secondary-content: var(--prs-c-gray-900);
-        --color-accent: var(--prs-c-accent);
-        --color-accent-content: var(--prs-c-white);
-        --color-neutral: var(--prs-c-gray-800);
-        --color-neutral-content: var(--prs-c-gray-50);
-        --color-info: var(--prs-c-info);
-        --color-info-content: var(--prs-c-gray-900);
-        --color-success: var(--prs-c-success);
-        --color-success-content: var(--prs-c-gray-900);
-        --color-warning: var(--prs-c-warning);
-        --color-warning-content: var(--prs-c-gray-900);
-        --color-error: var(--prs-c-danger);
-        --color-error-content: var(--prs-c-white);
-        --color-base-100: var(--prs-c-white);
-        --color-base-200: color-mix(in oklab, var(--color-neutral), var(--prs-c-white) 95%);
-        --color-base-300: color-mix(in oklab, var(--color-neutral), var(--prs-c-white) 85%);
-        --radius-selector: 0.25rem;
-        --radius-field: 0.25rem;
-        --radius-box: 0.5rem;
-        --size-selector: 0.25rem;
-        --size-field: 0.25rem;
-        --border: 1px;
-        --depth: 0;
-        --noise: 0;
-
         --bg-artboard: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' width='20' height='20' fill='rgba(128,128,128,.1)'><g opacity='.5'><rect x='0' y='0' width='10' height='10' /><rect x='10' y='10' width='10' height='10' /></g></svg>");
         --bg-grid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4' width='4' height='4'><rect x='0' y='0' width='2' height='2' fill='rgb(128 128 128 / .05)'></rect></svg>");
 
@@ -113,6 +83,10 @@
         --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       }
 
+      @utility writing-* {
+        writing-mode: --value('horizontal-tb', 'vertical-lr', 'vertical-rl', 'sideways-lr', 'sideways-rl');
+      }
+
       @layer utilities {
         :where(.btn) { @apply font-normal; }
         .mockup-code {
@@ -120,6 +94,8 @@
           & pre { @apply pb-5 before:mb-2.5 before:text-xs before:italic; }
         }
       }
+
+      hr { @apply my-8 border-(--color-base-300); }
 
       .bg-artboard { background-image: var(--bg-artboard); }
       .bg-grid { background-image: var(--bg-grid); }

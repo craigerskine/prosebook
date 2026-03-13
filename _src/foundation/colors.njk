@@ -1,0 +1,130 @@
+---
+title: Colors
+desc: The characteristic of human visual perception described through categories.
+ico: mdi:format-color-fill
+keywords:
+  - palette
+  - swatches
+date: 0002-01-01
+---
+
+{%- from 'macro.heading.njk' import heading -%}
+
+{%- set tokenStart = '--'+ prose.base.prefix +'-c-' -%}
+
+<div role="alert" class="alert bg-(--color-base-300)/30 [--alert-border-color:var(--color-base-300)] mb-12 shadow-lg">
+  <iconify-icon icon="mdi:wheelchair-accessibility" class="iconify text-xl block" noobserver></iconify-icon>
+  <p><strong>For best contrast & accessibility:</strong><br />Use <code class="badge badge-sm mx-1 font-mono">--prs-c-white</code> foreground on darker backgrounds and <code class="badge badge-sm mx-1 font-mono">--prs-c-gray-950</code> foreground on lighter backgrounds.</p>
+</div>
+
+{%- macro grid(param) -%}
+  <ul class="text-xs grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+    {{ param.slot | safe }}
+  </ul>
+{%- endmacro -%}
+
+{%- macro swatch(param) -%}
+  {%- set token -%}--{{ prose.base.prefix }}-c-{{ param.name | lower }}{%- if param.shade | lower %}-{{ param.shade | lower }}{%- endif %}{%- endset -%}
+  {%- set scale -%}{%- if param.shade %}{{ param.shade }}{%- else %}&nbsp;{%- endif %}{%- endset -%}
+  {%- set hex -%}{{ param.color }}{%- endset -%}
+  <li x-data="{
+    token: '{{ token }}',
+    hex: '{{ hex }}',
+    rgb: colorify('{{ hex }}', 'rgb'),
+    hsl: colorify('{{ hex }}', 'hsl'),
+    oklch: colorify('{{ hex }}', 'oklch'),
+    readable: colorify('{{ hex }}', 'readable'),
+  }" class="font-mono grid grid-cols-[auto_1fr]">
+    <p class="font-semibold writing-sideways-lr">{{ scale | safe }}</p>
+    <div>
+      <div class="mb-1 flex items-center justify-end gap-2">
+        <p>{{ token | replace('--prs-c-', '') | slugify }}</p>
+        {%- if param.menu %}  
+          <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
+            <div tabindex="0" class="btn btn-outline btn-circle btn-xs border-current/20 text-base"><iconify-icon icon="mdi:chevron-down" class="block iconify" noobserver></iconify-icon></div>
+            <ul class="dropdown-content menu menu-sm my-2 border border-white/10 outline outline-black/10 w-64 bg-base-200 rounded-box shadow-2xl">
+              <li class="menu-title text-xs font-sans">Token & Formats [click to copy]</li>
+              <li><button @click="copyValue(token, $event.currentTarget)" x-text="token"></button></li>
+              <li></li>
+              <li><button @click="copyValue(hex, $event.currentTarget)" x-text="hex"></button></li>
+              <li><button @click="copyValue(rgb, $event.currentTarget)" x-text="rgb"></button></li>
+              <li><button @click="copyValue(hsl, $event.currentTarget)" x-text="hsl"></button></li>
+              <li><button @click="copyValue(oklch, $event.currentTarget)" x-text="oklch"></button></li>
+            </ul>
+          </div>
+        {%- endif %}
+      </div>
+      {#- [mask:radial-gradient(4px_at_calc(100%-.75rem)_calc(100%-.75rem),#0000_100%,#000_100%)] -#}
+      <div :style="`color: ${colorify(hex, 'readable')}`" class="border border-base-300 p-2 aspect-video bg-[{{ hex }}] flex flex-col gap-2 rounded-box">
+        <strong class="text-sm block">{{ hex }}</strong>
+        <b class="mt-auto ml-auto py-0.5 px-1.5 border border-dashed border-current/50 leading-none font-sans font-black rounded-box" x-text="colorify(hex, 'ratio')"></b>
+      </div>
+    </div>
+  </li>
+{%- endmacro -%}
+
+<div class="space-y-12">
+  {#- back/white -#}
+  <section>
+    <header class="grid grid-cols-[auto_1fr] items-center gap-4">
+      {{ heading({ tag: 'h3', slot: 'neutral' | title, desc: tokenStart }) }}
+      <b class="h-2 bg-black rounded-box"></b>
+    </header>
+    {%- set neutralGrid -%}  
+      {%- for name, color in prose.colors %}
+        {%- if color is string %}
+          {{ swatch({ name: name, shade: '', color: color, menu: true }) }}
+        {%- endif %}
+      {%- endfor %}
+    {%- endset -%}
+    {{ grid({ slot: neutralGrid }) }}
+  </section>
+  
+  {#- prose -#}
+  {%- for name, group in prose.colors %}
+    <section class="space-y-4">
+      {%- if group is not string %}
+        <header class="grid grid-cols-[auto_1fr] items-center gap-4">
+          {{ heading({ tag: 'h3', slot: name | title, desc: tokenStart }) }}
+          <b class="h-2 bg-(--{{ prose.base.prefix }}-c-{{ name | slugify }}) rounded-box"></b>
+        </header>
+        {%- set proseGrid -%}  
+          {%- for shade, color in group %}
+            {%- if shade === '500' %}
+              {{ swatch({ name: name, shade: shade, color: color, menu: true }) }}
+            {%- endif %}
+          {%- endfor %}
+        {%- endset -%}
+        {{ grid({ slot: proseGrid }) }}
+        {%- set proseGrid -%}  
+          {%- for shade, color in group %}
+            {%- if shade !== '500' %}
+              {{ swatch({ name: name, shade: shade, color: color, menu: true }) }}
+            {%- endif %}
+          {%- endfor %}
+        {%- endset -%}
+        {{ grid({ slot: proseGrid }) }}
+      {%- endif %}
+    </section>
+  {%- endfor %}
+  
+  {#- marketing -#}
+  <div class="pt-12 space-y-4">
+    {{ heading({ tag: 'h2', slot: 'Marketing', divider: true }) }}
+    <div role="alert" class="alert alert-warning shadow-lg">
+      <iconify-icon icon="mdi:warning" class="iconify text-xl block" noobserver></iconify-icon>
+      <span>Warning: The following is for marketing purposes ONLY! Please use the base token colors above 👆 for all other UI styling so we can maintain consistency.</span>
+    </div>
+  </div>
+  {%- for group, colors in marketing.colors %}
+    <section class="space-y-8">
+      {{ heading({ tag: 'h3', slot: group | title, divider: true }) }}
+      {%- set brandGrid -%}  
+        {%- for name, color in colors %}
+          {{ swatch({ name: name, shade: '', color: color }) }}
+        {%- endfor -%}
+      {%- endset %}
+      {{ grid({ slot: brandGrid }) }}
+    </section>
+  {%- endfor %}
+</div>

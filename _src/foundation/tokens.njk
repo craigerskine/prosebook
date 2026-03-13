@@ -1,0 +1,21 @@
+---
+title: Tokens
+desc: CSS custom properties (variables) for reuse and sime theme-ing.
+ico: mdi:variable
+date: 0005-01-01
+---
+
+{%- from 'macro.tokens.njk' import tokens with context -%}
+
+{% set tokens -%}/*
+  {{ site.meta.title }} - tokens
+*/
+
+:where(html) {
+  {{- tokens({spacing: false}) }}
+}
+{%- endset -%}
+
+<div x-init="hljs.highlightElement($refs.tokensBlock)" class="mockup-code bg-grid">
+  <pre data-prefix="/* css */" class="language-css px-6 text-sm overflow-y-scroll"><code x-ref="tokensBlock">{{ tokens | safe }}</code></pre>
+</div>

@@ -12,7 +12,7 @@ permalink: './_assets/css/prs-styles_v{{ site.version }}.css'
 {% set cssComponents -%}
 {%- for item in collections.component %}
   /* === {{ item.data.title | upper }} === */
-  {%- include 'css/components/'+ item.data.title | slugify +'.css' -%}
+  {%- include '../components/'+ item.data.title | slugify +'.css' ignore missing -%}
 {%- endfor %}
 {%- endset -%}
 {{- cssComponents | cssmin | safe }}

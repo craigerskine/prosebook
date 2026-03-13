@@ -9,6 +9,7 @@ import Alpine from 'alpinejs';
 import anchor from '@alpinejs/anchor';
 import focus from '@alpinejs/focus';
 import persist from '@alpinejs/persist';
+import chroma from 'chroma-js';
 import tippy from 'tippy.js';
 
 document.addEventListener('alpine:init', () => {
@@ -28,6 +29,17 @@ document.addEventListener('alpine:init', () => {
           .replace(/[^\w\-]+/g, '-')
           .replace(/\s+/g, '-')
           .replace(/-+/g, '-')
+      },
+
+      copyValue(value, el) {
+        let original = el.textContent;
+        navigator.clipboard.writeText(value).then(() => {
+          el.textContent = 'Copied!';
+          setTimeout(() => { el.textContent = original }, 2000);
+        }).catch(() => {
+          el.textContent = 'Failed';
+          setTimeout(() => { el.textContent = original }, 2000);
+        });
       },
 
       get filteredResults() {
@@ -60,6 +72,52 @@ document.addEventListener('alpine:init', () => {
         document.startViewTransition(() => {
           this.theme = newTheme;
         });
+      },
+
+      colorify(color, format, options = {}) {
+        const colorLight = '#FFFFFF';
+        const colorDark = '#0E0D16';
+
+        let c = chroma(color);
+
+        if (options.tint != null) {
+          c = c.tint(options.tint);
+        } else if (options.shade != null) {
+          c = c.shade(options.shade);
+        }
+
+        const getLevel = (ratio) => {
+          if (ratio >= 7) return 'AAA';
+          if (ratio >= 4.5) return 'AA';
+          return 'Fail';
+        };
+
+        switch (format) {
+          case 'oklch':
+            return c.css('oklch');
+
+          case 'hsl':
+            return c.css('hsl');
+
+          case 'rgb':
+            return c.css('rgb');
+
+          case 'readable':
+            const contrastA = chroma.contrast(c, colorDark);
+            const contrastB = chroma.contrast(c, colorLight);
+            return contrastA > contrastB ? colorDark : colorLight;
+
+          case 'ratio':
+            const ratioA = chroma.contrast(c, colorDark);
+            const ratioB = chroma.contrast(c, colorLight);
+            const bestRatio = Math.max(ratioA, ratioB);
+            const rounded = bestRatio.toFixed(1);
+            const level = getLevel(bestRatio);
+            return `${rounded} = ${level}`;
+
+          default:
+            return c.hex();
+        }
       },
 
       async init() {

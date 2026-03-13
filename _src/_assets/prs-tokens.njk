@@ -7,11 +7,11 @@ permalink: './_assets/css/prs-tokens_v{{ site.version }}.css'
 
 {%- from 'macro.tokens.njk' import tokens with context -%}
 
-/*
+{% set tokens -%}/*
   {{ site.meta.title }} - tokens
 */
-{% set tokens -%}
-:root {
+
+:where(html) {
   {{- tokens({spacing: false}) }}
 }
 {%- endset -%}

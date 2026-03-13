@@ -34,7 +34,7 @@ layout: layouts/_base.njk
           <div class="relative z-20">
             <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
               <div class="tooltip" data-tip="AI"><div tabindex="0" class="btn btn-outline btn-circle btn-sm border-current/10 text-base" role="button" aria-label="AI"><iconify-icon icon="mdi:stars-outline" class="iconify" noobserver></iconify-icon></div></div>
-              <ul tabindex="-1" class="dropdown-content menu menu-sm my-2 border border-white/5 outline outline-black/5 w-52 bg-base-200 rounded-box shadow-2xl">
+              <ul tabindex="-1" class="dropdown-content menu menu-sm my-2 border border-white/10 outline outline-black/10 w-52 bg-base-200 rounded-box shadow-2xl">
                 <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="mdi:content-copy" class="text-base iconify" noobserver></iconify-icon> Copy docs</a></li>
                 <li></li>
                 <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:openai-chatgpt" class="text-base iconify" noobserver></iconify-icon> Open in ChatGPT</a></li>
@@ -68,9 +68,9 @@ layout: layouts/_base.njk
         <div class="relative">
           <div class="mockup-code mb-6 bg-grid rounded-t-none before:hidden">
             <pre data-prefix="&lt;!-- html --&gt;" class="language-html px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
-            <div class="flex items-center gap-2 absolute top-1 right-1">
-              <button @click="inspectMode = !inspectMode" class="btn btn-outline btn-circle btn-xs border-current/20 text-base tooltip tooltip-bottom" data-tip="Inspect">
-                <iconify-icon icon="mdi:select-search" class="iconify" noobserver></iconify-icon>
+            <div class="join absolute top-1 right-1">
+              <button @click="inspectMode = !inspectMode" class="join-item btn btn-outline btn-xs border-current/20">
+                Inspect
               </button>
               <button
                 @click="
@@ -79,7 +79,7 @@ layout: layouts/_base.njk
                     setTimeout(() => $el.textContent = 'Copy', 2000);
                   })
                 "
-                class="btn btn-outline btn-xs border-current/20"
+                class="join-item btn btn-outline btn-xs border-current/20"
               >
                 Copy
               </button>
@@ -90,7 +90,7 @@ layout: layouts/_base.njk
         <div>
           <div class="mb-1 flex items-center justify-between">
             {{ heading({ slot: 'Controls' }) }}
-            <div class="tooltip" data-tip="Restore">
+            <div class="tooltip tooltip-left" data-tip="Restore defaults">
               <button @click="restoreDefaults" class="btn btn-ghost btn-circle btn-xs text-lg" aria-label="Restore default values"><iconify-icon icon="mdi:restore" class="iconify" noobserver></iconify-icon></button>
             </div>
           </div>
@@ -220,7 +220,7 @@ layout: layouts/_base.njk
         style="display: none;"
       >
         <div class="mockup-code bg-grid">
-          <pre data-prefix="/* css */" class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{%- include 'css/components/'+ title | slugify +'.css' -%}</code></pre>
+          <pre data-prefix="/* css */" class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{%- include '../../components/'+ title | slugify +'.css' -%}</code></pre>
           <button
             @click="
               navigator.clipboard.writeText($refs.stylesBlock.textContent).then(() => {
@@ -228,7 +228,7 @@ layout: layouts/_base.njk
                 setTimeout(() => $el.textContent = 'Copy', 2000);
               })
             "
-            class="absolute top-1 right-1 btn btn-outline border-current/50 border-dashed btn-xs"
+            class="btn btn-outline btn-xs border-current/20 absolute top-1 right-1"
           >
             Copy
           </button>

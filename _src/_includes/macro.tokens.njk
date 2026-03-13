@@ -67,11 +67,11 @@
 {%- endfor %}
 {%- endfor %}
 
-{%- for item in prose.utility %}
+{%- for title, items in prose.utility %}
 
-  {{ spacing }}/* {{ item.title }} */
-  {%- for category, val in item.items %}
-  {{ spacing }}--{{ prose.base.prefix }}-{{ item.title }}-{{ category }}: {{ val }};
+  {{ spacing }}/* {{ title }} */
+  {%- for category, val in items %}
+  {{ spacing }}--{{ prose.base.prefix }}-{{ title }}-{{ category }}: {{ val }};
   {%- endfor %}
 {%- endfor %}
 {%- endif %}
