@@ -1,8 +1,214 @@
 ---
 title: Typography
 desc: Arranging type to be legible, readable, and appealing when screen displayed.
-ico: mdi:format-list-text
+ico: mdi:format-font
+keywords:
+  - font size
+  - font weight
+  - fonts
+  - leading
+  - letter
+  - line height
+  - prose
+  - tracking
+  - type
 date: 0003-01-01
+
+main:
+  - title: Font Sets
+    desc: |
+      Consistent and accurate usage of our approved typefaces reinforce our brand identity.
+    items:
+      - title: Figtree
+        type: Sans
+      - title: Literata
+        type: Serif
+      - title: JetBrains Mono
+        type: mono
+      - title: Arial
+        type: Websafe
+  - title: Google Fonts Embed
+    desc: |
+      Example Google Fonts head link markup for use in your application or sample prototype.
+  - title: CSS
+    desc: |
+      CSS font stack with fallback.
+  - title: Live Demo
+    desc: |
+      🚧 <em class="text-brand">WORK IN PROGRESS!</em><br /> Example typography content with various combinations in action.
+    prose: |
+      ## Example heading 2
+
+      What follows from here is just a bunch of [absolute nonsense](#). It includes every sensible typographic element like **bold text**, unordered lists, ordered lists, code blocks, block quotes, horizontal rules, _and even italics_.
+
+      Let's start covering the basics. Here's an ordered list:
+
+      1. Make things look good out of the box.
+      2. Use a consistent type scale.
+      3. Things look good in odd numbers, so here's a third item.
+
+      ### Example heading 3
+
+      Let's lead into a blockquote:
+
+      > The quick brown fox jumps over the lazy dog.
+
+      And here's a figure:
+
+      <figure>
+        <img src="https://fastly.picsum.photos/id/270/800/400.jpg?hmac=o5WoB5Lo9rkLLrCD_dpIDqkOQBea4NV1dUDCQywhHCc" alt="Alt text" />
+        <figcaption>With its associated caption</figcaption>
+      </figure>
+
+      Let's continue covering the basics. Here's an unordered list:
+
+      * Make things look good out of the box.
+      * Use a consistent type scale.
+      * Things look good in odd numbers, so here's a third item.
+
+      ***
+
+      ### Stacked heading 3
+
+      #### Stacked heading 4
+
+      Let's start getting really crazy now. We'll add some nested elements within other elements.
+
+      * #### Nested heading 4 inside of a list item.
+
+        Here's some paragraph text inside of a list item.
+      * #### Another nested heading 4 inside of a list item.
+
+        Here's some paragraph text inside of a list item.
+      * #### A third heading 4 inside of a list item.
+
+        Here's some paragraph text inside of a list item.
+
+      ***
+
+      ### Nested lists?
+
+      1. #### Nested lists are rarely a good idea.
+          * You might feel like you are being really "organized" or something but you are just creating a gross shape on the screen that is hard to read.
+          * Nested navigation in UIs is a bad idea too, keep things as flat as possible.
+          * Nesting tons of folders in your source code is also not helpful.
+      3. #### Since we need to have more items, here's another one.
+          * I'm not sure if we'll bother styling more than two levels deep.
+          * Two is already too much, three is guaranteed to be a bad idea.
+          * If you nest four levels deep you belong in prison.
+      3. #### Two items isn't really a list, three is good though.
+          * Again please don't nest lists if you want people to actually read your content.
+          * Nobody wants to look at this.
+          * I'm upset that we even have to bother styling this.
+
+      ### What about code blocks?
+
+      We can do `inline code` as well as code blocks:
+
+      ```
+      module.exports = {
+        foo: [],
+        bar: {
+          extend: {},
+        },
+        baz: {},
+      }
+      ```
+
+      ***
+
+      ### Finally
+
+      We'll even supply some basic table styles. Just use sematic markup and everything will just work:
+
+      | Wrestler                | Origin       | Finisher           |
+      |-------------------------|--------------|--------------------|
+      | Bret "The Hitman" Hart  | Calgary, AB  | Sharpshooter       |
+      | Stone Cold Steve Austin | Austin, TX   | Stone Cold Stunner |
+      | Randy Savage            | Sarasota, FL | Elbow Drop         |
+      | Vader                   | Boulder, CO  | Vader Bomb         |
+      | Razor Ramon             | Chuluota, FL | Razor's Edge       |
 ---
 
-Coming soon...
+{%- from 'macro.heading.njk' import heading -%}
+
+<div class="divide-y divide-(--color-base-300)">
+  {%- for item in main %}
+    <div class="py-12 grid grid-cols-1 justify-between gap-12 md:grid-cols-12">
+      <hgroup class="not-prose space-y-3 md:col-span-4">
+        {{ heading({
+          tag: 'h2',
+          slot: item.title,
+          prefix: 'type'
+         }) }}
+        <p class="text-current/60 text-sm text-pretty">{{ item.desc | safe }}</p>
+      </hgroup>
+      <div class="md:col-span-8">
+        {%- if item.items %}
+          <div class="not-prose">
+            <ul class="max-w-3xl divide-y divide-(--color-base-300)">
+              {%- for sub in item.items %}
+                <li class="py-8 flex flex-col items-start gap-8 relative [font-family:var(--prs-ff-{{ sub.type | lower }})] md:flex-row">
+                  <strong class="text-xs text-gray-500 uppercase absolute top-2 left-0">{{ sub.type }}</strong>
+                  <div class="text-3xl leading-none md:w-48 md:text-[6vw] leading-none)">Aa</div>
+                  <div class="space-y-3">
+                    <h2 class="text-xl font-semibold">{{ sub.title }}</h2>
+                    <ul>
+                      <li>ABCDEFGHIJKLMNOPQRSTUVWXYZ</li>
+                      <li>abcdefghijklmnopqrstuvwxyz</li>
+                      <li>(.,;:'"$#@!&*) 0123456789</li>
+                    </ul>
+                  </div>
+                </li>
+              {%- endfor %}
+            </ul>
+          </div>
+        {%- endif %}
+        {%- if item.code %}
+          <div not-prose>
+            {{ item.code | renderContent('md') | safe }}
+          </div>
+        {%- endif %}
+        {%- if item.prose %}
+          <div class="[&_iframe]:rounded-lg">
+            {# {{ preview({
+              version: site.version,
+              height: '[800px]',
+              start: false,
+              html: '<div class="prose max-w-none">'+ (item.prose | renderContent('md') | safe)+ '</div>'
+            }) }} #}
+          </div>
+        {%- endif %}
+        {%- if item.title === 'Google Fonts Embed' %}
+{%- set mockupCode -%}
+```html
+<link href="//fonts.googleapis.com" rel="preconnect" />
+<link href="//fonts.gstatic.com" rel="preconnect" />
+<link href="//fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap" rel="stylesheet" />
+```
+{%- endset -%}
+          <div>
+            <div class="mockup-code">
+              {{ mockupCode | renderContent('md') | safe }}
+            </div>
+          </div>
+        {%- endif %}
+        {%- if item.title === 'CSS' %}
+{%- set mockupCode -%}
+```css
+--{{ prose.base.prefix }}-ff-sans: {{ prose.typography.sans | safe }};
+--{{ prose.base.prefix }}-ff-serif: {{ prose.typography.serif | safe }};
+--{{ prose.base.prefix }}-ff-mono: {{ prose.typography.mono | safe }};
+--{{ prose.base.prefix }}-ff-websafe: {{ prose.typography.websafe | safe }};
+```
+{%- endset -%}
+          <div>
+            <div class="mockup-code">
+              {{ mockupCode | renderContent('md') | safe }}
+            </div>
+          </div>
+        {%- endif %}
+      </div>
+    </div>
+  {%- endfor %}
+</div>

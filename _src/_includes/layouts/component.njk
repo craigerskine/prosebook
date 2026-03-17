@@ -67,7 +67,7 @@ layout: layouts/_base.njk
         </div>
         <div class="relative">
           <div class="mockup-code mb-6 bg-grid rounded-t-none before:hidden">
-            <pre data-prefix="&lt;!-- html --&gt;" class="language-html px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
+            <pre data-prefix="&lt;!-- html --&gt;" class="language-html max-h-72 overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
             <div class="join absolute top-1 right-1">
               <button @click="inspectMode = !inspectMode" class="join-item btn btn-outline btn-xs border-current/20">
                 Inspect
@@ -220,7 +220,7 @@ layout: layouts/_base.njk
         style="display: none;"
       >
         <div class="mockup-code bg-grid">
-          <pre data-prefix="/* css */" class="language-css px-6 max-h-72 text-sm overflow-y-scroll"><code x-ref="stylesBlock">{%- include '../../components/'+ title | slugify +'.css' -%}</code></pre>
+          <pre data-prefix="/* css */" class="language-css max-h-72 overflow-y-scroll"><code x-ref="stylesBlock">{%- include '../../components/'+ title | slugify +'.css' -%}</code></pre>
           <button
             @click="
               navigator.clipboard.writeText($refs.stylesBlock.textContent).then(() => {

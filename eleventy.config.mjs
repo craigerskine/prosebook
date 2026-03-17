@@ -24,7 +24,16 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
-  eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(syntaxHighlight, {
+    preAttributes: { 'data-prefix': function({ language }) {
+      if (language === 'css' || language === 'js') {
+        return `/* ${language} */`;
+      } else {
+        return `&lt;!-- ${language} --&gt;`;
+      }
+    }},
+    codeAttributes: { 'x-init': 'hljs.highlightElement($el)' },
+  });
 
   //{% renderTemplate "md" %}
   //# Blah{.text-center}
