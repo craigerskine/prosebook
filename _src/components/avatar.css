@@ -4,7 +4,7 @@
   vertical-align: middle;
   display: inline-flex;
   position: relative;
-  & :where(img,svg,.prs-avatar-placeholder) {
+  & :where(img,svg,.icon,iconify-icon,.prs-avatar-placeholder) {
     width: 100%;
     height: 100%;
     background-color: var(--prs-c-gray-300);
@@ -12,7 +12,7 @@
     font-weight: 700;
     letter-spacing: -1px;
     border-radius: calc(infinity * 1px);
-    &:where(svg) {
+    &:where(svg,.icon,iconify-icon) {
       padding: 0.25rem;
       color: var(--prs-c-gray);
     }
