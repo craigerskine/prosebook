@@ -26,7 +26,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(eleventyNavigationPlugin);
   eleventyConfig.addPlugin(syntaxHighlight, {
     preAttributes: { 'data-prefix': function({ language }) {
-      if (language === 'css' || language === 'js') {
+      if (language === 'css' || language === 'javascript') {
         return `/* ${language} */`;
       } else {
         return `&lt;!-- ${language} --&gt;`;
