@@ -28,7 +28,6 @@
     "esbuild": "^0.25.12",
     "iconify-icon": "^3.0.2",
     "instant.page": "^5.2.0",
-    "markdown-it-anchor": "^9.2.0",
     "markdown-it-attrs": "^4.3.1",
     "tippy.js": "^6.3.7",
     "yaml": "^2.8.2"
