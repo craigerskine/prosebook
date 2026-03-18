@@ -5,14 +5,14 @@ ico: mdi:format-color-fill
 keywords:
   - palette
   - swatches
-date: 0002-01-01
+date: 0001-01-01
 ---
 
 {%- from 'macro.heading.njk' import heading -%}
 
 {%- set tokenStart = '--'+ prose.base.prefix +'-c-' -%}
 
-<div role="alert" class="alert bg-(--color-base-300)/30 [--alert-border-color:var(--color-base-300)] mb-12 shadow-lg">
+<div role="alert" class="alert mb-12 shadow-lg">
   <iconify-icon icon="mdi:wheelchair-accessibility" class="iconify text-xl block" noobserver></iconify-icon>
   <p><strong>For best contrast & accessibility:</strong><br />Use <code class="badge badge-sm mx-1 font-mono">--prs-c-white</code> foreground on darker backgrounds and <code class="badge badge-sm mx-1 font-mono">--prs-c-gray-950</code> foreground on lighter backgrounds.</p>
 </div>

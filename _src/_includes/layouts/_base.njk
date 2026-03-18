@@ -2,7 +2,7 @@
 {%- set page_title -%}{{ title +' ⇢ '+ site.meta.title if title else site.meta.title }}{%- endset -%}
 
 <!doctype html>
-<html lang="en" class="bg-transparent antialiased" x-data="app" x-cloak>
+<html lang="en" class="bg-transparent antialiased motion-safe:scroll-smooth" x-data="app" x-cloak>
 
   <head>
     <meta charset="utf-8" />
@@ -49,22 +49,22 @@
         & .prose {
           --prose-type-width: 100%;
           --prose-type-body: var(--color-base-content);
-          --prose-type-headings: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 50%);
-          --prose-type-lead: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 50%);
+          --prose-type-headings: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 30%);
+          --prose-type-lead: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 40%);
           --prose-type-links: var(--color-primary);
           --prose-type-links-hover: color-mix(in oklab, var(--color-primary), var(--color-base-100) 25%);
-          --prose-type-bold: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 50%);
-          --prose-type-counters: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 60%);
-          --prose-type-bullets: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 60%);
-          --prose-type-hr: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 90%);
-          --prose-type-quotes: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 60%);
+          --prose-type-bold: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 40%);
+          --prose-type-counters: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 50%);
+          --prose-type-bullets: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 50%);
+          --prose-type-hr: var(--color-base-300);
+          --prose-type-quotes: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 50%);
           --prose-type-quote-borders: var(--color-base-300);
           --prose-type-captions: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 40%);
-          --prose-type-kbd: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 60%);
+          --prose-type-kbd: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 50%);
           --prose-type-kbd-shadows: color-mix(in oklab, var(--color-base-content), transparent 40%);
-          --prose-type-code: color-mix(in oklab, var(--color-base-content), var(--color-base-100) 60%);
-          --prose-type-pre-code: var(--color-base-100);
-          --prose-type-pre-bg: var(--color-base-content);
+          --prose-type-code: var(--color-base-content);
+          --prose-type-pre-code: var(--color-base-content);
+          --prose-type-pre-bg: var(--color-base-300);
           --prose-type-th-borders: var(--color-base-300);
           --prose-type-td-borders: var(--color-base-300);
         }
@@ -97,6 +97,7 @@
 
       hr { @apply my-8 border-(--color-base-300); }
 
+      .header-anchor { @apply w-6 aspect-square leading-6 inline-flex items-center justify-center rounded-full; }
       .mockup-code > pre { @apply px-6 text-sm; }
       .bg-artboard { background-image: var(--bg-artboard); }
       .bg-grid { background-image: var(--bg-grid); }

@@ -6,8 +6,15 @@ layout: layouts/_base.njk
 <h2 class="text-gray-500 text-xs font-bold uppercase">{{ param.slot | safe }}</h2>
 {%- endmacro -%}
 
+{%- if alert %}
+  <div class="alert mb-12 shadow-lg" role="alert">
+    {%- if alert.ico %}<iconify-icon icon="{{ alert.ico }}" class="iconify text-xl block" noobserver></iconify-icon>{%- endif %}
+    {{ alert.body | md | safe }}
+  </div>
+{%- endif %}
+
 {%- if content %}  
-  <article class="prose">
+  <article class="prose mb-12">
     {{ content | safe }}
   </article>
 {%- endif %}
@@ -61,17 +68,17 @@ layout: layouts/_base.njk
             data-theme="light"
             x-html="previewRendered"
             class="preview-scope p-6 bg-base-100 flex items-center justify-center bg-artboard"
-            :class="'min-h-['+ previewHeight +'rem]'"
+            :class="'min-h-['+ {{ previewHeight if previewHeight else '10' }} +'rem]'"
           >
           </div>
         </div>
         <div class="relative">
           <div class="mockup-code mb-6 bg-grid rounded-t-none before:hidden">
-            <pre data-prefix="&lt;!-- html --&gt;" class="language-html max-h-72 overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
+            <pre data-prefix="&lt;!-- html --&gt;" class="language-html max-h-52 overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
             <div class="join absolute top-1 right-1">
-              <button @click="inspectMode = !inspectMode" class="join-item btn btn-outline btn-xs border-current/20">
+              {#- <button @click="inspectMode = !inspectMode" class="join-item btn btn-outline btn-xs border-current/20">
                 Inspect
-              </button>
+              </button> -#}
               <button
                 @click="
                   navigator.clipboard.writeText(codeRendered).then(() => {
@@ -108,7 +115,7 @@ layout: layouts/_base.njk
                     {%- if c.type === 'select' %}
                       <select id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="select select-sm appearance-none">
                         {%- for opt in c.options %}
-                          <option value="{{ opt }}">{{ opt | title }}</option>
+                          <option value="{{ opt }}">{{ opt }}</option>
                         {%- endfor %}
                       </select>
                     {%- elseif c.type === 'radio' %}
@@ -252,7 +259,6 @@ layout: layouts/_base.njk
     function story(config) {
       return {
         ...config,
-        previewHeight: 10,
         inspectMode: false,
         selectedEl: null,
         hoveredEl: null,

@@ -2,7 +2,7 @@
   --base: color-mix(in oklab, var(--prs-c-gray-800), #000 0%);
   --mono-1: color-mix(in oklab, var(--prs-c-gray-600), #000 0%);
   --mono-2: color-mix(in oklab, var(--prs-c-gray-700), #000 0%);
-  --mono-3: color-mix(in oklab, var(--prs-c-gray-800), #000 0%);
+  --mono-3: color-mix(in oklab, var(--prs-c-gray-600), #000 0%);
   --hue-1: color-mix(in oklab, var(--prs-c-warning-600), #000 0%);
   --hue-2: color-mix(in oklab, var(--prs-c-warning-700), #000 0%);
   --hue-3: color-mix(in oklab, var(--prs-c-warning-800), #000 0%);

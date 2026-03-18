@@ -7,6 +7,7 @@ import 'iconify-icon';
 // alpinejs
 import Alpine from 'alpinejs';
 import anchor from '@alpinejs/anchor';
+import collapse from '@alpinejs/collapse';
 import focus from '@alpinejs/focus';
 import persist from '@alpinejs/persist';
 import chroma from 'chroma-js';
@@ -208,6 +209,6 @@ document.addEventListener('alpine:init', () => {
   });
 });
 
-Alpine.plugin([anchor, focus, persist]);
+Alpine.plugin([anchor, collapse, focus, persist]);
 window.Alpine = Alpine;
 Alpine.start();

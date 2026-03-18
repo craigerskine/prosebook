@@ -57,8 +57,13 @@ html:has(:is(dialog[open])) {
   transform: scale(0.9);
 }
 
-.prs-dialog-bordered .prs-dialog-box > :not([hidden]) ~ :not([hidden]) {
-  border-top: 1px solid var(--prs-c-gray-300);
+.prs-dialog-bordered {
+  & :where(.prs-dialog-header) {
+    border-bottom: 1px solid var(--prs-c-gray-300);
+  }
+  & :where(.prs-dialog-action) {
+    border-top: 1px solid var(--prs-c-gray-300);
+  }
 }
 
 .prs-dialog-header {
@@ -116,10 +121,12 @@ html:has(:is(dialog[open])) {
 
 .prs-dialog-body {
   padding: 1.5rem 1.5rem 1rem;
+  &:has(+ [hidden]) {
+    padding-bottom: 1.5rem;
+  }
 }
 
 .prs-dialog-action {
-  margin-top: .5rem;
   padding: 1.5rem;
   background-color: var(--prs-c-white);
   display: flex;

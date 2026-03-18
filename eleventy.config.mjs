@@ -3,6 +3,7 @@ import eleventyNavigationPlugin from '@11ty/eleventy-navigation';
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 import esbuild from 'esbuild';
 import markdownIt from 'markdown-it';
+import markdownItAnchor from 'markdown-it-anchor';
 import markdownItAttrs from 'markdown-it-attrs';
 import yaml from 'yaml';
 
@@ -41,7 +42,17 @@ export default function (eleventyConfig) {
   //{% endrenderTemplate %}
   const markdownLibrary = markdownIt({
     html: true,
-  }).disable('code').use(markdownItAttrs);
+  }).disable('code')
+    .use(markdownItAttrs)
+    .use(markdownItAnchor, {
+      permalink: markdownItAnchor.permalink.linkInsideHeader({
+        symbol: `
+          <span class="sr-only">Jump to heading</span>
+          <span class="w-4 aspect-square text-sm inline-flex items-center justify-center rounded-full" aria-hidden="true"><iconify-icon icon="mdi:pound" class="iconify block" noobserver></iconify-icon></span>
+        `,
+        placement: 'after'
+      })
+    });
   eleventyConfig.setLibrary('md', markdownLibrary);
 
   // additional data formats

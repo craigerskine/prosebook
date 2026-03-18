@@ -148,7 +148,7 @@
 
 .prose :where(h2):not(:where([class~=not-prose],[class~=not-prose] *)) {
   color: var(--prose-type-headings);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 1.5em;
   margin-top: 2em;
   margin-bottom: 1em;
@@ -156,13 +156,13 @@
 }
 
 .prose :where(h2 strong):not(:where([class~=not-prose],[class~=not-prose] *)) {
-  font-weight: 800;
+  font-weight: 900;
   color: inherit
 }
 
 .prose :where(h3):not(:where([class~=not-prose],[class~=not-prose] *)) {
   color: var(--prose-type-headings);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.25em;
   margin-top: 1.6em;
   margin-bottom: .6em;
@@ -170,11 +170,11 @@
 }
 
 .prose :where(h3 strong):not(:where([class~=not-prose],[class~=not-prose] *)) {
-  font-weight: 700;
+  font-weight: 800;
   color: inherit
 }
 
-.prose :where(h4):not(:where([class~=not-prose],[class~=not-prose] *)) {
+.prose :where(h4,h5,h6):not(:where([class~=not-prose],[class~=not-prose] *)) {
   color: var(--prose-type-headings);
   font-weight: 600;
   margin-top: 1.5em;
@@ -182,7 +182,7 @@
   line-height: 1.5
 }
 
-.prose :where(h4 strong):not(:where([class~=not-prose],[class~=not-prose] *)) {
+.prose :where(h4 strong,h5 strong,h6 strong):not(:where([class~=not-prose],[class~=not-prose] *)) {
   font-weight: 700;
   color: inherit
 }

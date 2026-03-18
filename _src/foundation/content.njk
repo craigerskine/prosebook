@@ -1,0 +1,123 @@
+---
+title: Content Guidelines
+desc: Number formatting, spelling preferences, capitalization rules, preferred terminology.
+ico: mdi:account-voice
+keywords:
+  - language
+  - spelling
+  - time
+  - tone
+  - voice
+  - writing
+date: 0002-01-01
+---
+
+{%- set body -%}
+## Calendar Dates
+
+Because schools usually function on a weekly cadence, calendar dates start with the day of the week, as that is often important scheduling information. Day and month names are abbreviated to three letters, with no punctuation except for commas between the day and month time units.
+
+`Mon, Jan 1`
+
+```html
+<time datetime="2025-01-01">Mon, Jan 1</time>
+```
+
+In some cases, the time of day is important to specify (as when an assignment is due at a particular time of day). Note than "am" and "pm" are displayed in lower case, with a space in front and no punctuation. Use a timezone when referring to a specific time at a specific location or when we cannot convert the time to the user's location.
+
+`Mon, Jan 1, 11:59 pm CDT`
+
+```html
+<time datetime="2025-01-01T23:59-05:00">Mon, Jan 1, 11:59 pm CDT</time>
+```
+
+In other cases, however, it might more important to know the year than the day of the week (for instance, in a course list where an instructor might have courses spanning multiple semesters).
+
+`Jan 1, 2020`
+
+```html
+<time datetime="2020-01-01">Jan 1, 2020</time>
+```
+
+While it would be rare for a user to need to know both the year and the exact time of a calendar item, if that case were to arise, the year would go between the date and the time, and the day of the week could be dropped if space is a concern.
+
+`Jan 1, 2021, 11:59 pm CST`
+
+```html
+<time datetime="2021-01-01T23:59-06:00">Jan 1, 2021, 11:59 pm CST</time>
+```
+
+***
+
+## Time Durations
+
+In order to promote consistency in our expression of time durations, we've developed the following system of “time breakpoints” to offer a reasonable amount of temporal specificity, without burdening users with unnecessary and potentially confusing levels of detail.
+
+For all durations, an alternative short form can be used when space is very tight.
+
+The preferred or short form should handle the vast majority of durations that would appear in Achieve. If a more precise duration is necessary in a particular use case, you may add the next smaller time unit after the larger, separated by a comma and a space (or add a decimal in the case of seconds). In all cases, round up or down to the nearest unit.
+
+Note that when expressing hours, weeks, months, and years the singular form shown is used when the value is one.
+
+<div class="overflow-x-auto">
+
+| Time increment                          | Preferred form  | Short form | Precise form   |
+|-----------------------------------------|-----------------|------------|----------------|
+| Up to a minute _Express in seconds_     | 32 sec          | 32s        | 32.4 sec       |
+| Up to two hours _Express in minutes_    | 72 min          | 72m        | 72 min, 27sec  |
+| Up to two days _Express in hours_       | 35 hrs _1 hr_   | 35h        | 35 hrs, 21min  |
+| Up to four weeks _Express in days_      | 27 days _1 day_ | 27d        | 27 days, 3 hrs |
+| Up to one year _Express in weeks_       | 38 wks _1 wk_   | 38w        | 38 wks, 2 days |
+| Up to four years _Express in months_    | 28 mos _1 mo_   | 28mo       | 28 mos, 2 wks  |
+| More than four years _Express in years_ | 5 yrs _1yr_     | 5y         | 4 yrs, 7 mos   |
+
+{ .min-w-[30rem] .[&_em]:(block .text-gray-500 .text-xs .dark:text-gray-600) }
+
+</div>
+
+***
+
+## Internationalization
+
+As we move to more remote learning and expand the number of time zones we serve, terms like “yesterday” and “today” can be potentially confusing, and should generally be avoided. A smaller issue may arise around “this week”, “last week”, and “next week”, because different countries start their weeks on different days. It's better to refer to the guidelines on time duration to specify how long ago something was, or how much time remains.
+
+<div class="mx-auto max-w-lg overflow-x-auto">
+
+| Do              | Don't        {.text-red-500}|
+|-----------------|-----------------------------|
+| 17 hours ago    | Yesterday    {.text-red-500}|
+
+{ .min-w-[30rem] }
+
+</div>
+
+Similarly, expressing dates numerically can be a problem, because much of the world uses a DD/MM/YYYY or YYYY/MM/DD format, as opposed to the US standard of MM/DD/YYYY. Providing the month as text rather than a number avoids the confusion around whether 04/01/2021 means April 1, 2021 or January 4, 2021.
+
+<div class="mx-auto max-w-lg overflow-x-auto">
+
+| Do             | Don't       {.text-red-500}|
+|----------------|----------------------------|
+| Apr 1, 2021    | 4/1/2021    {.text-red-500}|
+
+{ .min-w-[30rem] }
+
+</div>
+
+12:00 is a complicated case, as it is technically neither am nor pm, and depending on the time zone could happen either at night or during the day. If a midnight or noon due date is required, we recommend using 11:59 with the appropriate am or pm designation, rather than terms like “noon”, “12 midnight” or “12:00 pm”.
+
+<div class="mx-auto max-w-lg overflow-x-auto">
+
+| Do                     | Don't              {.text-red-500}|
+|------------------------|-----------------------------------|
+| Jan 1, 11:59 pm CDT    | Jan 1, midnight    {.text-red-500}|
+
+{ .min-w-[30rem] }
+
+</div>
+
+Most of the world gets around this by using the 24 hour clock (AKA “Military Time”). In this system, the hours are simply counted up from 0 to 23, with no am or pm used. So, 12:30 am would be expressed as 00:30, and 12:30 pm would be 12:30. In the future, we might consider using that approach.
+{%- endset -%}
+
+<article class="prose">
+  {{ body | md | safe }}
+</article>

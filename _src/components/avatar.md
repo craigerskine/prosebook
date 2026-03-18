@@ -14,7 +14,7 @@ controls:
   - name: variant
     type: radio
     label: Variant
-    desc: Image, icon, or initials
+    desc: Custom image, user icon, or name initials.
     default: image
     options:
       - image
@@ -24,7 +24,7 @@ controls:
   - name: size
     type: select
     label: Size
-    desc: xs-2xl
+    desc: From extra small to 2x large sizes.
     default: default
     options:
       - xs
@@ -38,7 +38,7 @@ controls:
   - name: status
     type: toggle
     label: Status
-    desc: Optional status dot display
+    desc: Optional status 'dot' display
     default: false
 
 preview: |
@@ -65,7 +65,7 @@ code:
       {variant}
     </div>
   logic:
-    variant: "this.variant === 'image' ? '<img src=\"{imgPath}\" alt=\"{altText}\" />' : (this.variant === 'icon' ? '<svg class=\"icon\" role=\"img\" arial-label=\"Avatar\"></svg>' : '<span class=\"prs-avatar-placeholder\">WW</span>')"
+    variant: "this.variant === 'image' ? '<img />' : (this.variant === 'icon' ? '<svg class=\"icon\" role=\"img\" arial-label=\"Avatar\"></svg>' : '<span class=\"prs-avatar-placeholder\">WW</span>')"
     size: "this.size === 'default' ? '' : ' prs-avatar-'+ this.size"
     status: "this.status ? ' prs-avatar-online' : ''"
 ---

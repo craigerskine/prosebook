@@ -135,13 +135,11 @@ main:
 <div class="divide-y divide-(--color-base-300)">
   {%- for item in main %}
     <div class="py-12 grid grid-cols-1 justify-between gap-12 md:grid-cols-12">
-      <hgroup class="not-prose space-y-3 md:col-span-4">
-        {{ heading({
-          tag: 'h2',
-          slot: item.title,
-          prefix: 'type'
-         }) }}
-        <p class="text-current/60 text-sm text-pretty">{{ item.desc | safe }}</p>
+      <hgroup class="prose md:col-span-4">
+      {%- set heading -%}## {{ item.title }} {.mb-0}
+        {{ item.desc | safe }} { .text-current/60 .text-sm .text-pretty }
+      {%- endset -%}
+        {{ heading | md | safe }}
       </hgroup>
       <div class="md:col-span-8">
         {%- if item.items %}

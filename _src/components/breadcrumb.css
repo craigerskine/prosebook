@@ -15,6 +15,17 @@
       display: flex;
       align-items: center;
       gap: 0.25rem;
+
+      &:where(:is(:last-child)) {
+        max-width: var(--max-w);
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        transition-property: var(--prs-transition-property);
+        transition-timing-function: var(--prs-transition-timing);
+        transition-duration: var(--prs-transition-duration);
+      }
     }
 
     > :where(li:not(:last-child))::after {
@@ -24,12 +35,14 @@
       border-left: 5px solid currentColor;
       content: '';
     }
+
   }
 
   a {
     max-width: var(--max-w);
     color: var(--prs-c-primary);
     display: block;
+    text-underline-offset: 0.125rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
