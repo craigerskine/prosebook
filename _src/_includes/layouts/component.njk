@@ -204,7 +204,7 @@ layout: layouts/_base.njk
                     <span class="max-w-xs text-base-content/60 text-xs font-normal text-pretty">{{ c.desc }}</span>
                   {%- endif %}
                 </div>
-                <div class="prs-form-control">
+                <div class="prs-form-control items-start">
                   {%- if c.type === 'select' %}
                     <select id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="select select-sm appearance-none">
                       {%- for opt in c.options %}
