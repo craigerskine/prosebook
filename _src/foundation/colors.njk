@@ -34,8 +34,8 @@ date: 0001-01-01
   {%- endmacro -%}
   
   {%- macro swatch(param) -%}
-    {%- set token -%}--{{ prose.base.prefix }}-c-{{ param.name | lower }}{%- if param.shade | lower %}-{{ param.shade | lower }}{%- endif %}{%- endset -%}
-    {%- set scale -%}{%- if param.shade %}{{ param.shade }}{%- else %}&nbsp;{%- endif %}{%- endset -%}
+    {%- set token -%}--{{ prose.base.prefix }}-c-{{ param.name | lower }}{%- if param.shade and param.shade !== '500' %}-{{ param.shade | lower }}{%- endif %}{%- endset -%}
+    {%- set scale -%}{%- if param.shade and param.shade !== '500'%}{{ param.shade }}{%- else %}&nbsp;{%- endif %}{%- endset -%}
     {%- set hex -%}{{ param.color }}{%- endset -%}
     <li x-data="{
       token: '{{ token }}',
@@ -47,13 +47,13 @@ date: 0001-01-01
     }" class="font-mono grid grid-cols-[auto_1fr]">
       <p class="font-semibold writing-sideways-lr">{{ scale | safe }}</p>
       <div>
-        <div class="mb-1 flex items-center justify-end gap-2">
+        <div class="mb-1 flex items-center justify-between gap-2">
           <p>{{ token | replace('--prs-c-', '') | slugify }}</p>
           {%- if param.menu %}  
             <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
               <div tabindex="0" class="btn btn-outline btn-circle btn-xs border-current/20 text-base"><iconify-icon icon="mdi:chevron-down" class="block iconify" noobserver></iconify-icon></div>
-              <ul class="dropdown-content menu menu-sm my-2 border border-white/10 outline outline-black/10 w-64 bg-base-200 rounded-box shadow-2xl">
-                <li class="menu-title text-xs font-sans">Token & Formats [click to copy]</li>
+              <ul class="dropdown-content menu menu-xs my-2 border border-white/10 outline outline-black/10 w-64 bg-base-200 rounded-box shadow-2xl">
+                <li class="menu-title font-sans pointer-events-none">Token & Formats <small>[click to copy]</small></li>
                 <li><button @click="copyValue(token, $event.currentTarget)" x-text="token"></button></li>
                 <li></li>
                 <li><button @click="copyValue(hex, $event.currentTarget)" x-text="hex"></button></li>
@@ -65,19 +65,19 @@ date: 0001-01-01
           {%- endif %}
         </div>
         {#- [mask:radial-gradient(4px_at_calc(100%-.75rem)_calc(100%-.75rem),#0000_100%,#000_100%)] -#}
-        <div :style="`color: ${colorify(hex, 'readable')}`" class="border border-base-300 p-2 aspect-video bg-[{{ hex }}] flex flex-col gap-2 rounded-box">
-          <strong class="text-sm block">{{ hex }}</strong>
-          <b x-show="score" x-transition class="mt-auto ml-auto py-0.5 px-1.5 border border-dashed border-current/50 leading-none font-sans font-black rounded-box" x-text="colorify(hex, 'ratio')"></b>
+        <div :style="`color: ${colorify(hex, 'readable')}`" class="border border-base-300 pb-1 px-2 aspect-video bg-[{{ hex }}] flex flex-col flex-col-reverse gap-2 relative rounded-box">
+          <strong class="mt-auto text-sm block">{{ hex }}</strong>
+          <b x-show="score" x-transition class="mt-2 ml-auto py-0.5 px-1.5 border border-dashed border-current/50 leading-none font-sans font-black rounded-box" x-text="colorify(hex, 'ratio')"></b>
         </div>
       </div>
     </li>
   {%- endmacro -%}
   
-  <div class="space-y-12">
+  <div class="space-y-32">
     {#- back/white -#}
     <section>
-      <header class="grid grid-cols-[auto_1fr] items-center gap-4">
-        {{ heading({ tag: 'h3', slot: 'neutral' | title, desc: tokenStart }) }}
+      <header class="mb-4 grid grid-cols-[auto_1fr] items-center gap-4">
+        {{ heading({ tag: 'h3', slot: 'neutral' | title }) }}
         <b class="h-2 bg-black rounded-box"></b>
       </header>
       {%- set neutralGrid -%}  
@@ -95,7 +95,7 @@ date: 0001-01-01
       <section class="space-y-4">
         {%- if group is not string %}
           <header class="grid grid-cols-[auto_1fr] items-center gap-4">
-            {{ heading({ tag: 'h3', slot: name | title, desc: tokenStart }) }}
+            {{ heading({ tag: 'h3', slot: name | title }) }}
             <b class="h-2 bg-(--{{ prose.base.prefix }}-c-{{ name | slugify }}) rounded-box"></b>
           </header>
           {%- set proseGrid -%}  
@@ -123,7 +123,7 @@ date: 0001-01-01
       {{ heading({ tag: 'h2', slot: 'Marketing', divider: true }) }}
       <div role="alert" class="alert alert-warning shadow-lg">
         <iconify-icon icon="mdi:warning" class="iconify text-xl block" noobserver></iconify-icon>
-        <span>Warning: The following is for marketing purposes ONLY! Please use the base token colors above 👆 for all other UI styling so we can maintain consistency.</span>
+        <span class="text-pretty"><strong>Warning:</strong><br />The following colors are for marketing purposes <strong>ONLY!</strong> Please use the base token colors above for all other UI styling so we can maintain consistency throughout our products.</span>
       </div>
     </div>
     {%- for group, colors in marketing.colors %}

@@ -1,0 +1,31 @@
+---
+layout: layouts/prose.njk
+title: Icons
+desc: Please use Material Design Icons. DOT NOT EMBED SVG - use a framework like Iconify.
+ico: mdi:vector-bezier
+date: 0002-01-01
+---
+
+{% renderTemplate 'md' %}
+## Going Forward
+
+- Use [Material Design Icons](https://icon-sets.iconify.design/mdi/) for all icons.
+- Ideally, use [Iconify](https://iconify.design/docs/icon-components/) for your React / static web projects.
+- Legacy icons can be found on [Prose v1.5](https://proseui.com/foundation/icons/)
+
+***
+
+## Iconify Example
+
+<iconify-icon icon="mdi:check" noobserver></iconify-icon>
+<iconify-icon icon="mdi:close" noobserver></iconify-icon> { .text-2xl }
+
+```html
+<iconify-icon icon="mdi:check"></iconify-icon>
+<iconify-icon icon="mdi:close"></iconify-icon>
+
+<script type="module">
+  import 'https://esm.run/iconify-icon';
+</script>
+```
+{% endrenderTemplate %}

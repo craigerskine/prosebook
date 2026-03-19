@@ -9,8 +9,8 @@ pre code.hljs {
   --hue-2: color-mix(in oklab, var(--color-warning), #000 5%);
   --hue-3: color-mix(in oklab, var(--color-warning), #000 10%);
   --hue-4: color-mix(in oklab, var(--color-warning), #000 15%);
-  --hue-5: color-mix(in oklab, var(--color-info), #000 5%);
-  --hue-6: color-mix(in oklab, var(--color-info), #000 20%);
+  --hue-5: color-mix(in oklab, var(--color-primary), #FFF 5%);
+  --hue-6: color-mix(in oklab, var(--color-primary), #FFF 20%);
   --hue-6-2: color-mix(in oklab, var(--color-error), #000 0%);
   color: var(--mono-1);
 }
