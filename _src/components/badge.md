@@ -18,7 +18,7 @@ controls:
   - name: variant
     type: radio
     label: Variant
-    desc: Background color, foreground color, and border color variants. Current takes the nearest parent's color style and uses it as the border as well as the label color.
+    desc: Background color, foreground color, and border color variants. "Current" takes the nearest parent's color style and uses it as the border as well as the text color.
     default: default
     options:
       - default

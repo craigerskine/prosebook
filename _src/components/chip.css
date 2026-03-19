@@ -76,6 +76,8 @@
 
   &:disabled,&.prs-chip_disabled {
     pointer-events: none;
+    user-select: none;
+    cursor: not-allowed;
   }
 }
 

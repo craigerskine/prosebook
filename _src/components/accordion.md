@@ -12,19 +12,19 @@ alert:
   ico: mdi:wheelchair-accessibility
   body: |
     **For best accessibility:**  
-    Please use `details`{ .badge .badge-neutral .badge-dash .badge-sm } and `summary`{ .badge .badge-neutral .badge-dash .badge-sm } tags. Our CSS takes care of motion-safe sliding open/close animations.
+    Please use **details**{ .kbd .kbd-sm } and **summary**{ .kbd .kbd-sm } tags. Our CSS takes care of motion-safe sliding open/close animations.
 
 controls:
-  - name: exclusive
-    type: toggle
-    label: Exclusive
-    desc: Allow only one detail open at a time.
-    default: false
-
   - name: open
     type: toggle
     label: Open
     desc: The detail will open automatically when interacted with, but you can force it open by adding an open attribute.
+    default: false
+
+  - name: exclusive
+    type: toggle
+    label: Exclusive
+    desc: Allow only one detail open at a time.
     default: false
 
 previewHeight: 25 #rem

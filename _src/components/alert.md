@@ -11,7 +11,7 @@ alert:
   ico: mdi:wheelchair-accessibility
   body: |
     **For best accessibility:**  
-    Please use `role`{ .badge .badge-neutral .badge-dash .badge-sm } and `aria-live`{ .badge .badge-neutral .badge-dash .badge-sm } attributes depending on your use case.
+    Please use **role**{ .kbd .kbd-sm } and **aria-live**{ .kbd .kbd-sm } attributes depending on your use case.
 
 controls:
   - name: variant

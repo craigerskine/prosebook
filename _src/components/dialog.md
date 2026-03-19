@@ -11,7 +11,7 @@ alert:
   ico: mdi:wheelchair-accessibility
   body: |
     **For best accessibility:**  
-    Please use the `dialog`{ .badge .badge-neutral .badge-dash .badge-sm } tag. It automatically comes with **FREE** accessibility features like keyboard controls, focus trap with access to browser controls (react focus trap does NOT support this and is NOT accessible), unlimited dialog nesting/stacking, optional click outside to close, etc.
+    Please use the **dialog**{ .kbd .kbd-sm } tag. It automatically comes with **FREE** accessibility features like keyboard controls, focus trap with access to browser controls (react focus trap does NOT support this and is NOT accessible), unlimited dialog nesting/stacking, optional click outside to close, etc.
 
 controls:
   - name: title
@@ -91,3 +91,5 @@ code:
     bordered: "this.bordered ? ' prs-dialog-bordered' : ''"
     withActions: "this.withActions ? '' : ' hidden'"
 ---
+
+To prevent <kbd>esc ⎋</kbd> or click outside to close you can use `closedby="none|closerequest"`.

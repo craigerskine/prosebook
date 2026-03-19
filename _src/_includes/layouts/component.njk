@@ -7,7 +7,7 @@ layout: layouts/_base.njk
 {%- endmacro -%}
 
 {%- if alert %}
-  <div class="alert mb-12 shadow-lg" role="alert">
+  <div class="alert mb-6 border-base-300 shadow-lg md:mb-12" role="alert">
     {%- if alert.ico %}<iconify-icon icon="{{ alert.ico }}" class="iconify text-xl block" noobserver></iconify-icon>{%- endif %}
     {{ alert.body | md | safe }}
   </div>
@@ -27,7 +27,7 @@ layout: layouts/_base.njk
       {%- endfor %},
       tabs: [
         { title: 'Preview', ico: 'mdi:eye', },
-        { title: 'Styles', ico: 'mdi:language-css3', },
+        { title: 'Code', ico: 'mdi:code-block-tags', },
       ],
       tabActive: 1,
       tabId: $id('tab'),
@@ -35,20 +35,21 @@ layout: layouts/_base.njk
     x-id="['tab']"
   >
     <div>
-      <div class="mb-4 flex items-center justify-between gap-2">
+      <div class="flex items-center justify-between gap-2 relative z-20">
         {%- include '_tabs.njk' -%}
-        <div class="flex items-center gap-2">
-          <div class="relative z-20">
-            <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
-              <div class="tooltip" data-tip="AI"><div tabindex="0" class="btn btn-outline btn-circle btn-sm border-current/10 text-base" role="button" aria-label="AI"><iconify-icon icon="mdi:stars-outline" class="iconify" noobserver></iconify-icon></div></div>
-              <ul tabindex="-1" class="dropdown-content menu menu-sm my-2 border border-white/10 outline outline-black/10 w-52 bg-base-200 rounded-box shadow-2xl">
-                <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="mdi:content-copy" class="text-base iconify" noobserver></iconify-icon> Copy docs</a></li>
-                <li></li>
-                <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:openai-chatgpt" class="text-base iconify" noobserver></iconify-icon> Open in ChatGPT</a></li>
-                <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:claude" class="text-base iconify" noobserver></iconify-icon> Open in Claude</a></li>
-                <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:google-gemini" class="text-base iconify" noobserver></iconify-icon> Open in Gemini</a></li>
-              </ul>
-            </div>
+        <div class="join flex items-center">
+          <a href="//raw.githubusercontent.com/craigerskine/prosebook/refs/heads/main/_src/components/{{ title | slugify }}.css" target="_blank" class="join-item btn btn-outline btn-sm border-(--color-base-300)"><iconify-icon icon="mdi:language-css3" class="iconify text-current/60" noobserver></iconify-icon> CSS Source</a>
+          <div class="dropdown dropdown-end focus-within:[&_.btn]:bg-(--color-base-300)">
+            <div tabindex="0" class="join-item btn btn-outline btn-square btn-sm border-(--color-base-300) text-base -ms-(--border)" role="button" aria-label="AI"><iconify-icon icon="mdi:chevron-down" class="iconify" noobserver></iconify-icon></div>
+            <ul tabindex="-1" class="dropdown-content menu menu-sm my-2 border border-white/10 outline outline-black/10 w-52 bg-base-200 rounded-box shadow-2xl">
+              <li><a href="https://raw.githubusercontent.com/craigerskine/prosebook/refs/heads/main/_src/components/{{ title | slugify }}.md" target="_blank" @click="document.activeElement.blur()" class="group"><iconify-icon icon="mdi:language-markdown" class="iconify text-current/60 text-base" noobserver></iconify-icon> Markdown Source <iconify-icon icon="mdi:open-in-new" class="iconify text-current/60 opacity-0 transition group-hover:opacity-100" noobserver></iconify-icon></a></li>
+              <li></li>
+              <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:openai-chatgpt" class="iconify text-current/60 text-base" noobserver></iconify-icon> Open in ChatGPT</a></li>
+              <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:claude" class="iconify text-current/60 text-base" noobserver></iconify-icon> Open in Claude</a></li>
+              <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="arcticons:google-gemini" class="iconify text-current/60 text-base" noobserver></iconify-icon> Open in Gemini</a></li>
+              <li></li>
+              <li><a href="#" @click.prevent="document.activeElement.blur()"><iconify-icon icon="mdi:help-rhombus" class="iconify text-current/60 text-base" noobserver></iconify-icon>How to use LLMs</a></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -62,8 +63,9 @@ layout: layouts/_base.njk
         :aria-labelledby="tabId +'-'+ '1'"
         role="tabpanel"
         style="display: none;"
+        class="pt-4 pb-1 bg-base-100 sticky top-14 z-10 lg:top-0"
       >
-        <div class="border-x border-t border-base-300 overflow-auto relative rounded-t-box">
+        <div class="border border-base-300 overflow-auto relative rounded-box">
           <div
             data-theme="light"
             x-html="previewRendered"
@@ -72,76 +74,10 @@ layout: layouts/_base.njk
           >
           </div>
         </div>
-        <div class="relative">
-          <div class="mockup-code mb-6 bg-grid rounded-t-none before:hidden">
-            <pre data-prefix="&lt;!-- html --&gt;" class="language-html max-h-52 overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
-            <div class="join absolute top-1 right-1">
-              {#- <button @click="inspectMode = !inspectMode" class="join-item btn btn-outline btn-xs border-current/20">
-                Inspect
-              </button> -#}
-              <button
-                @click="
-                  navigator.clipboard.writeText(codeRendered).then(() => {
-                    $el.textContent = 'Copied!';
-                    setTimeout(() => $el.textContent = 'Copy', 2000);
-                  })
-                "
-                class="join-item btn btn-outline btn-xs border-current/20"
-              >
-                Copy
-              </button>
-            </div>
-          </div>
-        </div>
-        {#- CONTROLS -#}
-        <div>
-          <div class="mb-1 flex items-center justify-between">
-            {{ heading({ slot: 'Controls' }) }}
-            <div class="tooltip tooltip-left" data-tip="Restore defaults">
-              <button @click="restoreDefaults" class="btn btn-ghost btn-circle btn-xs text-lg" aria-label="Restore default values"><iconify-icon icon="mdi:restore" class="iconify" noobserver></iconify-icon></button>
-            </div>
-          </div>
-          <div class="border border-base-300 max-h-[25rem] bg-base-100 overflow-hidden overflow-y-scroll rounded-box after:h-16 after:bg-(--color-base-100) after:text-current/50 after:flex after:items-end after:justify-center after:pointer-events-none after:sticky after:bottom-0 after:[mask-image:linear-gradient(transparent,#000000)] after:content-['⇣_⇣']">
-            <div class="pt-2 px-6 divide-y divide-(--color-base-300)">
-              {%- for c in controls %}
-                <div class="prs-form-control-col py-4">
-                  <div class="prs-label prs-label-alt">
-                    <label for="id-{{ c.name | slugify }}{{ '-1' if c.type === 'radio' }}" class="prs-label-text">{{ c.label or c.name | capitalize }}</label>
-                    {%- if c.desc %}  
-                      <span class="max-w-xs text-base-content/60 text-xs font-normal text-pretty">{{ c.desc }}</span>
-                    {%- endif %}
-                  </div>
-                  <div class="prs-form-control">
-                    {%- if c.type === 'select' %}
-                      <select id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="select select-sm appearance-none">
-                        {%- for opt in c.options %}
-                          <option value="{{ opt }}">{{ opt }}</option>
-                        {%- endfor %}
-                      </select>
-                    {%- elseif c.type === 'radio' %}
-                      {%- for opt in c.options %}
-                        <label class="prs-radio-label">
-                          <input type="radio" id="id-{{ c.name | slugify }}-{{ loop.index }}" name="name-{{ c.name | slugify }}" value="{{ opt }}" x-model="{{ c.name }}" class="radio radio-sm" />
-                          <span class="text-sm">{{ opt | title }}</span>
-                        </label>
-                      {%- endfor %}
-                    {%- elseif c.type === 'toggle' %}
-                      <input type="checkbox" id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="toggle toggle-sm" />
-                    {%- elseif c.type === 'range' %}
-                      <input type="range" min="{{ c.min }}" max="{{ c.max }}" step="{{ c.step }}" value="{{ c.name }}" class="range" />
-                    {%- elseif c.type === 'text' or c.type == 'number' %}
-                      <input type="{{ c.type }}" id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="input input-sm" placeholder="{{ c.placeholder | default('Value') }}" />
-                    {%- endif %}
-                  </div>
-                </div>
-              {%- endfor %}
-            </div>
-          </div>
-        </div>
       </div>
 
       {#- INSPECT -#}
-      <div
+      {#- <div
         @keydown.escape.window="inspectMode = false"
         x-show="inspectMode"
         x-transition
@@ -173,7 +109,7 @@ layout: layouts/_base.njk
                         <div class="inpect-p border border-dashed border-current/30 bg-base-100 grid grid-cols-[auto_1fr_auto] items-center relative">
                           <p class="text-current/60 absolute top-1 left-1">padding</p>
                           <div class="space-unit col-span-3" x-text="getComputed('padding-top')"></div>
-                          <div class="space-unit" x-text="getComputed('padding-left')"></div><div class="border border-dashed border-current/30 p-0.5 bg-neutral text-neutral-content">&nbsp;{#<span x-text="getComputed('min-width')">w</span> &times; <span x-text="getComputed('min-height')">h</span>#}</div><div class="space-unit" x-text="getComputed('padding-right')"></div>
+                          <div class="space-unit" x-text="getComputed('padding-left')"></div><div class="border border-dashed border-current/30 p-0.5 bg-neutral text-neutral-content">&nbsp;<span x-text="getComputed('min-width')">w</span> &times; <span x-text="getComputed('min-height')">h</span></div><div class="space-unit" x-text="getComputed('padding-right')"></div>
                           <div class="space-unit col-span-3" x-text="getComputed('padding-bottom')"></div>
                         </div>
                       </div>
@@ -214,9 +150,9 @@ layout: layouts/_base.njk
         <div x-show="!selectedEl" class="text-current/60 italic py-4 text-center">
           Click an element in the preview.
         </div>
-      </div>
+      </div> -#}
 
-      {#- STYLES -#}
+      {#- CODE -#}
       <div
         x-show="tabActive === 2"
         x-transition:enter.opacity.duration.500ms
@@ -225,20 +161,74 @@ layout: layouts/_base.njk
         :aria-labelledby="tabId +'-'+ '2'"
         role="tabpanel"
         style="display: none;"
+        class="pt-4 pb-1 bg-base-100 sticky top-14 z-10 lg:top-0"
       >
-        <div class="mockup-code bg-grid">
-          <pre data-prefix="/* css */" class="language-css max-h-72 overflow-y-scroll"><code x-ref="stylesBlock">{%- include '../../components/'+ title | slugify +'.css' -%}</code></pre>
-          <button
-            @click="
-              navigator.clipboard.writeText($refs.stylesBlock.textContent).then(() => {
-                $el.textContent = 'Copied!';
-                setTimeout(() => $el.textContent = 'Copy', 2000);
-              })
-            "
-            class="btn btn-outline btn-xs border-current/20 absolute top-1 right-1"
-          >
-            Copy
-          </button>
+        <div class="relative">
+          <div class="mockup-code min-h-[calc(10rem+(var(--border)*2))] bg-grid">
+            <pre data-prefix="&lt;!-- html --&gt;" class="language-html max-h-96 overflow-y-scroll"><code x-ref="codeBlock" x-text="codeRendered"></code></pre>
+            <div class="join absolute top-1 right-1">
+              {#- <button @click="inspectMode = !inspectMode" class="join-item btn btn-outline btn-xs border-current/20">
+                Inspect
+              </button> -#}
+              <button
+                @click="
+                  navigator.clipboard.writeText(codeRendered).then(() => {
+                    $el.textContent = 'Copied!';
+                    setTimeout(() => $el.textContent = 'Copy', 2000);
+                  })
+                "
+                class="join-item btn btn-outline btn-xs border-current/20"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {#- CONTROLS -#}
+      <div>
+        <div class="mb-1 flex items-center justify-between">
+          {{ heading({ slot: 'Controls' }) }}
+          <div class="tooltip tooltip-left" data-tip="Restore defaults">
+            <button @click="restoreDefaults" :disabled="isAtDefaults" class="btn btn-ghost btn-circle btn-xs text-lg" aria-label="Restore default values"><iconify-icon icon="mdi:restore" class="iconify" noobserver></iconify-icon></button>
+          </div>
+        </div>
+        <div class="border border-base-300 bg-base-100 overflow-hidden overflow-y-scroll rounded-box">
+          <div class="pt-2 px-6 divide-y divide-(--color-base-300) md:divide-y-0">
+            {%- for c in controls %}
+              <div class="prs-form-control-col py-4">
+                <div class="prs-label prs-label-alt">
+                  <label for="id-{{ c.name | slugify }}{{ '-1' if c.type === 'radio' }}" class="prs-label-text md:mt-[3px] w-full flex items-center gap-2 md:after:h-px md:after:bg-(--color-base-300) md:after:grow">{{ c.label or c.name | capitalize }}</label>
+                  {%- if c.desc %}  
+                    <span class="max-w-xs text-base-content/60 text-xs font-normal text-pretty">{{ c.desc }}</span>
+                  {%- endif %}
+                </div>
+                <div class="prs-form-control">
+                  {%- if c.type === 'select' %}
+                    <select id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="select select-sm appearance-none">
+                      {%- for opt in c.options %}
+                        <option value="{{ opt }}">{{ opt }}</option>
+                      {%- endfor %}
+                    </select>
+                  {%- elseif c.type === 'radio' %}
+                    {%- for opt in c.options %}
+                      <label class="prs-radio-label{{ ' md:mt-1.5' if loop.first }}">
+                        <input type="radio" id="id-{{ c.name | slugify }}-{{ loop.index }}" name="name-{{ c.name | slugify }}" value="{{ opt }}" x-model="{{ c.name }}" class="radio radio-sm" />
+                        <span class="text-sm">{{ opt | title }}</span>
+                      </label>
+                    {%- endfor %}
+                  {%- elseif c.type === 'toggle' %}
+                    <input type="checkbox" id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="toggle toggle-sm md:mt-1.5" />
+                  {%- elseif c.type === 'range' %}
+                    <input type="range" min="{{ c.min }}" max="{{ c.max }}" step="{{ c.step }}" value="{{ c.name }}" class="range" />
+                  {%- elseif c.type === 'text' or c.type == 'number' %}
+                    <input type="{{ c.type }}" id="id-{{ c.name | slugify }}" x-model="{{ c.name }}" class="input input-sm" placeholder="{{ c.placeholder | default('Value') }}" />
+                  {%- endif %}
+                </div>
+              </div>
+            {%- endfor %}
+          </div>
         </div>
       </div>
     </div>
@@ -399,6 +389,12 @@ layout: layouts/_base.njk
           } else {
             // console.log('[syncToUrl] No change needed');
           }
+        },
+
+        isAtDefaults() {
+          return Object.keys(this.defaults).every(key => {
+            return this[key] === this.defaults[key];
+          });
         },
 
         restoreDefaults() {

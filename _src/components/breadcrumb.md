@@ -10,7 +10,7 @@ alert:
   ico: mdi:wheelchair-accessibility
   body: |
     **For best accessibility:**  
-    Please use `nav`{ .badge .badge-neutral .badge-dash .badge-sm } with nested `ol`{ .badge .badge-neutral .badge-dash .badge-sm } tags as well as  `role="navigation"`{ .badge .badge-neutral .badge-dash .badge-sm } and `aria-label`{ .badge .badge-neutral .badge-dash .badge-sm } attributes.
+    Please use **nav**{ .kbd .kbd-sm } with nested **ol**{ .kbd .kbd-sm } tags as well as  **role="navigation"**{ .kbd .kbd-sm } and **aria-label**{ .kbd .kbd-sm } attributes.
 
 controls:
   - name: current
