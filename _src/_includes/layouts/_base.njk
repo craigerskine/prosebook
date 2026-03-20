@@ -32,11 +32,10 @@
       {%- include 'css/highlight.css' -%}
     {%- endset -%}
 
-    <style data-twind></style>
-
     <style>
       @import url("{{ '/' | url }}_assets/css/prs-tokens_v{{ site.version }}.css");
       @import url("{{ '/' | url }}_assets/css/prs-styles_v{{ site.version }}.css");
+      [x-cloak] { display: none; }
     </style>
 
     <style type="text/tailwindcss">
@@ -101,15 +100,13 @@
       .mockup-code > pre { @apply px-6 text-sm; }
       .bg-artboard { background-image: var(--bg-artboard); }
       .bg-grid { background-image: var(--bg-grid); }
-      
-      [x-cloak] { display: none; }
     </style>
 
     {% renderblock 'css' %}
 
   </head>
 
-  <body class="bg-base-100 text-base-content !block" style="display: none;" data-instant-intensity="mousedown" x-cloak :data-theme="theme">
+  <body class="bg-base-100 text-base-content !block" data-instant-intensity="mousedown" x-cloak :data-theme="theme">
 
     <div class="min-h-screen flex flex-col relative">
       <div class="grow flex flex-col lg:ml-72 xl:ml-80">
