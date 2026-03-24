@@ -1,0 +1,21 @@
+[[redirects]]
+  from = "https://proseui.qzz.io/*"
+  to = "https://proseui.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.proseui.qzz.io/*"
+  to = "https://proseui.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/404/"
+  status = 404
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

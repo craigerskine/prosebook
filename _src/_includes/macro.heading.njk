@@ -15,10 +15,10 @@
   {%- endset -%}
 
   <{{ tag }} class="w-full leading-tight font-black flex items-center space-x-4 {{ size }}">
-    <span class="{{ 'shrink-0' if param.divider else 'grow' }}">
+    <span class="">
       {{ param.slot | safe }}
       <small class="max-w-xs text-xs text-current/60 font-normal text-balance tracking-normal block lg:text-base">{{ param.desc | safe }}</small>
     </span>
-    {%- if param.divider %}<i class="h-0 border-b border-base-300 grow" aria-hidden="true"></i>{%- endif %}
+    {%- if param.divider %}<i class="h-0 border-b border-base-300 grow hidden md:block" aria-hidden="true"></i>{%- endif %}
   </{{ tag }}>
 {%- endmacro %}

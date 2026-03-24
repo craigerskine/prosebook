@@ -15,6 +15,6 @@ permalink: './_assets/css/prs-styles_v{{ site.version }}.css'
   {%- include '../components/'+ item.data.title | slugify +'.css' ignore missing -%}
 {%- endfor %}
 {%- endset -%}
-{{- cssComponents | cssmin | safe }}
+{{- cssComponents | cssMin | safe }}
 
 /* === typography === */

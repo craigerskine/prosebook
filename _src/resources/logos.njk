@@ -1,10 +1,131 @@
 ---
 title: Logos
-desc: Company and miscellaneous logos/icons in SVG Symbol, SVG, and PNG.
+desc: Company and miscellaneous logos, icons, & web assets.
 ico: mdi:vector-polygon
 date: 0002-01-01
 ---
 
-{% renderTemplate 'md' %}
-Coming soon...
-{% endrenderTemplate %}
+<article class="prose">
+  <p>Coming soon...</p>
+</article>
+
+{#-
+{%- set tabs -%}{%- for category, items in prose.logos %}{ title: '{{ category | title | replace('Iclicker', 'iClicker') }}' },{%- endfor %}{%- endset -%}
+
+{%- macro fills(param) -%}  
+--fill-1: {{ '#FFF' if param.reverse else '#0900DA' }}; --fill-2: #00BCFF; --fill-3: #FF2986;
+{%- endmacro -%}
+
+{%- macro logoCode(param) -%}
+{%- set theCode -%}
+<svg xmlns="http://www.w3.org/2000/svg" width="{{ param.item.width }}" height="{{ param.item.height }}" role="img">
+  <title>{{ param.item.title }}</title>
+  <g{% if param.item.reverse %} style="{{ fills({ reverse: param.reverse }) }}"{% endif %}>
+    {{ caller() }}
+  </g>
+</svg>
+{%- endset -%}
+  {{- theCode -}}
+{%- endmacro -%}
+
+{%- macro previewClasses(param) -%}preview border border-base-300 p-6 min-h-[{{ param.height if param.height else '15rem' }}] bg-artboard bg-{{ 'neutral-700' if param.reversed else 'white' }} flex items-center justify-center rounded-t-(--radius-box){%- endmacro -%}
+
+<div x-data="{
+  tabs: [ {{ tabs }} ],
+  tabActive: 1,
+  tabId: $id('tab'),
+}" x-id="['tab']">
+
+  <div class="mb-6 lg:ml-80 lg:pl-4">{%- include '_tabs.njk' -%}</div>
+
+  {%- for category, items in prose.logos %}
+    <div
+      x-show="{{ loop.index }} === tabActive"
+      x-transition:enter.opacity.duration.500ms
+      x-transition:leave.opacity.duration.0ms
+      :id="tabId +'-'+ '{{ loop.index }}' +'-panel'"
+      :aria-labelledby="tabId +'-'+ '{{ loop.index }}'"
+      role="tabpanel"
+      style="display: none;"
+      class="pt-4 space-y-12"
+
+    >
+      {%- for item in items %}
+      <div class="grid grid-cols-1 lg:grid-cols-[20rem_1fr] gap-4">
+        <header class="space-y-6">
+          <hgroup class="prose space-y-2">
+            <h3>{{ item.title }}</h3>
+            {%- if item.desc %}{{ (item.desc +' { .text-sm }') | md | safe }}{%- endif %}
+          </hgroup>
+          <dl class="text-xs font-mono grid grid-cols-[auto_1fr] gap-2 [&>dt]:mt-0.5 [&>dt]:pt-px [&>dd]:py-1">
+            <dt><iconify-icon icon="mdi:pound" class="iconify block text-current/60 text-lg" noobserver></iconify-icon></dt>
+            <dd>{{ item.id }}</dd>
+            <dt><iconify-icon icon="mdi:arrow-all" class="iconify block text-current/60 text-lg" noobserver></iconify-icon></dt>
+            <dd>{{ item.width }} &times; {{ item.height }}</dd>
+            {%- if item.png or item.download %}
+              <dt><iconify-icon icon="mdi:download" class="iconify block text-current/60 text-lg" noobserver></iconify-icon></dt>
+              <dd class="font-sans flex flex-col gap-2">
+                <a href="{{ '/' | url }}{{ item.download if item.download else ('_assets/logos/'+ item.id +'.png') }}" class="btn btn-xs btn-wide rounded-full">{{ 'Download .zip' if item.download else 'Download PNG' }}</a>
+                {%- if item.reverse %}  
+                  <a href="{{ '/' | url }}_assets/logos/{{ item.id }}-reverse.png" class="btn btn-xs btn-wide rounded-full">Download PNG (on dark)</a>
+                {%- endif %}
+              </dd>
+            {%- endif %}
+          </dl>
+        </header>
+        <article x-data="{ reversed: false, }" class="grid grid-cols-1">
+          <div class="preview relative [&_svg]:max-w-full">
+            <div x-show="!reversed" class="{{ previewClasses() }}" x-cloak>
+              {%- if item.htmlPreview %}
+                {{ item.htmlPreview | safe }}
+              {%- else %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="{{ item.width }}" height="{{ item.height }}" role="img">
+                  <title>{{ item.title }}</title>
+                  <use href="{{'/' | url }}_assets/prs-logos.svg?bust={% bust %}#{{ item.id }}" />
+                </svg>
+              {%- endif %}
+            </div>
+            {%- if item.reverse %}
+              <div x-show="reversed" class="{{ previewClasses({ reversed: true }) }}" x-cloak>
+                <svg xmlns="http://www.w3.org/2000/svg" width="{{ item.width }}" height="{{ item.height }}" role="img">
+                  <title>{{ item.title }}</title>
+                  <use href="{{'/' | url }}_assets/prs-logos.svg?bust={% bust %}#{{ item.id }}-reverse" />
+                </svg>
+              </div>
+              <div class="fieldset bg-transparent absolute top-2 right-2" data-theme="light">
+                <label class="toggle">
+                  <input type="checkbox" x-model="reversed" />
+                  <iconify-icon icon="mdi:weather-sunny" class="iconify" aria-label="Light" noobserver></iconify-icon>
+                  <iconify-icon icon="mdi:weather-night" class="iconify" aria-label="Dark" noobserver></iconify-icon>
+                </label>
+              </div>
+            {%- endif %}
+          </div>
+          <div class="[&_.mockup-src]:rounded-b-(--radius-box)">
+            <div x-show="!reversed" x-cloak>
+              <pre x-init="hljs.highlightElement($el)" data-prefix="&lt;!-- {{ 'html' if item.htmlCode else 'svg' }} --&gt;" class="language-{{ 'html' if item.htmlCode else 'svg' }} mockup-src">
+                {{- item.htmlCode -}}
+                {%- if item.svg %}
+  {%- call logoCode({item: item}) -%}
+  {{ item.svg | safe | trim | indent('4') }}
+  {%- endcall -%}
+                {%- endif -%}
+              </pre>
+            </div>
+            {%- if item.reverse %}
+            <div x-show="reversed" x-cloak>
+              <pre x-init="hljs.highlightElement($el)" data-prefix="&lt;!-- svg --&gt;" class="language-svg mockup-src">
+{%- call logoCode({item: item, reverse: true}) -%}
+{{ item.svg | safe | trim | indent('4') }}
+{%- endcall -%}
+              </pre>
+            </div>
+            {%- endif %}
+          </div>
+        </article>
+      </div>
+      {%- endfor %}
+    </div>
+  {%- endfor %}
+</div>
+-#}

@@ -1,0 +1,21 @@
+---
+layout: ''
+eleventyExcludeFromCollections: true
+permalink: _assets/prs-logos.svg
+---
+
+{%- macro fills(param) -%}  
+--fill-1: {{ '#FFF' if param.reverse else '#0900DA' }}; --fill-2: #00BCFF; --fill-3: #FF2986;
+{%- endmacro -%}
+
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
+{%- for category, items in prose.logos %}{%- for item in items %}
+{%- if item.svg %}
+  <symbol viewBox="0 0 {{ item.width }} {{ item.height }}" id="{{ item.id }}"><g style="{{ fills() }}">{{ item.svg | trim | htmlMin | safe }}</g></symbol>
+{%- if item.reverse %}
+  <symbol viewBox="0 0 {{ item.width }} {{ item.height }}" id="{{ item.id }}-reverse"><g style="{{ fills({reverse: true}) }}">{{ item.svg | trim | htmlMin | safe }}</g></symbol>
+{%- endif -%}
+{%- endif -%}
+{%- endfor -%}{%- endfor %}
+</svg>

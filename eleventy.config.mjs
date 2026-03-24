@@ -16,6 +16,9 @@ export default function (eleventyConfig) {
   eleventyConfig.setDataFileBaseName('_data');
 
   eleventyConfig.addPassthroughCopy({
+    '_src/_assets/files': '_assets/files',
+    '_src/_assets/logos': '_assets/logos',
+    '_src/_assets/css': '_assets/css',
     '_src/_assets/img': '_assets/img',
     '_src/_assets/js': '_assets/js',
     '_src/_assets/_root': './',
@@ -102,7 +105,16 @@ export default function (eleventyConfig) {
     return markdownLibrary.render(content);
   });
 
-  // cssmin
+  // htmlmin
+  eleventyConfig.addFilter('htmlMin', function(str) {
+    if (typeof str !== "string") return str;
+    return str
+      .replace(/\s+/g, ' ')           // collapse all whitespace to single space
+      .replace(/>\s+</g, '><')        // remove spaces between tags
+      .trim();
+  });
+
+  // cssMin
   /*
     {%- set css -%}
       .parent {
@@ -110,9 +122,9 @@ export default function (eleventyConfig) {
         & :where(:not(.child)) { margin: 0; }
       }
     {%- endset -%}
-    {{ css | cssmin | safe }}
+    {{ css | cssMin | safe }}
   */
-  eleventyConfig.addFilter('cssmin', function(code) {
+  eleventyConfig.addFilter('cssMin', function(code) {
     return code
       .replace(/\/\*(?:(?!\*\/)[\s\S])*\*\/|[\r\n\t]+/g, '')
       .replace(/ {2,}/g, ' ')
